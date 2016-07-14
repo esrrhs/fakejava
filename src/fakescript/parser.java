@@ -1,6 +1,13 @@
 package fakescript;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStreamReader;
+import java.io.Reader;
 import java.util.ArrayList;
+
+import fakescript.YYParser.Lexer;
 
 class parser 
 {
@@ -39,9 +46,50 @@ class parser
 		// 加入
 		m_parsing_file_list.add(filename);
 
-		// TODO 输入源文件
-
+		// 输入源文件
+		String content = read_file(filename);
+		if (content.isEmpty())
+		{
+			return false;
+		}
+		
+		Lexer yylexer;
+		YYParser yyp = new YYParser();
+		
+		
 		return true;
+	}
+	
+	private String read_file(String filename)
+	{
+		File file = new File(filename);
+		if (!file.isFile() || !file.exists())
+		{
+			types.seterror(m_f, filename, 0, "", "open " + filename + " fail");
+			return "";
+		}
+		
+		try 
+		{
+			String ret = "";
+			String encoding = "utf-8";
+			
+			Reader reader = new InputStreamReader(new FileInputStream(file), encoding);
+			BufferedReader bufferedReader = new BufferedReader(reader);
+            String lineTxt = null;
+            while((lineTxt = bufferedReader.readLine()) != null)
+            {
+            	ret += lineTxt;
+            }
+            reader.close();
+	        
+			return ret;
+	    } 
+		catch (Exception e) 
+		{
+			types.seterror(m_f, filename, 0, "", "read " + filename + " fail " + e.toString());
+			return "";
+	    }
 	}
 	
 	private boolean is_parsing(String filename)
