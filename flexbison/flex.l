@@ -1,20 +1,34 @@
+package fakescript;
 
-%option c++
-%option batch
-%option stack
-%option yylineno
-%x STR
-%x SINGLE_LINE_COMMENT
+import fakescript.YYParser.Lexer;
+%%
+
+%byaccj
+%public
+%implements Lexer
+%unicode
+%line
+%column
+
+%{
+  StringBuilder string = new StringBuilder();
+
+%}
+
+LineTerminator = \r|\n|\r\n
+InputCharacter = [^\r\n]
+Comment = "//" {InputCharacter}* {LineTerminator}?
+StringCharacter = [^\r\n\"\\]
+
+%state STRING
 
 %%
 
-"--"	yy_push_state(SINGLE_LINE_COMMENT);
-<SINGLE_LINE_COMMENT>{
-	[^\n]*	;
-	"\n"	{
-		yy_pop_state(); 
-	}
-}
+<YYINITIAL> {
+
+{Comment}                      { /* ignore */ }
+
+\"                           { yybegin(STRING); string.setLength(0); }
 
 "var"	{
 	return VAR_BEGIN;
@@ -129,15 +143,6 @@
 "default" {
 	return DEFAULT;
 }
-
-"\""	yy_push_state(STR); lvalp->str = String();
-<STR>\\n	lvalp->str += String("\n");
-<STR>\\t	lvalp->str += String("\t");
-<STR>\\s	lvalp->str += String(" ");
-<STR>\\r	lvalp->str += String("\r");
-<STR>\\\"	lvalp->str += String("\"");
-<STR>[^\"] 	lvalp->str += String(yytext);
-<STR>"\""	yy_pop_state(); return STRING_DEFINITION; 
 
 [a-zA-Z_][a-zA-Z0-9_]* {
 	lvalp->str = String(yytext);
@@ -297,12 +302,21 @@
 . {
 }
 
-%%
-int yyFlexLexer::yywrap()
-{
-	return 1;
 }
-int yyFlexLexer::yylex()
-{
-	return 0;
+
+<STRING> {
+  \"                             { yybegin(YYINITIAL); return STRING_DEFINITION; }
+  
+  {StringCharacter}+             { string.append( yytext() ); }
+  
+  /* escape sequences */
+  "\\b"                          { string.append( '\b' ); }
+  "\\t"                          { string.append( '\t' ); }
+  "\\n"                          { string.append( '\n' ); }
+  "\\f"                          { string.append( '\f' ); }
+  "\\r"                          { string.append( '\r' ); }
+  "\\\""                         { string.append( '\"' ); }
+  "\\'"                          { string.append( '\'' ); }
+  "\\\\"                         { string.append( '\\' ); }
+
 }
