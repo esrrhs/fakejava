@@ -11,6 +11,6 @@ public class test
 		fake f = fk.newfake(null);
 		fk.set_callback(f, new callbackimpl());
 		
-		boolean ret = fk.parse(f, "test.fk");
+		boolean ret = fk.parse(f, "./bin/test.fk");
 	}
 }

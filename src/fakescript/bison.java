@@ -33,6 +33,13 @@
 
 /* First part of user declarations.  */
 
+/* Line 32 of lalr1.java  */
+/* Line 1 of "bison.y"  */
+
+package fakescript;
+
+import javax.swing.text.Position;
+
 
 /**
  * A Bison parser, automatically generated from <tt>bison.y</tt>.
@@ -475,7 +482,7 @@ class YYParser
   if (yyn == 3)
     
 /* Line 353 of lalr1.java  */
-/* Line 146 of "bison.y"  */
+/* Line 151 of "bison.y"  */
     {
 	};
   break;
@@ -485,11 +492,11 @@ class YYParser
   if (yyn == 4)
     
 /* Line 353 of lalr1.java  */
-/* Line 150 of "bison.y"  */
+/* Line 155 of "bison.y"  */
     {
-		FKLOG("[bison]: package %s", ((str)(yystack.valueAt (2-(2)))).c_str());
-		myflexer *l = (myflexer *)parm;
-		l->set_package(((str)(yystack.valueAt (2-(2)))).c_str());
+		//FKLOG("[bison]: package %s", $2.c_str());
+		//myflexer *l = (myflexer *)parm;
+		//l->set_package($2.c_str());
 	};
   break;
     
@@ -498,11 +505,11 @@ class YYParser
   if (yyn == 5)
     
 /* Line 353 of lalr1.java  */
-/* Line 157 of "bison.y"  */
+/* Line 162 of "bison.y"  */
     {
-		FKLOG("[bison]: package %s", ((str)(yystack.valueAt (2-(2)))).c_str());
-		myflexer *l = (myflexer *)parm;
-		l->set_package(((str)(yystack.valueAt (2-(2)))).c_str());
+		//FKLOG("[bison]: package %s", $2.c_str());
+		//myflexer *l = (myflexer *)parm;
+		//l->set_package($2.c_str());
 	};
   break;
     
@@ -511,7 +518,7 @@ class YYParser
   if (yyn == 6)
     
 /* Line 353 of lalr1.java  */
-/* Line 165 of "bison.y"  */
+/* Line 170 of "bison.y"  */
     {
 	};
   break;
@@ -521,11 +528,11 @@ class YYParser
   if (yyn == 9)
     
 /* Line 353 of lalr1.java  */
-/* Line 175 of "bison.y"  */
+/* Line 180 of "bison.y"  */
     {
-		FKLOG("[bison]: include %s", ((str)(yystack.valueAt (2-(2)))).c_str());
-		myflexer *l = (myflexer *)parm;
-		l->add_include(((str)(yystack.valueAt (2-(2)))).c_str());
+		//FKLOG("[bison]: include %s", $2.c_str());
+		//myflexer *l = (myflexer *)parm;
+		//l->add_include($2.c_str());
 	};
   break;
     
@@ -534,7 +541,7 @@ class YYParser
   if (yyn == 10)
     
 /* Line 353 of lalr1.java  */
-/* Line 184 of "bison.y"  */
+/* Line 189 of "bison.y"  */
     {
 	};
   break;
@@ -544,12 +551,12 @@ class YYParser
   if (yyn == 13)
     
 /* Line 353 of lalr1.java  */
-/* Line 194 of "bison.y"  */
+/* Line 199 of "bison.y"  */
     {
-		FKLOG("[bison]: struct_define %s", ((str)(yystack.valueAt (4-(2)))).c_str());
-		myflexer *l = (myflexer *)parm;
-		struct_desc_memlist_node * p = dynamic_cast<struct_desc_memlist_node*>(((syntree)(yystack.valueAt (4-(3)))));
-		l->add_struct_desc(((str)(yystack.valueAt (4-(2)))).c_str(), p);
+		//FKLOG("[bison]: struct_define %s", $2.c_str());
+		//myflexer *l = (myflexer *)parm;
+		//struct_desc_memlist_node * p = dynamic_cast<struct_desc_memlist_node*>($3);
+		//l->add_struct_desc($2.c_str(), p);
 	};
   break;
     
@@ -558,9 +565,9 @@ class YYParser
   if (yyn == 14)
     
 /* Line 353 of lalr1.java  */
-/* Line 204 of "bison.y"  */
+/* Line 209 of "bison.y"  */
     {
-		yyval = 0;
+		//$$ = 0;
 	};
   break;
     
@@ -569,13 +576,13 @@ class YYParser
   if (yyn == 15)
     
 /* Line 353 of lalr1.java  */
-/* Line 209 of "bison.y"  */
+/* Line 214 of "bison.y"  */
     {
-		FKLOG("[bison]: struct_mem_declaration <- IDENTIFIER struct_mem_declaration");
-		assert(((syntree)(yystack.valueAt (2-(1))))->gettype() == est_struct_memlist);
-		struct_desc_memlist_node * p = dynamic_cast<struct_desc_memlist_node*>(((syntree)(yystack.valueAt (2-(1)))));
-		p->add_arg(((str)(yystack.valueAt (2-(2)))));
-		yyval = p;
+		//FKLOG("[bison]: struct_mem_declaration <- IDENTIFIER struct_mem_declaration");
+		//assert($1->gettype() == est_struct_memlist);
+		//struct_desc_memlist_node * p = dynamic_cast<struct_desc_memlist_node*>($1);
+		//p->add_arg($2);
+		//$$ = p;
 	};
   break;
     
@@ -584,12 +591,12 @@ class YYParser
   if (yyn == 16)
     
 /* Line 353 of lalr1.java  */
-/* Line 218 of "bison.y"  */
+/* Line 223 of "bison.y"  */
     {
-		FKLOG("[bison]: struct_mem_declaration <- IDENTIFIER");
-		NEWTYPE(p, struct_desc_memlist_node);
-		p->add_arg(((str)(yystack.valueAt (1-(1)))));
-		yyval = p;
+		//FKLOG("[bison]: struct_mem_declaration <- IDENTIFIER");
+		//NEWTYPE(p, struct_desc_memlist_node);
+		//p->add_arg($1);
+		//$$ = p;
 	};
   break;
     
@@ -598,7 +605,7 @@ class YYParser
   if (yyn == 17)
     
 /* Line 353 of lalr1.java  */
-/* Line 228 of "bison.y"  */
+/* Line 233 of "bison.y"  */
     {
 	};
   break;
@@ -608,11 +615,11 @@ class YYParser
   if (yyn == 20)
     
 /* Line 353 of lalr1.java  */
-/* Line 238 of "bison.y"  */
+/* Line 243 of "bison.y"  */
     {
-		FKLOG("[bison]: const_define %s", ((str)(yystack.valueAt (4-(2)))).c_str());
-		myflexer *l = (myflexer *)parm;
-		l->add_const_desc(((str)(yystack.valueAt (4-(2)))).c_str(), ((syntree)(yystack.valueAt (4-(4)))));
+		//FKLOG("[bison]: const_define %s", $2.c_str());
+		//myflexer *l = (myflexer *)parm;
+		//l->add_const_desc($2.c_str(), $4);
 	};
   break;
     
@@ -621,7 +628,7 @@ class YYParser
   if (yyn == 21)
     
 /* Line 353 of lalr1.java  */
-/* Line 247 of "bison.y"  */
+/* Line 252 of "bison.y"  */
     {
 	};
   break;
@@ -631,16 +638,16 @@ class YYParser
   if (yyn == 24)
     
 /* Line 353 of lalr1.java  */
-/* Line 259 of "bison.y"  */
+/* Line 264 of "bison.y"  */
     {
-		FKLOG("[bison]: function_declaration <- block %s %d", ((str)(yystack.valueAt (7-(2)))).c_str(), yylloc.first_line);
-		NEWTYPE(p, func_desc_node);
-		p->funcname = ((str)(yystack.valueAt (7-(2))));
-		p->arglist = dynamic_cast<func_desc_arglist_node*>(((syntree)(yystack.valueAt (7-(4)))));
-		p->block = dynamic_cast<block_node*>(((syntree)(yystack.valueAt (7-(6)))));
-		p->endline = yylloc.first_line;
-		myflexer *l = (myflexer *)parm;
-		l->add_func_desc(p);
+		//FKLOG("[bison]: function_declaration <- block %s %d", $2.c_str(), yylloc.first_line);
+		//NEWTYPE(p, func_desc_node);
+		////p->funcname = $2;
+		//p->arglist = dynamic_cast<func_desc_arglist_node*>($4);
+		//p->block = dynamic_cast<block_node*>($6);
+		//p->endline = yylloc.first_line;
+		//myflexer *l = (myflexer *)parm;
+		//l->add_func_desc(p);
 	};
   break;
     
@@ -649,16 +656,16 @@ class YYParser
   if (yyn == 25)
     
 /* Line 353 of lalr1.java  */
-/* Line 271 of "bison.y"  */
+/* Line 276 of "bison.y"  */
     {
-		FKLOG("[bison]: function_declaration <- empty %s %d", ((str)(yystack.valueAt (6-(2)))).c_str(), yylloc.first_line);
-		NEWTYPE(p, func_desc_node);
-		p->funcname = ((str)(yystack.valueAt (6-(2))));
-		p->arglist = 0;
-		p->block = 0;
-		p->endline = yylloc.first_line;
-		myflexer *l = (myflexer *)parm;
-		l->add_func_desc(p);
+		//FKLOG("[bison]: function_declaration <- empty %s %d", $2.c_str(), yylloc.first_line);
+		//NEWTYPE(p, func_desc_node);
+		//p->funcname = $2;
+		//p->arglist = 0;
+		//p->block = 0;
+		//p->endline = yylloc.first_line;
+		//myflexer *l = (myflexer *)parm;
+		//l->add_func_desc(p);
 	};
   break;
     
@@ -667,9 +674,9 @@ class YYParser
   if (yyn == 26)
     
 /* Line 353 of lalr1.java  */
-/* Line 285 of "bison.y"  */
+/* Line 290 of "bison.y"  */
     {
-		yyval = 0;
+		//$$ = 0;
 	};
   break;
     
@@ -678,13 +685,13 @@ class YYParser
   if (yyn == 27)
     
 /* Line 353 of lalr1.java  */
-/* Line 290 of "bison.y"  */
+/* Line 295 of "bison.y"  */
     {
-		FKLOG("[bison]: function_declaration_arguments <- arg function_declaration_arguments");
-		assert(((syntree)(yystack.valueAt (3-(1))))->gettype() == est_arglist);
-		func_desc_arglist_node * p = dynamic_cast<func_desc_arglist_node*>(((syntree)(yystack.valueAt (3-(1)))));
-		p->add_arg(((syntree)(yystack.valueAt (3-(3)))));
-		yyval = p;
+		//FKLOG("[bison]: function_declaration_arguments <- arg function_declaration_arguments");
+		//assert($1->gettype() == est_arglist);
+		//func_desc_arglist_node * p = dynamic_cast<func_desc_arglist_node*>($1);
+		//p->add_arg($3);
+		//$$ = p;
 	};
   break;
     
@@ -693,12 +700,12 @@ class YYParser
   if (yyn == 28)
     
 /* Line 353 of lalr1.java  */
-/* Line 299 of "bison.y"  */
+/* Line 304 of "bison.y"  */
     {
-		FKLOG("[bison]: function_declaration_arguments <- arg");
-		NEWTYPE(p, func_desc_arglist_node);
-		p->add_arg(((syntree)(yystack.valueAt (1-(1)))));
-		yyval = p;
+		//FKLOG("[bison]: function_declaration_arguments <- arg");
+		//NEWTYPE(p, func_desc_arglist_node);
+		//p->add_arg($1);
+		//$$ = p;
 	};
   break;
     
@@ -707,12 +714,12 @@ class YYParser
   if (yyn == 29)
     
 /* Line 353 of lalr1.java  */
-/* Line 309 of "bison.y"  */
+/* Line 314 of "bison.y"  */
     {
-		FKLOG("[bison]: arg <- IDENTIFIER %s", ((str)(yystack.valueAt (1-(1)))).c_str());
-		NEWTYPE(p, identifier_node);
-		p->str = ((str)(yystack.valueAt (1-(1))));
-		yyval = p;
+		//FKLOG("[bison]: arg <- IDENTIFIER %s", $1.c_str());
+		//NEWTYPE(p, identifier_node);
+		//p->str = $1;
+		//$$ = p;
 	};
   break;
     
@@ -721,15 +728,15 @@ class YYParser
   if (yyn == 30)
     
 /* Line 353 of lalr1.java  */
-/* Line 319 of "bison.y"  */
+/* Line 324 of "bison.y"  */
     {
-		FKLOG("[bison]: function_call <- function_call_arguments %s", ((str)(yystack.valueAt (4-(1)))).c_str());
-		NEWTYPE(p, function_call_node);
-		p->fuc = ((str)(yystack.valueAt (4-(1))));
-		p->arglist = dynamic_cast<function_call_arglist_node*>(((syntree)(yystack.valueAt (4-(3)))));
-		p->fakecall = false;
-		p->classmem_call = false;
-		yyval = p;
+		//FKLOG("[bison]: function_call <- function_call_arguments %s", $1.c_str());
+		//NEWTYPE(p, function_call_node);
+		//p->fuc = $1;
+		//p->arglist = dynamic_cast<function_call_arglist_node*>($3);
+		//p->fakecall = false;
+		//p->classmem_call = false;
+		//$$ = p;
 	};
   break;
     
@@ -738,15 +745,15 @@ class YYParser
   if (yyn == 31)
     
 /* Line 353 of lalr1.java  */
-/* Line 330 of "bison.y"  */
+/* Line 335 of "bison.y"  */
     {
-		FKLOG("[bison]: function_call <- function_call_arguments %s", ((str)(yystack.valueAt (4-(1)))).c_str());
-		NEWTYPE(p, function_call_node);
-		p->fuc = ((str)(yystack.valueAt (4-(1))));
-		p->arglist = dynamic_cast<function_call_arglist_node*>(((syntree)(yystack.valueAt (4-(3)))));
-		p->fakecall = false;
-		p->classmem_call = false;
-		yyval = p;
+		//FKLOG("[bison]: function_call <- function_call_arguments %s", $1.c_str());
+		//NEWTYPE(p, function_call_node);
+		//p->fuc = $1;
+		//p->arglist = dynamic_cast<function_call_arglist_node*>($3);
+		//p->fakecall = false;
+		//p->classmem_call = false;
+		//$$ = p;
 	};
   break;
     
@@ -755,21 +762,21 @@ class YYParser
   if (yyn == 32)
     
 /* Line 353 of lalr1.java  */
-/* Line 341 of "bison.y"  */
+/* Line 346 of "bison.y"  */
     {
-		FKLOG("[bison]: function_call <- mem function_call_arguments %s", ((str)(yystack.valueAt (6-(3)))).c_str());
-		NEWTYPE(p, function_call_node);
-		p->fuc = ((str)(yystack.valueAt (6-(3))));
-		p->arglist = dynamic_cast<function_call_arglist_node*>(((syntree)(yystack.valueAt (6-(5)))));
-		if (p->arglist == 0)
-		{
-			NEWTYPE(pa, function_call_arglist_node);
-			p->arglist = pa;
-		}
-		p->arglist->add_arg(((syntree)(yystack.valueAt (6-(1)))));
-		p->fakecall = false;
-		p->classmem_call = true;
-		yyval = p;
+		//FKLOG("[bison]: function_call <- mem function_call_arguments %s", $3.c_str());
+		//NEWTYPE(p, function_call_node);
+		//p->fuc = $3;
+		//p->arglist = dynamic_cast<function_call_arglist_node*>($5);
+		//if (p->arglist == 0)
+		//{
+		//	NEWTYPE(pa, function_call_arglist_node);
+		//	p->arglist = pa;
+		//}
+		//p->arglist->add_arg($1);
+		//p->fakecall = false;
+		//p->classmem_call = true;
+		//$$ = p;
 	};
   break;
     
@@ -778,9 +785,9 @@ class YYParser
   if (yyn == 33)
     
 /* Line 353 of lalr1.java  */
-/* Line 360 of "bison.y"  */
+/* Line 365 of "bison.y"  */
     {
-		yyval = 0;
+		//$$ = 0;
 	};
   break;
     
@@ -789,13 +796,13 @@ class YYParser
   if (yyn == 34)
     
 /* Line 353 of lalr1.java  */
-/* Line 365 of "bison.y"  */
+/* Line 370 of "bison.y"  */
     {
-		FKLOG("[bison]: function_call_arguments <- arg_expr function_call_arguments");
-		assert(((syntree)(yystack.valueAt (3-(1))))->gettype() == est_call_arglist);
-		function_call_arglist_node * p = dynamic_cast<function_call_arglist_node*>(((syntree)(yystack.valueAt (3-(1)))));
-		p->add_arg(((syntree)(yystack.valueAt (3-(3)))));
-		yyval = p;
+		//FKLOG("[bison]: function_call_arguments <- arg_expr function_call_arguments");
+		//assert($1->gettype() == est_call_arglist);
+		//function_call_arglist_node * p = dynamic_cast<function_call_arglist_node*>($1);
+		//p->add_arg($3);
+		//$$ = p;
 	};
   break;
     
@@ -804,12 +811,12 @@ class YYParser
   if (yyn == 35)
     
 /* Line 353 of lalr1.java  */
-/* Line 374 of "bison.y"  */
+/* Line 379 of "bison.y"  */
     {
-		FKLOG("[bison]: function_call_arguments <- arg_expr");
-		NEWTYPE(p, function_call_arglist_node);
-		p->add_arg(((syntree)(yystack.valueAt (1-(1)))));
-		yyval = p;
+		//FKLOG("[bison]: function_call_arguments <- arg_expr");
+		//NEWTYPE(p, function_call_arglist_node);
+		//p->add_arg($1);
+		//$$ = p;
 	};
   break;
     
@@ -818,10 +825,10 @@ class YYParser
   if (yyn == 36)
     
 /* Line 353 of lalr1.java  */
-/* Line 384 of "bison.y"  */
+/* Line 389 of "bison.y"  */
     {
-		FKLOG("[bison]: arg_expr <- expr_value");
-		yyval = ((syntree)(yystack.valueAt (1-(1))));
+		//FKLOG("[bison]: arg_expr <- expr_value");
+		//$$ = $1;
 	};
   break;
     
@@ -830,13 +837,13 @@ class YYParser
   if (yyn == 37)
     
 /* Line 353 of lalr1.java  */
-/* Line 394 of "bison.y"  */
+/* Line 399 of "bison.y"  */
     {
-		FKLOG("[bison]: block <- block stmt");
-		assert(((syntree)(yystack.valueAt (2-(1))))->gettype() == est_block);
-		block_node * p = dynamic_cast<block_node*>(((syntree)(yystack.valueAt (2-(1)))));
-		p->add_stmt(((syntree)(yystack.valueAt (2-(2)))));
-		yyval = p;
+		//FKLOG("[bison]: block <- block stmt");
+		//assert($1->gettype() == est_block);
+		//block_node * p = dynamic_cast<block_node*>($1);
+		//p->add_stmt($2);
+		//$$ = p;
 	};
   break;
     
@@ -845,12 +852,12 @@ class YYParser
   if (yyn == 38)
     
 /* Line 353 of lalr1.java  */
-/* Line 403 of "bison.y"  */
+/* Line 408 of "bison.y"  */
     {
-		FKLOG("[bison]: block <- stmt");
-		NEWTYPE(p, block_node);
-		p->add_stmt(((syntree)(yystack.valueAt (1-(1)))));
-		yyval = p;
+		//FKLOG("[bison]: block <- stmt");
+		//NEWTYPE(p, block_node);
+		//p->add_stmt($1);
+		//$$ = p;
 	};
   break;
     
@@ -859,10 +866,10 @@ class YYParser
   if (yyn == 39)
     
 /* Line 353 of lalr1.java  */
-/* Line 413 of "bison.y"  */
+/* Line 418 of "bison.y"  */
     {
-		FKLOG("[bison]: stmt <- while_stmt");
-		yyval = ((syntree)(yystack.valueAt (1-(1))));
+		//FKLOG("[bison]: stmt <- while_stmt");
+		//$$ = $1;
 	};
   break;
     
@@ -871,10 +878,10 @@ class YYParser
   if (yyn == 40)
     
 /* Line 353 of lalr1.java  */
-/* Line 419 of "bison.y"  */
+/* Line 424 of "bison.y"  */
     {
-		FKLOG("[bison]: stmt <- if_stmt");
-		yyval = ((syntree)(yystack.valueAt (1-(1))));
+		//FKLOG("[bison]: stmt <- if_stmt");
+		//$$ = $1;
 	};
   break;
     
@@ -883,10 +890,10 @@ class YYParser
   if (yyn == 41)
     
 /* Line 353 of lalr1.java  */
-/* Line 425 of "bison.y"  */
+/* Line 430 of "bison.y"  */
     {
-		FKLOG("[bison]: stmt <- return_stmt");
-		yyval = ((syntree)(yystack.valueAt (1-(1))));
+		//FKLOG("[bison]: stmt <- return_stmt");
+		//$$ = $1;
 	};
   break;
     
@@ -895,10 +902,10 @@ class YYParser
   if (yyn == 42)
     
 /* Line 353 of lalr1.java  */
-/* Line 431 of "bison.y"  */
+/* Line 436 of "bison.y"  */
     {
-		FKLOG("[bison]: stmt <- assign_stmt");
-		yyval = ((syntree)(yystack.valueAt (1-(1))));
+		//FKLOG("[bison]: stmt <- assign_stmt");
+		//$$ = $1;
 	};
   break;
     
@@ -907,10 +914,10 @@ class YYParser
   if (yyn == 43)
     
 /* Line 353 of lalr1.java  */
-/* Line 437 of "bison.y"  */
+/* Line 442 of "bison.y"  */
     {
-		FKLOG("[bison]: stmt <- multi_assign_stmt");
-		yyval = ((syntree)(yystack.valueAt (1-(1))));
+		//FKLOG("[bison]: stmt <- multi_assign_stmt");
+		//$$ = $1;
 	};
   break;
     
@@ -919,10 +926,10 @@ class YYParser
   if (yyn == 44)
     
 /* Line 353 of lalr1.java  */
-/* Line 443 of "bison.y"  */
+/* Line 448 of "bison.y"  */
     {
-		FKLOG("[bison]: stmt <- break");
-		yyval = ((syntree)(yystack.valueAt (1-(1))));
+		//FKLOG("[bison]: stmt <- break");
+		//$$ = $1;
 	};
   break;
     
@@ -931,10 +938,10 @@ class YYParser
   if (yyn == 45)
     
 /* Line 353 of lalr1.java  */
-/* Line 449 of "bison.y"  */
+/* Line 454 of "bison.y"  */
     {
-		FKLOG("[bison]: stmt <- continue");
-		yyval = ((syntree)(yystack.valueAt (1-(1))));
+		//FKLOG("[bison]: stmt <- continue");
+		//$$ = $1;
 	};
   break;
     
@@ -943,10 +950,10 @@ class YYParser
   if (yyn == 46)
     
 /* Line 353 of lalr1.java  */
-/* Line 455 of "bison.y"  */
+/* Line 460 of "bison.y"  */
     {
-		FKLOG("[bison]: stmt <- expr");
-		yyval = ((syntree)(yystack.valueAt (1-(1))));
+		//FKLOG("[bison]: stmt <- expr");
+		//$$ = $1;
 	};
   break;
     
@@ -955,10 +962,10 @@ class YYParser
   if (yyn == 47)
     
 /* Line 353 of lalr1.java  */
-/* Line 461 of "bison.y"  */
+/* Line 466 of "bison.y"  */
     {
-		FKLOG("[bison]: stmt <- math_assign_stmt");
-		yyval = ((syntree)(yystack.valueAt (1-(1))));
+		//FKLOG("[bison]: stmt <- math_assign_stmt");
+		//$$ = $1;
 	};
   break;
     
@@ -967,10 +974,10 @@ class YYParser
   if (yyn == 48)
     
 /* Line 353 of lalr1.java  */
-/* Line 467 of "bison.y"  */
+/* Line 472 of "bison.y"  */
     {
-		FKLOG("[bison]: stmt <- for_stmt");
-		yyval = ((syntree)(yystack.valueAt (1-(1))));
+		//FKLOG("[bison]: stmt <- for_stmt");
+		//$$ = $1;
 	};
   break;
     
@@ -979,10 +986,10 @@ class YYParser
   if (yyn == 49)
     
 /* Line 353 of lalr1.java  */
-/* Line 473 of "bison.y"  */
+/* Line 478 of "bison.y"  */
     {
-		FKLOG("[bison]: stmt <- for_loop_stmt");
-		yyval = ((syntree)(yystack.valueAt (1-(1))));
+		//FKLOG("[bison]: stmt <- for_loop_stmt");
+		//$$ = $1;
 	};
   break;
     
@@ -991,10 +998,10 @@ class YYParser
   if (yyn == 50)
     
 /* Line 353 of lalr1.java  */
-/* Line 479 of "bison.y"  */
+/* Line 484 of "bison.y"  */
     {
-		FKLOG("[bison]: stmt <- fake_call_stmt");
-		yyval = ((syntree)(yystack.valueAt (1-(1))));
+		//FKLOG("[bison]: stmt <- fake_call_stmt");
+		//$$ = $1;
 	};
   break;
     
@@ -1003,10 +1010,10 @@ class YYParser
   if (yyn == 51)
     
 /* Line 353 of lalr1.java  */
-/* Line 485 of "bison.y"  */
+/* Line 490 of "bison.y"  */
     {
-		FKLOG("[bison]: stmt <- sleep_stmt");
-		yyval = ((syntree)(yystack.valueAt (1-(1))));
+		//FKLOG("[bison]: stmt <- sleep_stmt");
+		//$$ = $1;
 	};
   break;
     
@@ -1015,10 +1022,10 @@ class YYParser
   if (yyn == 52)
     
 /* Line 353 of lalr1.java  */
-/* Line 491 of "bison.y"  */
+/* Line 496 of "bison.y"  */
     {
-		FKLOG("[bison]: stmt <- yield_stmt");
-		yyval = ((syntree)(yystack.valueAt (1-(1))));
+		//FKLOG("[bison]: stmt <- yield_stmt");
+		//$$ = $1;
 	};
   break;
     
@@ -1027,10 +1034,10 @@ class YYParser
   if (yyn == 53)
     
 /* Line 353 of lalr1.java  */
-/* Line 497 of "bison.y"  */
+/* Line 502 of "bison.y"  */
     {
-		FKLOG("[bison]: stmt <- switch_stmt");
-		yyval = ((syntree)(yystack.valueAt (1-(1))));
+		//FKLOG("[bison]: stmt <- switch_stmt");
+		//$$ = $1;
 	};
   break;
     
@@ -1039,12 +1046,12 @@ class YYParser
   if (yyn == 54)
     
 /* Line 353 of lalr1.java  */
-/* Line 505 of "bison.y"  */
+/* Line 510 of "bison.y"  */
     {
-		FKLOG("[bison]: fake_call_stmt <- fake function_call");
-		function_call_node * p = dynamic_cast<function_call_node*>(((syntree)(yystack.valueAt (2-(2)))));
-		p->fakecall = true;
-		yyval = p;
+		//FKLOG("[bison]: fake_call_stmt <- fake function_call");
+		//function_call_node * p = dynamic_cast<function_call_node*>($2);
+		//p->fakecall = true;
+		//$$ = p;
 	};
   break;
     
@@ -1053,15 +1060,15 @@ class YYParser
   if (yyn == 55)
     
 /* Line 353 of lalr1.java  */
-/* Line 515 of "bison.y"  */
+/* Line 520 of "bison.y"  */
     {
-		FKLOG("[bison]: for_stmt <- block cmp block");
-		NEWTYPE(p, for_stmt);
-		p->cmp = dynamic_cast<cmp_stmt*>(((syntree)(yystack.valueAt (9-(4)))));
-		p->beginblock = dynamic_cast<block_node*>(((syntree)(yystack.valueAt (9-(2)))));
-		p->endblock = dynamic_cast<block_node*>(((syntree)(yystack.valueAt (9-(6)))));
-		p->block = dynamic_cast<block_node*>(((syntree)(yystack.valueAt (9-(8)))));
-		yyval = p;
+		//FKLOG("[bison]: for_stmt <- block cmp block");
+		//NEWTYPE(p, for_stmt);
+		//p->cmp = dynamic_cast<cmp_stmt*>($4);
+		//p->beginblock = dynamic_cast<block_node*>($2);
+		//p->endblock = dynamic_cast<block_node*>($6);
+		//p->block = dynamic_cast<block_node*>($8);
+		//$$ = p;
 	};
   break;
     
@@ -1070,15 +1077,15 @@ class YYParser
   if (yyn == 56)
     
 /* Line 353 of lalr1.java  */
-/* Line 526 of "bison.y"  */
+/* Line 531 of "bison.y"  */
     {
-		FKLOG("[bison]: for_stmt <- block cmp");
-		NEWTYPE(p, for_stmt);
-		p->cmp = dynamic_cast<cmp_stmt*>(((syntree)(yystack.valueAt (8-(4)))));
-		p->beginblock = dynamic_cast<block_node*>(((syntree)(yystack.valueAt (8-(2)))));
-		p->endblock = dynamic_cast<block_node*>(((syntree)(yystack.valueAt (8-(6)))));
-		p->block = 0;
-		yyval = p;
+		//FKLOG("[bison]: for_stmt <- block cmp");
+		//NEWTYPE(p, for_stmt);
+		//p->cmp = dynamic_cast<cmp_stmt*>($4);
+		//p->beginblock = dynamic_cast<block_node*>($2);
+		//p->endblock = dynamic_cast<block_node*>($6);
+		//p->block = 0;
+		//$$ = p;
 	};
   break;
     
@@ -1087,16 +1094,16 @@ class YYParser
   if (yyn == 57)
     
 /* Line 353 of lalr1.java  */
-/* Line 539 of "bison.y"  */
+/* Line 544 of "bison.y"  */
     {
-		FKLOG("[bison]: for_loop_stmt <- block");
-		NEWTYPE(p, for_loop_stmt);
-		p->var = ((syntree)(yystack.valueAt (11-(2))));
-		p->begin = ((syntree)(yystack.valueAt (11-(4))));
-		p->end = ((syntree)(yystack.valueAt (11-(6))));
-		p->add = ((syntree)(yystack.valueAt (11-(8))));
-		p->block = dynamic_cast<block_node*>(((syntree)(yystack.valueAt (11-(10)))));
-		yyval = p;
+		//FKLOG("[bison]: for_loop_stmt <- block");
+		//NEWTYPE(p, for_loop_stmt);
+		//p->var = $2;
+		//p->begin = $4;
+		//p->end = $6;
+		//p->add = $8;
+		//p->block = dynamic_cast<block_node*>($10);
+		//$$ = p;
 	};
   break;
     
@@ -1105,16 +1112,16 @@ class YYParser
   if (yyn == 58)
     
 /* Line 353 of lalr1.java  */
-/* Line 551 of "bison.y"  */
+/* Line 556 of "bison.y"  */
     {
-		FKLOG("[bison]: for_loop_stmt <- empty");
-		NEWTYPE(p, for_loop_stmt);
-		p->var = ((syntree)(yystack.valueAt (10-(2))));
-		p->begin = ((syntree)(yystack.valueAt (10-(4))));
-		p->end = ((syntree)(yystack.valueAt (10-(6))));
-		p->add = ((syntree)(yystack.valueAt (10-(8))));
-		p->block = 0;
-		yyval = p;
+		//FKLOG("[bison]: for_loop_stmt <- empty");
+		//NEWTYPE(p, for_loop_stmt);
+		//p->var = $2;
+		//p->begin = $4;
+		//p->end = $6;
+		//p->add = $8;
+		//p->block = 0;
+		//$$ = p;
 	};
   break;
     
@@ -1123,13 +1130,13 @@ class YYParser
   if (yyn == 59)
     
 /* Line 353 of lalr1.java  */
-/* Line 565 of "bison.y"  */
+/* Line 570 of "bison.y"  */
     {
-		FKLOG("[bison]: while_stmt <- cmp block");
-		NEWTYPE(p, while_stmt);
-		p->cmp = dynamic_cast<cmp_stmt*>(((syntree)(yystack.valueAt (5-(2)))));
-		p->block = dynamic_cast<block_node*>(((syntree)(yystack.valueAt (5-(4)))));
-		yyval = p;
+		//FKLOG("[bison]: while_stmt <- cmp block");
+		//NEWTYPE(p, while_stmt);
+		//p->cmp = dynamic_cast<cmp_stmt*>($2);
+		//p->block = dynamic_cast<block_node*>($4);
+		//$$ = p;
 	};
   break;
     
@@ -1138,13 +1145,13 @@ class YYParser
   if (yyn == 60)
     
 /* Line 353 of lalr1.java  */
-/* Line 574 of "bison.y"  */
+/* Line 579 of "bison.y"  */
     {
-		FKLOG("[bison]: while_stmt <- cmp");
-		NEWTYPE(p, while_stmt);
-		p->cmp = dynamic_cast<cmp_stmt*>(((syntree)(yystack.valueAt (4-(2)))));
-		p->block = 0;
-		yyval = p;
+		//FKLOG("[bison]: while_stmt <- cmp");
+		//NEWTYPE(p, while_stmt);
+		//p->cmp = dynamic_cast<cmp_stmt*>($2);
+		//p->block = 0;
+		//$$ = p;
 	};
   break;
     
@@ -1153,15 +1160,15 @@ class YYParser
   if (yyn == 61)
     
 /* Line 353 of lalr1.java  */
-/* Line 585 of "bison.y"  */
+/* Line 590 of "bison.y"  */
     {
-		FKLOG("[bison]: if_stmt <- cmp block");
-		NEWTYPE(p, if_stmt);
-		p->cmp = dynamic_cast<cmp_stmt*>(((syntree)(yystack.valueAt (7-(2)))));
-		p->block = dynamic_cast<block_node*>(((syntree)(yystack.valueAt (7-(4)))));
-		p->elseifs = dynamic_cast<elseif_stmt_list*>(((syntree)(yystack.valueAt (7-(5)))));
-		p->elses = dynamic_cast<else_stmt*>(((syntree)(yystack.valueAt (7-(6)))));
-		yyval = p;
+		//FKLOG("[bison]: if_stmt <- cmp block");
+		//NEWTYPE(p, if_stmt);
+		//p->cmp = dynamic_cast<cmp_stmt*>($2);
+		//p->block = dynamic_cast<block_node*>($4);
+		//p->elseifs = dynamic_cast<elseif_stmt_list*>($5);
+		//p->elses = dynamic_cast<else_stmt*>($6);
+		//$$ = p;
 	};
   break;
     
@@ -1170,15 +1177,15 @@ class YYParser
   if (yyn == 62)
     
 /* Line 353 of lalr1.java  */
-/* Line 596 of "bison.y"  */
+/* Line 601 of "bison.y"  */
     {
-		FKLOG("[bison]: if_stmt <- cmp");
-		NEWTYPE(p, if_stmt);
-		p->cmp = dynamic_cast<cmp_stmt*>(((syntree)(yystack.valueAt (6-(2)))));
-		p->block = 0;
-		p->elseifs = dynamic_cast<elseif_stmt_list*>(((syntree)(yystack.valueAt (6-(4)))));
-		p->elses = dynamic_cast<else_stmt*>(((syntree)(yystack.valueAt (6-(5)))));
-		yyval = p;
+		//FKLOG("[bison]: if_stmt <- cmp");
+		//NEWTYPE(p, if_stmt);
+		//p->cmp = dynamic_cast<cmp_stmt*>($2);
+		//p->block = 0;
+		//p->elseifs = dynamic_cast<elseif_stmt_list*>($4);
+		//p->elses = dynamic_cast<else_stmt*>($5);
+		//$$ = p;
 	};
   break;
     
@@ -1187,9 +1194,9 @@ class YYParser
   if (yyn == 63)
     
 /* Line 353 of lalr1.java  */
-/* Line 609 of "bison.y"  */
+/* Line 614 of "bison.y"  */
     {
-		yyval = 0;
+		//$$ = 0;
 	};
   break;
     
@@ -1198,13 +1205,13 @@ class YYParser
   if (yyn == 64)
     
 /* Line 353 of lalr1.java  */
-/* Line 614 of "bison.y"  */
+/* Line 619 of "bison.y"  */
     {
-		FKLOG("[bison]: elseif_stmt_list <- elseif_stmt_list elseif_stmt");
-		assert(((syntree)(yystack.valueAt (2-(1))))->gettype() == est_elseif_stmt_list);
-		elseif_stmt_list * p = dynamic_cast<elseif_stmt_list*>(((syntree)(yystack.valueAt (2-(1)))));
-		p->add_stmt(((syntree)(yystack.valueAt (2-(2)))));
-		yyval = p;
+		//FKLOG("[bison]: elseif_stmt_list <- elseif_stmt_list elseif_stmt");
+		//assert($1->gettype() == est_elseif_stmt_list);
+		//elseif_stmt_list * p = dynamic_cast<elseif_stmt_list*>($1);
+		//p->add_stmt($2);
+		//$$ = p;
 	};
   break;
     
@@ -1213,12 +1220,12 @@ class YYParser
   if (yyn == 65)
     
 /* Line 353 of lalr1.java  */
-/* Line 623 of "bison.y"  */
+/* Line 628 of "bison.y"  */
     {
-		FKLOG("[bison]: elseif_stmt_list <- elseif_stmt");
-		NEWTYPE(p, elseif_stmt_list);
-		p->add_stmt(((syntree)(yystack.valueAt (1-(1)))));
-		yyval = p;
+		//FKLOG("[bison]: elseif_stmt_list <- elseif_stmt");
+		//NEWTYPE(p, elseif_stmt_list);
+		//p->add_stmt($1);
+		//$$ = p;
 	};
   break;
     
@@ -1227,13 +1234,13 @@ class YYParser
   if (yyn == 66)
     
 /* Line 353 of lalr1.java  */
-/* Line 633 of "bison.y"  */
+/* Line 638 of "bison.y"  */
     {
-		FKLOG("[bison]: elseif_stmt <- ELSEIF cmp THEN block");
-		NEWTYPE(p, elseif_stmt);
-		p->cmp = dynamic_cast<cmp_stmt*>(((syntree)(yystack.valueAt (4-(2)))));
-		p->block = ((syntree)(yystack.valueAt (4-(4))));
-		yyval = p;
+		//FKLOG("[bison]: elseif_stmt <- ELSEIF cmp THEN block");
+		//NEWTYPE(p, elseif_stmt);
+		//p->cmp = dynamic_cast<cmp_stmt*>($2);
+		//p->block = $4;
+		//$$ = p;
 	};
   break;
     
@@ -1242,13 +1249,13 @@ class YYParser
   if (yyn == 67)
     
 /* Line 353 of lalr1.java  */
-/* Line 642 of "bison.y"  */
+/* Line 647 of "bison.y"  */
     {
-		FKLOG("[bison]: elseif_stmt <- ELSEIF cmp THEN block");
-		NEWTYPE(p, elseif_stmt);
-		p->cmp = dynamic_cast<cmp_stmt*>(((syntree)(yystack.valueAt (3-(2)))));
-		p->block = 0;
-		yyval = p;
+		//FKLOG("[bison]: elseif_stmt <- ELSEIF cmp THEN block");
+		//NEWTYPE(p, elseif_stmt);
+		//p->cmp = dynamic_cast<cmp_stmt*>($2);
+		//p->block = 0;
+		//$$ = p;
 	};
   break;
     
@@ -1257,9 +1264,9 @@ class YYParser
   if (yyn == 68)
     
 /* Line 353 of lalr1.java  */
-/* Line 653 of "bison.y"  */
+/* Line 658 of "bison.y"  */
     {
-		yyval = 0;
+		//$$ = 0;
 	};
   break;
     
@@ -1268,12 +1275,12 @@ class YYParser
   if (yyn == 69)
     
 /* Line 353 of lalr1.java  */
-/* Line 658 of "bison.y"  */
+/* Line 663 of "bison.y"  */
     {
-		FKLOG("[bison]: else_stmt <- block");
-		NEWTYPE(p, else_stmt);
-		p->block = dynamic_cast<block_node*>(((syntree)(yystack.valueAt (2-(2)))));
-		yyval = p;
+		//FKLOG("[bison]: else_stmt <- block");
+		//NEWTYPE(p, else_stmt);
+		//p->block = dynamic_cast<block_node*>($2);
+		//$$ = p;
 	};
   break;
     
@@ -1282,12 +1289,12 @@ class YYParser
   if (yyn == 70)
     
 /* Line 353 of lalr1.java  */
-/* Line 666 of "bison.y"  */
+/* Line 671 of "bison.y"  */
     {
-		FKLOG("[bison]: else_stmt <- empty");
-		NEWTYPE(p, else_stmt);
-		p->block = 0;
-		yyval = p;
+		//FKLOG("[bison]: else_stmt <- empty");
+		//NEWTYPE(p, else_stmt);
+		//p->block = 0;
+		//$$ = p;
 	};
   break;
     
@@ -1296,10 +1303,10 @@ class YYParser
   if (yyn == 71)
     
 /* Line 353 of lalr1.java  */
-/* Line 676 of "bison.y"  */
+/* Line 681 of "bison.y"  */
     {
-		FKLOG("[bison]: cmp <- ( cmp )");
-		yyval = ((syntree)(yystack.valueAt (3-(2))));
+		//FKLOG("[bison]: cmp <- ( cmp )");
+		//$$ = $2;
 	};
   break;
     
@@ -1308,14 +1315,14 @@ class YYParser
   if (yyn == 72)
     
 /* Line 353 of lalr1.java  */
-/* Line 682 of "bison.y"  */
+/* Line 687 of "bison.y"  */
     {
-		FKLOG("[bison]: cmp <- cmp AND cmp");
-		NEWTYPE(p, cmp_stmt);
-		p->cmp = "&&";
-		p->left = ((syntree)(yystack.valueAt (3-(1))));
-		p->right = ((syntree)(yystack.valueAt (3-(3))));
-		yyval = p;
+		//FKLOG("[bison]: cmp <- cmp AND cmp");
+		//NEWTYPE(p, cmp_stmt);
+		//p->cmp = "&&";
+		//p->left = $1;
+		//p->right = $3;
+		//$$ = p;
 	};
   break;
     
@@ -1324,14 +1331,14 @@ class YYParser
   if (yyn == 73)
     
 /* Line 353 of lalr1.java  */
-/* Line 692 of "bison.y"  */
+/* Line 697 of "bison.y"  */
     {
-		FKLOG("[bison]: cmp <- cmp OR cmp");
-		NEWTYPE(p, cmp_stmt);
-		p->cmp = "||";
-		p->left = ((syntree)(yystack.valueAt (3-(1))));
-		p->right = ((syntree)(yystack.valueAt (3-(3))));
-		yyval = p;
+		//FKLOG("[bison]: cmp <- cmp OR cmp");
+		//NEWTYPE(p, cmp_stmt);
+		//p->cmp = "||";
+		//p->left = $1;
+		//p->right = $3;
+		//$$ = p;
 	};
   break;
     
@@ -1340,14 +1347,14 @@ class YYParser
   if (yyn == 74)
     
 /* Line 353 of lalr1.java  */
-/* Line 702 of "bison.y"  */
+/* Line 707 of "bison.y"  */
     {
-		FKLOG("[bison]: cmp <- cmp_value LESS cmp_value");
-		NEWTYPE(p, cmp_stmt);
-		p->cmp = ((str)(yystack.valueAt (3-(2))));
-		p->left = ((syntree)(yystack.valueAt (3-(1))));
-		p->right = ((syntree)(yystack.valueAt (3-(3))));
-		yyval = p;
+		//FKLOG("[bison]: cmp <- cmp_value LESS cmp_value");
+		//NEWTYPE(p, cmp_stmt);
+		//p->cmp = $2;
+		//p->left = $1;
+		//p->right = $3;
+		//$$ = p;
 	};
   break;
     
@@ -1356,14 +1363,14 @@ class YYParser
   if (yyn == 75)
     
 /* Line 353 of lalr1.java  */
-/* Line 712 of "bison.y"  */
+/* Line 717 of "bison.y"  */
     {
-		FKLOG("[bison]: cmp <- cmp_value MORE cmp_value");
-		NEWTYPE(p, cmp_stmt);
-		p->cmp = ((str)(yystack.valueAt (3-(2))));
-		p->left = ((syntree)(yystack.valueAt (3-(1))));
-		p->right = ((syntree)(yystack.valueAt (3-(3))));
-		yyval = p;
+		//FKLOG("[bison]: cmp <- cmp_value MORE cmp_value");
+		//NEWTYPE(p, cmp_stmt);
+		//p->cmp = $2;
+		//p->left = $1;
+		//p->right = $3;
+		//$$ = p;
 	};
   break;
     
@@ -1372,14 +1379,14 @@ class YYParser
   if (yyn == 76)
     
 /* Line 353 of lalr1.java  */
-/* Line 722 of "bison.y"  */
+/* Line 727 of "bison.y"  */
     {
-		FKLOG("[bison]: cmp <- cmp_value EQUAL cmp_value");
-		NEWTYPE(p, cmp_stmt);
-		p->cmp = ((str)(yystack.valueAt (3-(2))));
-		p->left = ((syntree)(yystack.valueAt (3-(1))));
-		p->right = ((syntree)(yystack.valueAt (3-(3))));
-		yyval = p;
+		//FKLOG("[bison]: cmp <- cmp_value EQUAL cmp_value");
+		//NEWTYPE(p, cmp_stmt);
+		//p->cmp = $2;
+		//p->left = $1;
+		//p->right = $3;
+		//$$ = p;
 	};
   break;
     
@@ -1388,14 +1395,14 @@ class YYParser
   if (yyn == 77)
     
 /* Line 353 of lalr1.java  */
-/* Line 732 of "bison.y"  */
+/* Line 737 of "bison.y"  */
     {
-		FKLOG("[bison]: cmp <- cmp_value MORE_OR_EQUAL cmp_value");
-		NEWTYPE(p, cmp_stmt);
-		p->cmp = ((str)(yystack.valueAt (3-(2))));
-		p->left = ((syntree)(yystack.valueAt (3-(1))));
-		p->right = ((syntree)(yystack.valueAt (3-(3))));
-		yyval = p;
+		//FKLOG("[bison]: cmp <- cmp_value MORE_OR_EQUAL cmp_value");
+		//NEWTYPE(p, cmp_stmt);
+		//p->cmp = $2;
+		//p->left = $1;
+		//p->right = $3;
+		//$$ = p;
 	};
   break;
     
@@ -1404,14 +1411,14 @@ class YYParser
   if (yyn == 78)
     
 /* Line 353 of lalr1.java  */
-/* Line 742 of "bison.y"  */
+/* Line 747 of "bison.y"  */
     {
-		FKLOG("[bison]: cmp <- cmp_value LESS_OR_EQUAL cmp_value");
-		NEWTYPE(p, cmp_stmt);
-		p->cmp = ((str)(yystack.valueAt (3-(2))));
-		p->left = ((syntree)(yystack.valueAt (3-(1))));
-		p->right = ((syntree)(yystack.valueAt (3-(3))));
-		yyval = p;
+		//FKLOG("[bison]: cmp <- cmp_value LESS_OR_EQUAL cmp_value");
+		//NEWTYPE(p, cmp_stmt);
+		//p->cmp = $2;
+		//p->left = $1;
+		//p->right = $3;
+		//$$ = p;
 	};
   break;
     
@@ -1420,14 +1427,14 @@ class YYParser
   if (yyn == 79)
     
 /* Line 353 of lalr1.java  */
-/* Line 752 of "bison.y"  */
+/* Line 757 of "bison.y"  */
     {
-		FKLOG("[bison]: cmp <- cmp_value NOT_EQUAL cmp_value");
-		NEWTYPE(p, cmp_stmt);
-		p->cmp = ((str)(yystack.valueAt (3-(2))));
-		p->left = ((syntree)(yystack.valueAt (3-(1))));
-		p->right = ((syntree)(yystack.valueAt (3-(3))));
-		yyval = p;
+		//FKLOG("[bison]: cmp <- cmp_value NOT_EQUAL cmp_value");
+		//NEWTYPE(p, cmp_stmt);
+		//p->cmp = $2;
+		//p->left = $1;
+		//p->right = $3;
+		//$$ = p;
 	};
   break;
     
@@ -1436,14 +1443,14 @@ class YYParser
   if (yyn == 80)
     
 /* Line 353 of lalr1.java  */
-/* Line 762 of "bison.y"  */
+/* Line 767 of "bison.y"  */
     {
-		FKLOG("[bison]: cmp <- true");
-		NEWTYPE(p, cmp_stmt);
-		p->cmp = "true";
-		p->left = 0;
-		p->right = 0;
-		yyval = p;
+		//FKLOG("[bison]: cmp <- true");
+		//NEWTYPE(p, cmp_stmt);
+		//p->cmp = "true";
+		//p->left = 0;
+		//p->right = 0;
+		//$$ = p;
 	};
   break;
     
@@ -1452,14 +1459,14 @@ class YYParser
   if (yyn == 81)
     
 /* Line 353 of lalr1.java  */
-/* Line 772 of "bison.y"  */
+/* Line 777 of "bison.y"  */
     {
-		FKLOG("[bison]: cmp <- false");
-		NEWTYPE(p, cmp_stmt);
-		p->cmp = "false";
-		p->left = 0;
-		p->right = 0;
-		yyval = p;
+		//FKLOG("[bison]: cmp <- false");
+		//NEWTYPE(p, cmp_stmt);
+		//p->cmp = "false";
+		//p->left = 0;
+		//p->right = 0;
+		//$$ = p;
 	};
   break;
     
@@ -1468,14 +1475,14 @@ class YYParser
   if (yyn == 82)
     
 /* Line 353 of lalr1.java  */
-/* Line 782 of "bison.y"  */
+/* Line 787 of "bison.y"  */
     {
-		FKLOG("[bison]: cmp <- cmp_value IS cmp_value");
-		NEWTYPE(p, cmp_stmt);
-		p->cmp = "is";
-		p->left = ((syntree)(yystack.valueAt (2-(2))));
-		p->right = 0;
-		yyval = p;
+		//FKLOG("[bison]: cmp <- cmp_value IS cmp_value");
+		//NEWTYPE(p, cmp_stmt);
+		//p->cmp = "is";
+		//p->left = $2;
+		//p->right = 0;
+		//$$ = p;
 	};
   break;
     
@@ -1484,14 +1491,14 @@ class YYParser
   if (yyn == 83)
     
 /* Line 353 of lalr1.java  */
-/* Line 792 of "bison.y"  */
+/* Line 797 of "bison.y"  */
     {
-		FKLOG("[bison]: cmp <- cmp_value NOT cmp_value");
-		NEWTYPE(p, cmp_stmt);
-		p->cmp = "not";
-		p->left = ((syntree)(yystack.valueAt (2-(2))));
-		p->right = 0;
-		yyval = p;
+		//FKLOG("[bison]: cmp <- cmp_value NOT cmp_value");
+		//NEWTYPE(p, cmp_stmt);
+		//p->cmp = "not";
+		//p->left = $2;
+		//p->right = 0;
+		//$$ = p;
 	};
   break;
     
@@ -1500,10 +1507,10 @@ class YYParser
   if (yyn == 84)
     
 /* Line 353 of lalr1.java  */
-/* Line 804 of "bison.y"  */
+/* Line 809 of "bison.y"  */
     {
-		FKLOG("[bison]: cmp_value <- explicit_value");
-		yyval = ((syntree)(yystack.valueAt (1-(1))));
+		//FKLOG("[bison]: cmp_value <- explicit_value");
+		//$$ = $1;
 	};
   break;
     
@@ -1512,10 +1519,10 @@ class YYParser
   if (yyn == 85)
     
 /* Line 353 of lalr1.java  */
-/* Line 810 of "bison.y"  */
+/* Line 815 of "bison.y"  */
     {
-		FKLOG("[bison]: cmp_value <- variable");
-		yyval = ((syntree)(yystack.valueAt (1-(1))));
+		//FKLOG("[bison]: cmp_value <- variable");
+		//$$ = $1;
 	};
   break;
     
@@ -1524,10 +1531,10 @@ class YYParser
   if (yyn == 86)
     
 /* Line 353 of lalr1.java  */
-/* Line 816 of "bison.y"  */
+/* Line 821 of "bison.y"  */
     {
-		FKLOG("[bison]: cmp_value <- expr");
-		yyval = ((syntree)(yystack.valueAt (1-(1))));
+		//FKLOG("[bison]: cmp_value <- expr");
+		//$$ = $1;
 	};
   break;
     
@@ -1536,12 +1543,12 @@ class YYParser
   if (yyn == 87)
     
 /* Line 353 of lalr1.java  */
-/* Line 824 of "bison.y"  */
+/* Line 829 of "bison.y"  */
     {
-		FKLOG("[bison]: return_stmt <- RETURN return_value_list");
-		NEWTYPE(p, return_stmt);
-		p->returnlist = dynamic_cast<return_value_list_node*>(((syntree)(yystack.valueAt (2-(2)))));
-		yyval = p;
+		//FKLOG("[bison]: return_stmt <- RETURN return_value_list");
+		//NEWTYPE(p, return_stmt);
+		//p->returnlist = dynamic_cast<return_value_list_node*>($2);
+		//$$ = p;
 	};
   break;
     
@@ -1550,12 +1557,12 @@ class YYParser
   if (yyn == 88)
     
 /* Line 353 of lalr1.java  */
-/* Line 832 of "bison.y"  */
+/* Line 837 of "bison.y"  */
     {
-		FKLOG("[bison]: return_stmt <- RETURN");
-		NEWTYPE(p, return_stmt);
-		p->returnlist = 0;
-		yyval = p;
+		//FKLOG("[bison]: return_stmt <- RETURN");
+		//NEWTYPE(p, return_stmt);
+		//p->returnlist = 0;
+		//$$ = p;
 	};
   break;
     
@@ -1564,13 +1571,13 @@ class YYParser
   if (yyn == 89)
     
 /* Line 353 of lalr1.java  */
-/* Line 842 of "bison.y"  */
+/* Line 847 of "bison.y"  */
     {
-		FKLOG("[bison]: return_value_list <- return_value_list return_value");
-		assert(((syntree)(yystack.valueAt (3-(1))))->gettype() == est_return_value_list);
-		return_value_list_node * p = dynamic_cast<return_value_list_node*>(((syntree)(yystack.valueAt (3-(1)))));
-		p->add_arg(((syntree)(yystack.valueAt (3-(3)))));
-		yyval = p;
+		//FKLOG("[bison]: return_value_list <- return_value_list return_value");
+		//assert($1->gettype() == est_return_value_list);
+		//return_value_list_node * p = dynamic_cast<return_value_list_node*>($1);
+		//p->add_arg($3);
+		//$$ = p;
 	};
   break;
     
@@ -1579,11 +1586,11 @@ class YYParser
   if (yyn == 90)
     
 /* Line 353 of lalr1.java  */
-/* Line 851 of "bison.y"  */
+/* Line 856 of "bison.y"  */
     {
-		NEWTYPE(p, return_value_list_node);
-		p->add_arg(((syntree)(yystack.valueAt (1-(1)))));
-		yyval = p;
+		//NEWTYPE(p, return_value_list_node);
+		//p->add_arg($1);
+		//$$ = p;
 	};
   break;
     
@@ -1592,10 +1599,10 @@ class YYParser
   if (yyn == 91)
     
 /* Line 353 of lalr1.java  */
-/* Line 860 of "bison.y"  */
+/* Line 865 of "bison.y"  */
     {
-		FKLOG("[bison]: return_value <- explicit_value");
-		yyval = ((syntree)(yystack.valueAt (1-(1))));
+		//FKLOG("[bison]: return_value <- explicit_value");
+		//$$ = $1;
 	};
   break;
     
@@ -1604,10 +1611,10 @@ class YYParser
   if (yyn == 92)
     
 /* Line 353 of lalr1.java  */
-/* Line 866 of "bison.y"  */
+/* Line 871 of "bison.y"  */
     {
-		FKLOG("[bison]: return_value <- variable");
-		yyval = ((syntree)(yystack.valueAt (1-(1))));
+		//FKLOG("[bison]: return_value <- variable");
+		//$$ = $1;
 	};
   break;
     
@@ -1616,10 +1623,10 @@ class YYParser
   if (yyn == 93)
     
 /* Line 353 of lalr1.java  */
-/* Line 872 of "bison.y"  */
+/* Line 877 of "bison.y"  */
     {
-		FKLOG("[bison]: return_value <- expr");
-		yyval = ((syntree)(yystack.valueAt (1-(1))));
+		//FKLOG("[bison]: return_value <- expr");
+		//$$ = $1;
 	};
   break;
     
@@ -1628,14 +1635,14 @@ class YYParser
   if (yyn == 94)
     
 /* Line 353 of lalr1.java  */
-/* Line 880 of "bison.y"  */
+/* Line 885 of "bison.y"  */
     {
-		FKLOG("[bison]: assign_stmt <- var assign_value");
-		NEWTYPE(p, assign_stmt);
-		p->var = ((syntree)(yystack.valueAt (3-(1))));
-		p->value = ((syntree)(yystack.valueAt (3-(3))));
-		p->isnew = false;
-		yyval = p;
+		//FKLOG("[bison]: assign_stmt <- var assign_value");
+		//NEWTYPE(p, assign_stmt);
+		//p->var = $1;
+		//p->value = $3;
+		//p->isnew = false;
+		//$$ = p;
 	};
   break;
     
@@ -1644,14 +1651,14 @@ class YYParser
   if (yyn == 95)
     
 /* Line 353 of lalr1.java  */
-/* Line 890 of "bison.y"  */
+/* Line 895 of "bison.y"  */
     {
-		FKLOG("[bison]: new assign_stmt <- var assign_value");
-		NEWTYPE(p, assign_stmt);
-		p->var = ((syntree)(yystack.valueAt (3-(1))));
-		p->value = ((syntree)(yystack.valueAt (3-(3))));
-		p->isnew = true;
-		yyval = p;
+		//FKLOG("[bison]: new assign_stmt <- var assign_value");
+		//NEWTYPE(p, assign_stmt);
+		//p->var = $1;
+		//p->value = $3;
+		//p->isnew = true;
+		//$$ = p;
 	};
   break;
     
@@ -1660,14 +1667,14 @@ class YYParser
   if (yyn == 96)
     
 /* Line 353 of lalr1.java  */
-/* Line 902 of "bison.y"  */
+/* Line 907 of "bison.y"  */
     {
-		FKLOG("[bison]: multi_assign_stmt <- var_list function_call");
-		NEWTYPE(p, multi_assign_stmt);
-		p->varlist = dynamic_cast<var_list_node*>(((syntree)(yystack.valueAt (3-(1)))));
-		p->value = ((syntree)(yystack.valueAt (3-(3))));
-		p->isnew = false;
-		yyval = p;
+		//FKLOG("[bison]: multi_assign_stmt <- var_list function_call");
+		//NEWTYPE(p, multi_assign_stmt);
+		//p->varlist = dynamic_cast<var_list_node*>($1);
+		//p->value = $3;
+		//p->isnew = false;
+		//$$ = p;
 	};
   break;
     
@@ -1676,14 +1683,14 @@ class YYParser
   if (yyn == 97)
     
 /* Line 353 of lalr1.java  */
-/* Line 912 of "bison.y"  */
+/* Line 917 of "bison.y"  */
     {
-		FKLOG("[bison]: new multi_assign_stmt <- var_list function_call");
-		NEWTYPE(p, multi_assign_stmt);
-		p->varlist = dynamic_cast<var_list_node*>(((syntree)(yystack.valueAt (3-(1)))));
-		p->value = ((syntree)(yystack.valueAt (3-(3))));
-		p->isnew = true;
-		yyval = p;
+		//FKLOG("[bison]: new multi_assign_stmt <- var_list function_call");
+		//NEWTYPE(p, multi_assign_stmt);
+		//p->varlist = dynamic_cast<var_list_node*>($1);
+		//p->value = $3;
+		//p->isnew = true;
+		//$$ = p;
 	};
   break;
     
@@ -1692,13 +1699,13 @@ class YYParser
   if (yyn == 98)
     
 /* Line 353 of lalr1.java  */
-/* Line 924 of "bison.y"  */
+/* Line 929 of "bison.y"  */
     {
-		FKLOG("[bison]: var_list <- var_list var");
-		assert(((syntree)(yystack.valueAt (3-(1))))->gettype() == est_var_list);
-		var_list_node * p = dynamic_cast<var_list_node*>(((syntree)(yystack.valueAt (3-(1)))));
-		p->add_arg(((syntree)(yystack.valueAt (3-(3)))));
-		yyval = p;
+		//FKLOG("[bison]: var_list <- var_list var");
+		//assert($1->gettype() == est_var_list);
+		//var_list_node * p = dynamic_cast<var_list_node*>($1);
+		//p->add_arg($3);
+		//$$ = p;
 	};
   break;
     
@@ -1707,11 +1714,11 @@ class YYParser
   if (yyn == 99)
     
 /* Line 353 of lalr1.java  */
-/* Line 933 of "bison.y"  */
+/* Line 938 of "bison.y"  */
     {
-		NEWTYPE(p, var_list_node);
-		p->add_arg(((syntree)(yystack.valueAt (1-(1)))));
-		yyval = p;
+		//NEWTYPE(p, var_list_node);
+		//p->add_arg($1);
+		//$$ = p;
 	};
   break;
     
@@ -1720,10 +1727,10 @@ class YYParser
   if (yyn == 100)
     
 /* Line 353 of lalr1.java  */
-/* Line 942 of "bison.y"  */
+/* Line 947 of "bison.y"  */
     {
-		FKLOG("[bison]: assign_value <- explicit_value");
-		yyval = ((syntree)(yystack.valueAt (1-(1))));
+		//FKLOG("[bison]: assign_value <- explicit_value");
+		//$$ = $1;
 	};
   break;
     
@@ -1732,10 +1739,10 @@ class YYParser
   if (yyn == 101)
     
 /* Line 353 of lalr1.java  */
-/* Line 948 of "bison.y"  */
+/* Line 953 of "bison.y"  */
     {
-		FKLOG("[bison]: assign_value <- variable");
-		yyval = ((syntree)(yystack.valueAt (1-(1))));
+		//FKLOG("[bison]: assign_value <- variable");
+		//$$ = $1;
 	};
   break;
     
@@ -1744,10 +1751,10 @@ class YYParser
   if (yyn == 102)
     
 /* Line 353 of lalr1.java  */
-/* Line 954 of "bison.y"  */
+/* Line 959 of "bison.y"  */
     {
-		FKLOG("[bison]: assign_value <- expr");
-		yyval = ((syntree)(yystack.valueAt (1-(1))));
+		//FKLOG("[bison]: assign_value <- expr");
+		//$$ = $1;
 	};
   break;
     
@@ -1756,14 +1763,14 @@ class YYParser
   if (yyn == 103)
     
 /* Line 353 of lalr1.java  */
-/* Line 962 of "bison.y"  */
+/* Line 967 of "bison.y"  */
     {
-		FKLOG("[bison]: math_assign_stmt <- variable assign_value");
-		NEWTYPE(p, math_assign_stmt);
-		p->var = ((syntree)(yystack.valueAt (3-(1))));
-		p->oper = "+=";
-		p->value = ((syntree)(yystack.valueAt (3-(3))));
-		yyval = p;
+		//FKLOG("[bison]: math_assign_stmt <- variable assign_value");
+		//NEWTYPE(p, math_assign_stmt);
+		//p->var = $1;
+		//p->oper = "+=";
+		//p->value = $3;
+		//$$ = p;
 	};
   break;
     
@@ -1772,14 +1779,14 @@ class YYParser
   if (yyn == 104)
     
 /* Line 353 of lalr1.java  */
-/* Line 972 of "bison.y"  */
+/* Line 977 of "bison.y"  */
     {
-		FKLOG("[bison]: math_assign_stmt <- variable assign_value");
-		NEWTYPE(p, math_assign_stmt);
-		p->var = ((syntree)(yystack.valueAt (3-(1))));
-		p->oper = "-=";
-		p->value = ((syntree)(yystack.valueAt (3-(3))));
-		yyval = p;
+		//FKLOG("[bison]: math_assign_stmt <- variable assign_value");
+		//NEWTYPE(p, math_assign_stmt);
+		//p->var = $1;
+		//p->oper = "-=";
+		//p->value = $3;
+		//$$ = p;
 	};
   break;
     
@@ -1788,14 +1795,14 @@ class YYParser
   if (yyn == 105)
     
 /* Line 353 of lalr1.java  */
-/* Line 982 of "bison.y"  */
+/* Line 987 of "bison.y"  */
     {
-		FKLOG("[bison]: math_assign_stmt <- variable assign_value");
-		NEWTYPE(p, math_assign_stmt);
-		p->var = ((syntree)(yystack.valueAt (3-(1))));
-		p->oper = "/=";
-		p->value = ((syntree)(yystack.valueAt (3-(3))));
-		yyval = p;
+		//FKLOG("[bison]: math_assign_stmt <- variable assign_value");
+		//NEWTYPE(p, math_assign_stmt);
+		//p->var = $1;
+		//p->oper = "/=";
+		//p->value = $3;
+		//$$ = p;
 	};
   break;
     
@@ -1804,14 +1811,14 @@ class YYParser
   if (yyn == 106)
     
 /* Line 353 of lalr1.java  */
-/* Line 992 of "bison.y"  */
+/* Line 997 of "bison.y"  */
     {
-		FKLOG("[bison]: math_assign_stmt <- variable assign_value");
-		NEWTYPE(p, math_assign_stmt);
-		p->var = ((syntree)(yystack.valueAt (3-(1))));
-		p->oper = "*=";
-		p->value = ((syntree)(yystack.valueAt (3-(3))));
-		yyval = p;
+		//FKLOG("[bison]: math_assign_stmt <- variable assign_value");
+		//NEWTYPE(p, math_assign_stmt);
+		//p->var = $1;
+		//p->oper = "*=";
+		//p->value = $3;
+		//$$ = p;
 	};
   break;
     
@@ -1820,14 +1827,14 @@ class YYParser
   if (yyn == 107)
     
 /* Line 353 of lalr1.java  */
-/* Line 1002 of "bison.y"  */
+/* Line 1007 of "bison.y"  */
     {
-		FKLOG("[bison]: math_assign_stmt <- variable assign_value");
-		NEWTYPE(p, math_assign_stmt);
-		p->var = ((syntree)(yystack.valueAt (3-(1))));
-		p->oper = "%=";
-		p->value = ((syntree)(yystack.valueAt (3-(3))));
-		yyval = p;
+		//FKLOG("[bison]: math_assign_stmt <- variable assign_value");
+		//NEWTYPE(p, math_assign_stmt);
+		//p->var = $1;
+		//p->oper = "%=";
+		//p->value = $3;
+		//$$ = p;
 	};
   break;
     
@@ -1836,18 +1843,18 @@ class YYParser
   if (yyn == 108)
     
 /* Line 353 of lalr1.java  */
-/* Line 1012 of "bison.y"  */
+/* Line 1017 of "bison.y"  */
     {
-		FKLOG("[bison]: math_assign_stmt <- variable INC");
-		NEWTYPE(pp, explicit_value_node);
-		pp->str = "1";
-		pp->type = explicit_value_node::EVT_NUM;
-		
-		NEWTYPE(p, math_assign_stmt);
-		p->var = ((syntree)(yystack.valueAt (2-(1))));
-		p->oper = "+=";
-		p->value = pp;
-		yyval = p;
+		//FKLOG("[bison]: math_assign_stmt <- variable INC");
+		//NEWTYPE(pp, explicit_value_node);
+		//pp->str = "1";
+		//pp->type = explicit_value_node::EVT_NUM;
+		//
+		//NEWTYPE(p, math_assign_stmt);
+		//p->var = $1;
+		//p->oper = "+=";
+		//p->value = pp;
+		//$$ = p;
 	};
   break;
     
@@ -1856,12 +1863,12 @@ class YYParser
   if (yyn == 109)
     
 /* Line 353 of lalr1.java  */
-/* Line 1028 of "bison.y"  */
+/* Line 1033 of "bison.y"  */
     {
-		FKLOG("[bison]: var <- VAR_BEGIN IDENTIFIER %s", ((str)(yystack.valueAt (2-(2)))).c_str());
-		NEWTYPE(p, var_node);
-		p->str = ((str)(yystack.valueAt (2-(2))));
-		yyval = p;
+		//FKLOG("[bison]: var <- VAR_BEGIN IDENTIFIER %s", $2.c_str());
+		//NEWTYPE(p, var_node);
+		//p->str = $2;
+		//$$ = p;
 	};
   break;
     
@@ -1870,10 +1877,10 @@ class YYParser
   if (yyn == 110)
     
 /* Line 353 of lalr1.java  */
-/* Line 1036 of "bison.y"  */
+/* Line 1041 of "bison.y"  */
     {
-		FKLOG("[bison]: var <- variable");
-		yyval = ((syntree)(yystack.valueAt (1-(1))));
+		//FKLOG("[bison]: var <- variable");
+		//$$ = $1;
 	};
   break;
     
@@ -1882,12 +1889,12 @@ class YYParser
   if (yyn == 111)
     
 /* Line 353 of lalr1.java  */
-/* Line 1044 of "bison.y"  */
+/* Line 1049 of "bison.y"  */
     {
-		FKLOG("[bison]: variable <- IDENTIFIER %s", ((str)(yystack.valueAt (1-(1)))).c_str());
-		NEWTYPE(p, variable_node);
-		p->str = ((str)(yystack.valueAt (1-(1))));
-		yyval = p;
+		//FKLOG("[bison]: variable <- IDENTIFIER %s", $1.c_str());
+		//NEWTYPE(p, variable_node);
+		//p->str = $1;
+		//$$ = p;
 	};
   break;
     
@@ -1896,13 +1903,13 @@ class YYParser
   if (yyn == 112)
     
 /* Line 353 of lalr1.java  */
-/* Line 1052 of "bison.y"  */
+/* Line 1057 of "bison.y"  */
     {
-		FKLOG("[bison]: container_get_node <- IDENTIFIER[expr_value] %s", ((str)(yystack.valueAt (4-(1)))).c_str());
-		NEWTYPE(p, container_get_node);
-		p->container = ((str)(yystack.valueAt (4-(1))));
-		p->key = ((syntree)(yystack.valueAt (4-(3))));
-		yyval = p;
+		//FKLOG("[bison]: container_get_node <- IDENTIFIER[expr_value] %s", $1.c_str());
+		//NEWTYPE(p, container_get_node);
+		//p->container = $1;
+		//p->key = $3;
+		//$$ = p;
 	};
   break;
     
@@ -1911,12 +1918,12 @@ class YYParser
   if (yyn == 113)
     
 /* Line 353 of lalr1.java  */
-/* Line 1061 of "bison.y"  */
+/* Line 1066 of "bison.y"  */
     {
-		FKLOG("[bison]: variable <- IDENTIFIER_POINTER %s", ((str)(yystack.valueAt (1-(1)))).c_str());
-		NEWTYPE(p, struct_pointer_node);
-		p->str = ((str)(yystack.valueAt (1-(1))));
-		yyval = p;
+		//FKLOG("[bison]: variable <- IDENTIFIER_POINTER %s", $1.c_str());
+		//NEWTYPE(p, struct_pointer_node);
+		//p->str = $1;
+		//$$ = p;
 	};
   break;
     
@@ -1925,12 +1932,12 @@ class YYParser
   if (yyn == 114)
     
 /* Line 353 of lalr1.java  */
-/* Line 1069 of "bison.y"  */
+/* Line 1074 of "bison.y"  */
     {
-		FKLOG("[bison]: variable <- IDENTIFIER_DOT %s", ((str)(yystack.valueAt (1-(1)))).c_str());
-		NEWTYPE(p, variable_node);
-		p->str = ((str)(yystack.valueAt (1-(1))));
-		yyval = p;
+		//FKLOG("[bison]: variable <- IDENTIFIER_DOT %s", $1.c_str());
+		//NEWTYPE(p, variable_node);
+		//p->str = $1;
+		//$$ = p;
 	};
   break;
     
@@ -1939,10 +1946,10 @@ class YYParser
   if (yyn == 115)
     
 /* Line 353 of lalr1.java  */
-/* Line 1079 of "bison.y"  */
+/* Line 1084 of "bison.y"  */
     {
-		FKLOG("[bison]: expr <- (expr)");
-		yyval = ((syntree)(yystack.valueAt (3-(2))));
+		//FKLOG("[bison]: expr <- (expr)");
+		//$$ = $2;
 	};
   break;
     
@@ -1951,10 +1958,10 @@ class YYParser
   if (yyn == 116)
     
 /* Line 353 of lalr1.java  */
-/* Line 1085 of "bison.y"  */
+/* Line 1090 of "bison.y"  */
     {
-		FKLOG("[bison]: expr <- function_call");
-		yyval = ((syntree)(yystack.valueAt (1-(1))));
+		//FKLOG("[bison]: expr <- function_call");
+		//$$ = $1;
 	};
   break;
     
@@ -1963,10 +1970,10 @@ class YYParser
   if (yyn == 117)
     
 /* Line 353 of lalr1.java  */
-/* Line 1091 of "bison.y"  */
+/* Line 1096 of "bison.y"  */
     {
-		FKLOG("[bison]: expr <- math_expr");
-		yyval = ((syntree)(yystack.valueAt (1-(1))));
+		//FKLOG("[bison]: expr <- math_expr");
+		//$$ = $1;
 	};
   break;
     
@@ -1975,10 +1982,10 @@ class YYParser
   if (yyn == 118)
     
 /* Line 353 of lalr1.java  */
-/* Line 1099 of "bison.y"  */
+/* Line 1104 of "bison.y"  */
     {
-		FKLOG("[bison]: math_expr <- (math_expr)");
-		yyval = ((syntree)(yystack.valueAt (3-(2))));
+		//FKLOG("[bison]: math_expr <- (math_expr)");
+		//$$ = $2;
 	};
   break;
     
@@ -1987,14 +1994,14 @@ class YYParser
   if (yyn == 119)
     
 /* Line 353 of lalr1.java  */
-/* Line 1105 of "bison.y"  */
+/* Line 1110 of "bison.y"  */
     {
-		FKLOG("[bison]: math_expr <- expr_value %s expr_value", ((str)(yystack.valueAt (3-(2)))).c_str());
-		NEWTYPE(p, math_expr_node);
-		p->oper = "+";
-		p->left = ((syntree)(yystack.valueAt (3-(1))));
-		p->right = ((syntree)(yystack.valueAt (3-(3))));
-		yyval = p;
+		//FKLOG("[bison]: math_expr <- expr_value %s expr_value", $2.c_str());
+		//NEWTYPE(p, math_expr_node);
+		//p->oper = "+";
+		//p->left = $1;
+		//p->right = $3;
+		//$$ = p;
 	};
   break;
     
@@ -2003,14 +2010,14 @@ class YYParser
   if (yyn == 120)
     
 /* Line 353 of lalr1.java  */
-/* Line 1115 of "bison.y"  */
+/* Line 1120 of "bison.y"  */
     {
-		FKLOG("[bison]: math_expr <- expr_value %s expr_value", ((str)(yystack.valueAt (3-(2)))).c_str());
-		NEWTYPE(p, math_expr_node);
-		p->oper = "-";
-		p->left = ((syntree)(yystack.valueAt (3-(1))));
-		p->right = ((syntree)(yystack.valueAt (3-(3))));
-		yyval = p;
+		//FKLOG("[bison]: math_expr <- expr_value %s expr_value", $2.c_str());
+		//NEWTYPE(p, math_expr_node);
+		//p->oper = "-";
+		//p->left = $1;
+		//p->right = $3;
+		//$$ = p;
 	};
   break;
     
@@ -2019,14 +2026,14 @@ class YYParser
   if (yyn == 121)
     
 /* Line 353 of lalr1.java  */
-/* Line 1125 of "bison.y"  */
+/* Line 1130 of "bison.y"  */
     {
-		FKLOG("[bison]: math_expr <- expr_value %s expr_value", ((str)(yystack.valueAt (3-(2)))).c_str());
-		NEWTYPE(p, math_expr_node);
-		p->oper = "*";
-		p->left = ((syntree)(yystack.valueAt (3-(1))));
-		p->right = ((syntree)(yystack.valueAt (3-(3))));
-		yyval = p;
+		//FKLOG("[bison]: math_expr <- expr_value %s expr_value", $2.c_str());
+		//NEWTYPE(p, math_expr_node);
+		//p->oper = "*";
+		//p->left = $1;
+		//p->right = $3;
+		//$$ = p;
 	};
   break;
     
@@ -2035,14 +2042,14 @@ class YYParser
   if (yyn == 122)
     
 /* Line 353 of lalr1.java  */
-/* Line 1135 of "bison.y"  */
+/* Line 1140 of "bison.y"  */
     {
-		FKLOG("[bison]: math_expr <- expr_value %s expr_value", ((str)(yystack.valueAt (3-(2)))).c_str());
-		NEWTYPE(p, math_expr_node);
-		p->oper = "/";
-		p->left = ((syntree)(yystack.valueAt (3-(1))));
-		p->right = ((syntree)(yystack.valueAt (3-(3))));
-		yyval = p;
+		//FKLOG("[bison]: math_expr <- expr_value %s expr_value", $2.c_str());
+		//NEWTYPE(p, math_expr_node);
+		//p->oper = "/";
+		//p->left = $1;
+		//p->right = $3;
+		//$$ = p;
 	};
   break;
     
@@ -2051,14 +2058,14 @@ class YYParser
   if (yyn == 123)
     
 /* Line 353 of lalr1.java  */
-/* Line 1145 of "bison.y"  */
+/* Line 1150 of "bison.y"  */
     {
-		FKLOG("[bison]: math_expr <- expr_value %s expr_value", ((str)(yystack.valueAt (3-(2)))).c_str());
-		NEWTYPE(p, math_expr_node);
-		p->oper = "%";
-		p->left = ((syntree)(yystack.valueAt (3-(1))));
-		p->right = ((syntree)(yystack.valueAt (3-(3))));
-		yyval = p;
+		//FKLOG("[bison]: math_expr <- expr_value %s expr_value", $2.c_str());
+		//NEWTYPE(p, math_expr_node);
+		//p->oper = "%";
+		//p->left = $1;
+		//p->right = $3;
+		//$$ = p;
 	};
   break;
     
@@ -2067,14 +2074,14 @@ class YYParser
   if (yyn == 124)
     
 /* Line 353 of lalr1.java  */
-/* Line 1155 of "bison.y"  */
+/* Line 1160 of "bison.y"  */
     {
-		FKLOG("[bison]: math_expr <- expr_value %s expr_value", ((str)(yystack.valueAt (3-(2)))).c_str());
-		NEWTYPE(p, math_expr_node);
-		p->oper = "..";
-		p->left = ((syntree)(yystack.valueAt (3-(1))));
-		p->right = ((syntree)(yystack.valueAt (3-(3))));
-		yyval = p;
+		//FKLOG("[bison]: math_expr <- expr_value %s expr_value", $2.c_str());
+		//NEWTYPE(p, math_expr_node);
+		//p->oper = "..";
+		//p->left = $1;
+		//p->right = $3;
+		//$$ = p;
 	};
   break;
     
@@ -2083,10 +2090,10 @@ class YYParser
   if (yyn == 125)
     
 /* Line 353 of lalr1.java  */
-/* Line 1167 of "bison.y"  */
+/* Line 1172 of "bison.y"  */
     {
-		FKLOG("[bison]: expr_value <- math_expr");
-		yyval = ((syntree)(yystack.valueAt (1-(1))));
+		//FKLOG("[bison]: expr_value <- math_expr");
+		//$$ = $1;
 	};
   break;
     
@@ -2095,10 +2102,10 @@ class YYParser
   if (yyn == 126)
     
 /* Line 353 of lalr1.java  */
-/* Line 1173 of "bison.y"  */
+/* Line 1178 of "bison.y"  */
     {
-		FKLOG("[bison]: expr_value <- explicit_value");
-		yyval = ((syntree)(yystack.valueAt (1-(1))));
+		//FKLOG("[bison]: expr_value <- explicit_value");
+		//$$ = $1;
 	};
   break;
     
@@ -2107,10 +2114,10 @@ class YYParser
   if (yyn == 127)
     
 /* Line 353 of lalr1.java  */
-/* Line 1179 of "bison.y"  */
+/* Line 1184 of "bison.y"  */
     {
-		FKLOG("[bison]: expr_value <- function_call");
-		yyval = ((syntree)(yystack.valueAt (1-(1))));
+		//FKLOG("[bison]: expr_value <- function_call");
+		//$$ = $1;
 	};
   break;
     
@@ -2119,10 +2126,10 @@ class YYParser
   if (yyn == 128)
     
 /* Line 353 of lalr1.java  */
-/* Line 1185 of "bison.y"  */
+/* Line 1190 of "bison.y"  */
     {
-		FKLOG("[bison]: expr_value <- variable");
-		yyval = ((syntree)(yystack.valueAt (1-(1))));
+		//FKLOG("[bison]: expr_value <- variable");
+		//$$ = $1;
 	};
   break;
     
@@ -2131,13 +2138,13 @@ class YYParser
   if (yyn == 129)
     
 /* Line 353 of lalr1.java  */
-/* Line 1193 of "bison.y"  */
+/* Line 1198 of "bison.y"  */
     {
-		FKLOG("[bison]: explicit_value <- FTRUE");
-		NEWTYPE(p, explicit_value_node);
-		p->str = ((str)(yystack.valueAt (1-(1))));
-		p->type = explicit_value_node::EVT_TRUE;
-		yyval = p;
+		//FKLOG("[bison]: explicit_value <- FTRUE");
+		//NEWTYPE(p, explicit_value_node);
+		//p->str = $1;
+		//p->type = explicit_value_node::EVT_TRUE;
+		//$$ = p;
 	};
   break;
     
@@ -2146,13 +2153,13 @@ class YYParser
   if (yyn == 130)
     
 /* Line 353 of lalr1.java  */
-/* Line 1202 of "bison.y"  */
+/* Line 1207 of "bison.y"  */
     {
-		FKLOG("[bison]: explicit_value <- FFALSE");
-		NEWTYPE(p, explicit_value_node);
-		p->str = ((str)(yystack.valueAt (1-(1))));
-		p->type = explicit_value_node::EVT_FALSE;
-		yyval = p;
+		//FKLOG("[bison]: explicit_value <- FFALSE");
+		//NEWTYPE(p, explicit_value_node);
+		//p->str = $1;
+		//p->type = explicit_value_node::EVT_FALSE;
+		//$$ = p;
 	};
   break;
     
@@ -2161,13 +2168,13 @@ class YYParser
   if (yyn == 131)
     
 /* Line 353 of lalr1.java  */
-/* Line 1211 of "bison.y"  */
+/* Line 1216 of "bison.y"  */
     {
-		FKLOG("[bison]: explicit_value <- NUMBER %s", ((str)(yystack.valueAt (1-(1)))).c_str());
-		NEWTYPE(p, explicit_value_node);
-		p->str = ((str)(yystack.valueAt (1-(1))));
-		p->type = explicit_value_node::EVT_NUM;
-		yyval = p;
+		//FKLOG("[bison]: explicit_value <- NUMBER %s", $1.c_str());
+		//NEWTYPE(p, explicit_value_node);
+		//p->str = $1;
+		//p->type = explicit_value_node::EVT_NUM;
+		//$$ = p;
 	};
   break;
     
@@ -2176,13 +2183,13 @@ class YYParser
   if (yyn == 132)
     
 /* Line 353 of lalr1.java  */
-/* Line 1220 of "bison.y"  */
+/* Line 1225 of "bison.y"  */
     {
-		FKLOG("[bison]: explicit_value <- FKUUID %s", ((str)(yystack.valueAt (1-(1)))).c_str());
-		NEWTYPE(p, explicit_value_node);
-		p->str = ((str)(yystack.valueAt (1-(1))));
-		p->type = explicit_value_node::EVT_UUID;
-		yyval = p;
+		//FKLOG("[bison]: explicit_value <- FKUUID %s", $1.c_str());
+		//NEWTYPE(p, explicit_value_node);
+		//p->str = $1;
+		//p->type = explicit_value_node::EVT_UUID;
+		//$$ = p;
 	};
   break;
     
@@ -2191,13 +2198,13 @@ class YYParser
   if (yyn == 133)
     
 /* Line 353 of lalr1.java  */
-/* Line 1229 of "bison.y"  */
+/* Line 1234 of "bison.y"  */
     {
-		FKLOG("[bison]: explicit_value <- STRING_DEFINITION %s", ((str)(yystack.valueAt (1-(1)))).c_str());
-		NEWTYPE(p, explicit_value_node);
-		p->str = ((str)(yystack.valueAt (1-(1))));
-		p->type = explicit_value_node::EVT_STR;
-		yyval = p;
+		//FKLOG("[bison]: explicit_value <- STRING_DEFINITION %s", $1.c_str());
+		//NEWTYPE(p, explicit_value_node);
+		//p->str = $1;
+		//p->type = explicit_value_node::EVT_STR;
+		//$$ = p;
 	};
   break;
     
@@ -2206,13 +2213,13 @@ class YYParser
   if (yyn == 134)
     
 /* Line 353 of lalr1.java  */
-/* Line 1238 of "bison.y"  */
+/* Line 1243 of "bison.y"  */
     {
-		FKLOG("[bison]: explicit_value <- FKFLOAT %s", ((str)(yystack.valueAt (1-(1)))).c_str());
-		NEWTYPE(p, explicit_value_node);
-		p->str = ((str)(yystack.valueAt (1-(1))));
-		p->type = explicit_value_node::EVT_FLOAT;
-		yyval = p;
+		//FKLOG("[bison]: explicit_value <- FKFLOAT %s", $1.c_str());
+		//NEWTYPE(p, explicit_value_node);
+		//p->str = $1;
+		//p->type = explicit_value_node::EVT_FLOAT;
+		//$$ = p;
 	};
   break;
     
@@ -2221,14 +2228,14 @@ class YYParser
   if (yyn == 135)
     
 /* Line 353 of lalr1.java  */
-/* Line 1247 of "bison.y"  */
+/* Line 1252 of "bison.y"  */
     {
-		FKLOG("[bison]: explicit_value <- const_map_list_value");
-		NEWTYPE(p, explicit_value_node);
-		p->str = "";
-		p->type = explicit_value_node::EVT_MAP;
-		p->v = ((syntree)(yystack.valueAt (3-(2))));
-		yyval = p;
+		//FKLOG("[bison]: explicit_value <- const_map_list_value");
+		//NEWTYPE(p, explicit_value_node);
+		//p->str = "";
+		//p->type = explicit_value_node::EVT_MAP;
+		//p->v = $2;
+		//$$ = p;
 	};
   break;
     
@@ -2237,14 +2244,14 @@ class YYParser
   if (yyn == 136)
     
 /* Line 353 of lalr1.java  */
-/* Line 1257 of "bison.y"  */
+/* Line 1262 of "bison.y"  */
     {
-		FKLOG("[bison]: explicit_value <- const_array_list_value");
-		NEWTYPE(p, explicit_value_node);
-		p->str = "";
-		p->type = explicit_value_node::EVT_ARRAY;
-		p->v = ((syntree)(yystack.valueAt (3-(2))));
-		yyval = p;
+		//FKLOG("[bison]: explicit_value <- const_array_list_value");
+		//NEWTYPE(p, explicit_value_node);
+		//p->str = "";
+		//p->type = explicit_value_node::EVT_ARRAY;
+		//p->v = $2;
+		//$$ = p;
 	};
   break;
     
@@ -2253,11 +2260,11 @@ class YYParser
   if (yyn == 137)
     
 /* Line 353 of lalr1.java  */
-/* Line 1269 of "bison.y"  */
+/* Line 1274 of "bison.y"  */
     {
-		FKLOG("[bison]: const_map_list_value <- null");
-		NEWTYPE(p, const_map_list_value_node);
-		yyval = p;
+		//FKLOG("[bison]: const_map_list_value <- null");
+		//NEWTYPE(p, const_map_list_value_node);
+		//$$ = p;
 	};
   break;
     
@@ -2266,12 +2273,12 @@ class YYParser
   if (yyn == 138)
     
 /* Line 353 of lalr1.java  */
-/* Line 1276 of "bison.y"  */
+/* Line 1281 of "bison.y"  */
     {
-		FKLOG("[bison]: const_map_list_value <- const_map_value");
-		NEWTYPE(p, const_map_list_value_node);
-		p->add_ele(((syntree)(yystack.valueAt (1-(1)))));
-		yyval = p;
+		//FKLOG("[bison]: const_map_list_value <- const_map_value");
+		//NEWTYPE(p, const_map_list_value_node);
+		//p->add_ele($1);
+		//$$ = p;
 	};
   break;
     
@@ -2280,13 +2287,13 @@ class YYParser
   if (yyn == 139)
     
 /* Line 353 of lalr1.java  */
-/* Line 1284 of "bison.y"  */
+/* Line 1289 of "bison.y"  */
     {
-		FKLOG("[bison]: const_map_list_value <- const_map_list_value const_map_value");
-		assert(((syntree)(yystack.valueAt (2-(1))))->gettype() == est_constmaplist);
-		const_map_list_value_node * p = dynamic_cast<const_map_list_value_node*>(((syntree)(yystack.valueAt (2-(1)))));
-		p->add_ele(((syntree)(yystack.valueAt (2-(2)))));
-		yyval = p;
+		//FKLOG("[bison]: const_map_list_value <- const_map_list_value const_map_value");
+		//assert($1->gettype() == est_constmaplist);
+		//const_map_list_value_node * p = dynamic_cast<const_map_list_value_node*>($1);
+		//p->add_ele($2);
+		//$$ = p;
 	};
   break;
     
@@ -2295,13 +2302,13 @@ class YYParser
   if (yyn == 140)
     
 /* Line 353 of lalr1.java  */
-/* Line 1295 of "bison.y"  */
+/* Line 1300 of "bison.y"  */
     {
-		FKLOG("[bison]: const_map_value <- explicit_value");
-		NEWTYPE(p, const_map_value_node);
-		p->k = ((syntree)(yystack.valueAt (3-(1))));
-		p->v = ((syntree)(yystack.valueAt (3-(3))));
-		yyval = p;
+		//FKLOG("[bison]: const_map_value <- explicit_value");
+		//NEWTYPE(p, const_map_value_node);
+		//p->k = $1;
+		//p->v = $3;
+		//$$ = p;
 	};
   break;
     
@@ -2310,11 +2317,11 @@ class YYParser
   if (yyn == 141)
     
 /* Line 353 of lalr1.java  */
-/* Line 1306 of "bison.y"  */
+/* Line 1311 of "bison.y"  */
     {
-		FKLOG("[bison]: const_array_list_value <- null");
-		NEWTYPE(p, const_array_list_value_node);
-		yyval = p;
+		//FKLOG("[bison]: const_array_list_value <- null");
+		//NEWTYPE(p, const_array_list_value_node);
+		//$$ = p;
 	};
   break;
     
@@ -2323,12 +2330,12 @@ class YYParser
   if (yyn == 142)
     
 /* Line 353 of lalr1.java  */
-/* Line 1313 of "bison.y"  */
+/* Line 1318 of "bison.y"  */
     {
-		FKLOG("[bison]: const_array_list_value <- explicit_value");
-		NEWTYPE(p, const_array_list_value_node);
-		p->add_ele(((syntree)(yystack.valueAt (1-(1)))));
-		yyval = p;
+		//FKLOG("[bison]: const_array_list_value <- explicit_value");
+		//NEWTYPE(p, const_array_list_value_node);
+		//p->add_ele($1);
+		//$$ = p;
 	};
   break;
     
@@ -2337,13 +2344,13 @@ class YYParser
   if (yyn == 143)
     
 /* Line 353 of lalr1.java  */
-/* Line 1321 of "bison.y"  */
+/* Line 1326 of "bison.y"  */
     {
-		FKLOG("[bison]: const_array_list_value <- const_array_list_value explicit_value");
-		assert(((syntree)(yystack.valueAt (2-(1))))->gettype() == est_constarraylist);
-		const_array_list_value_node * p = dynamic_cast<const_array_list_value_node*>(((syntree)(yystack.valueAt (2-(1)))));
-		p->add_ele(((syntree)(yystack.valueAt (2-(2)))));
-		yyval = p;
+		//FKLOG("[bison]: const_array_list_value <- const_array_list_value explicit_value");
+		//assert($1->gettype() == est_constarraylist);
+		//const_array_list_value_node * p = dynamic_cast<const_array_list_value_node*>($1);
+		//p->add_ele($2);
+		//$$ = p;
 	};
   break;
     
@@ -2352,11 +2359,11 @@ class YYParser
   if (yyn == 144)
     
 /* Line 353 of lalr1.java  */
-/* Line 1332 of "bison.y"  */
+/* Line 1337 of "bison.y"  */
     {
-		FKLOG("[bison]: break <- BREAK");
-		NEWTYPE(p, break_stmt);
-		yyval = p;
+		//FKLOG("[bison]: break <- BREAK");
+		//NEWTYPE(p, break_stmt);
+		//$$ = p;
 	};
   break;
     
@@ -2365,11 +2372,11 @@ class YYParser
   if (yyn == 145)
     
 /* Line 353 of lalr1.java  */
-/* Line 1341 of "bison.y"  */
+/* Line 1346 of "bison.y"  */
     {
-		FKLOG("[bison]: CONTINUE");
-		NEWTYPE(p, continue_stmt);
-		yyval = p;
+		//FKLOG("[bison]: CONTINUE");
+		//NEWTYPE(p, continue_stmt);
+		//$$ = p;
 	};
   break;
     
@@ -2378,12 +2385,12 @@ class YYParser
   if (yyn == 146)
     
 /* Line 353 of lalr1.java  */
-/* Line 1350 of "bison.y"  */
+/* Line 1355 of "bison.y"  */
     {
-		FKLOG("[bison]: SLEEP");
-		NEWTYPE(p, sleep_stmt);
-		p->time = ((syntree)(yystack.valueAt (2-(2))));
-		yyval = p;
+		//FKLOG("[bison]: SLEEP");
+		//NEWTYPE(p, sleep_stmt);
+		//p->time = $2;
+		//$$ = p;
 	};
   break;
     
@@ -2392,12 +2399,12 @@ class YYParser
   if (yyn == 147)
     
 /* Line 353 of lalr1.java  */
-/* Line 1359 of "bison.y"  */
+/* Line 1364 of "bison.y"  */
     {
-		FKLOG("[bison]: YIELD");
-		NEWTYPE(p, yield_stmt);
-		p->time = ((syntree)(yystack.valueAt (2-(2))));
-		yyval = p;
+		//FKLOG("[bison]: YIELD");
+		//NEWTYPE(p, yield_stmt);
+		//p->time = $2;
+		//$$ = p;
 	};
   break;
     
@@ -2406,14 +2413,14 @@ class YYParser
   if (yyn == 148)
     
 /* Line 353 of lalr1.java  */
-/* Line 1369 of "bison.y"  */
+/* Line 1374 of "bison.y"  */
     {
-		FKLOG("[bison]: switch_stmt");
-		NEWTYPE(p, switch_stmt);
-		p->cmp = ((syntree)(yystack.valueAt (6-(2))));
-		p->caselist = ((syntree)(yystack.valueAt (6-(3))));
-		p->def = ((syntree)(yystack.valueAt (6-(5))));
-		yyval = p;
+		//FKLOG("[bison]: switch_stmt");
+		//NEWTYPE(p, switch_stmt);
+		//p->cmp = $2;
+		//p->caselist = $3;
+		//p->def = $5;
+		//$$ = p;
 	};
   break;
     
@@ -2422,14 +2429,14 @@ class YYParser
   if (yyn == 149)
     
 /* Line 353 of lalr1.java  */
-/* Line 1379 of "bison.y"  */
+/* Line 1384 of "bison.y"  */
     {
-		FKLOG("[bison]: switch_stmt");
-		NEWTYPE(p, switch_stmt);
-		p->cmp = ((syntree)(yystack.valueAt (5-(2))));
-		p->caselist = ((syntree)(yystack.valueAt (5-(3))));
-		p->def = 0;
-		yyval = p;
+		//FKLOG("[bison]: switch_stmt");
+		//NEWTYPE(p, switch_stmt);
+		//p->cmp = $2;
+		//p->caselist = $3;
+		//p->def = 0;
+		//$$ = p;
 	};
   break;
     
@@ -2438,12 +2445,12 @@ class YYParser
   if (yyn == 150)
     
 /* Line 353 of lalr1.java  */
-/* Line 1391 of "bison.y"  */
+/* Line 1396 of "bison.y"  */
     {
-		FKLOG("[bison]: switch_case_list <- switch_case_define");
-		NEWTYPE(p, switch_caselist_node);
-		p->add_case(((syntree)(yystack.valueAt (1-(1)))));
-		yyval = p;
+		//FKLOG("[bison]: switch_case_list <- switch_case_define");
+		//NEWTYPE(p, switch_caselist_node);
+		//p->add_case($1);
+		//$$ = p;
 	};
   break;
     
@@ -2452,13 +2459,13 @@ class YYParser
   if (yyn == 151)
     
 /* Line 353 of lalr1.java  */
-/* Line 1399 of "bison.y"  */
+/* Line 1404 of "bison.y"  */
     {
-		FKLOG("[bison]: switch_case_list <- switch_case_list switch_case_define");
-		assert(((syntree)(yystack.valueAt (2-(2))))->gettype() == est_switch_case_node);
-		switch_caselist_node * p = dynamic_cast<switch_caselist_node*>(((syntree)(yystack.valueAt (2-(1)))));
-		p->add_case(((syntree)(yystack.valueAt (2-(2)))));
-		yyval = p;
+		//FKLOG("[bison]: switch_case_list <- switch_case_list switch_case_define");
+		//assert($2->gettype() == est_switch_case_node);
+		//switch_caselist_node * p = dynamic_cast<switch_caselist_node*>($1);
+		//p->add_case($2);
+		//$$ = p;
 	};
   break;
     
@@ -2467,13 +2474,13 @@ class YYParser
   if (yyn == 152)
     
 /* Line 353 of lalr1.java  */
-/* Line 1410 of "bison.y"  */
+/* Line 1415 of "bison.y"  */
     {
-		FKLOG("[bison]: switch_case_define");
-		NEWTYPE(p, switch_case_node);
-		p->cmp = ((syntree)(yystack.valueAt (4-(2))));
-		p->block = ((syntree)(yystack.valueAt (4-(4))));
-		yyval = p;
+		//FKLOG("[bison]: switch_case_define");
+		//NEWTYPE(p, switch_case_node);
+		//p->cmp = $2;
+		//p->block = $4;
+		//$$ = p;
 	};
   break;
     
@@ -2482,13 +2489,13 @@ class YYParser
   if (yyn == 153)
     
 /* Line 353 of lalr1.java  */
-/* Line 1419 of "bison.y"  */
+/* Line 1424 of "bison.y"  */
     {
-		FKLOG("[bison]: switch_case_define");
-		NEWTYPE(p, switch_case_node);
-		p->cmp = ((syntree)(yystack.valueAt (3-(2))));
-		p->block = 0;
-		yyval = p;
+		//FKLOG("[bison]: switch_case_define");
+		//NEWTYPE(p, switch_case_node);
+		//p->cmp = $2;
+		//p->block = 0;
+		//$$ = p;
 	};
   break;
     
@@ -2496,7 +2503,7 @@ class YYParser
 
 
 /* Line 353 of lalr1.java  */
-/* Line 2500 of "bison.java"  */
+/* Line 2507 of "bison.java"  */
 	default: break;
       }
 
@@ -3408,22 +3415,22 @@ class YYParser
   /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
   private static final short yyrline_[] =
   {
-         0,   137,   137,   146,   149,   156,   165,   168,   170,   174,
-     184,   187,   189,   193,   204,   208,   217,   228,   231,   233,
-     237,   247,   250,   252,   258,   270,   285,   289,   298,   308,
-     318,   329,   340,   360,   364,   373,   383,   393,   402,   412,
-     418,   424,   430,   436,   442,   448,   454,   460,   466,   472,
-     478,   484,   490,   496,   504,   514,   525,   538,   550,   564,
-     573,   584,   595,   609,   613,   622,   632,   641,   653,   657,
-     665,   675,   681,   691,   701,   711,   721,   731,   741,   751,
-     761,   771,   781,   791,   803,   809,   815,   823,   831,   841,
-     850,   859,   865,   871,   879,   889,   901,   911,   923,   932,
-     941,   947,   953,   961,   971,   981,   991,  1001,  1011,  1027,
-    1035,  1043,  1051,  1060,  1068,  1078,  1084,  1090,  1098,  1104,
-    1114,  1124,  1134,  1144,  1154,  1166,  1172,  1178,  1184,  1192,
-    1201,  1210,  1219,  1228,  1237,  1246,  1256,  1269,  1275,  1283,
-    1294,  1306,  1312,  1320,  1331,  1340,  1349,  1358,  1368,  1378,
-    1390,  1398,  1409,  1418
+         0,   142,   142,   151,   154,   161,   170,   173,   175,   179,
+     189,   192,   194,   198,   209,   213,   222,   233,   236,   238,
+     242,   252,   255,   257,   263,   275,   290,   294,   303,   313,
+     323,   334,   345,   365,   369,   378,   388,   398,   407,   417,
+     423,   429,   435,   441,   447,   453,   459,   465,   471,   477,
+     483,   489,   495,   501,   509,   519,   530,   543,   555,   569,
+     578,   589,   600,   614,   618,   627,   637,   646,   658,   662,
+     670,   680,   686,   696,   706,   716,   726,   736,   746,   756,
+     766,   776,   786,   796,   808,   814,   820,   828,   836,   846,
+     855,   864,   870,   876,   884,   894,   906,   916,   928,   937,
+     946,   952,   958,   966,   976,   986,   996,  1006,  1016,  1032,
+    1040,  1048,  1056,  1065,  1073,  1083,  1089,  1095,  1103,  1109,
+    1119,  1129,  1139,  1149,  1159,  1171,  1177,  1183,  1189,  1197,
+    1206,  1215,  1224,  1233,  1242,  1251,  1261,  1274,  1280,  1288,
+    1299,  1311,  1317,  1325,  1336,  1345,  1354,  1363,  1373,  1383,
+    1395,  1403,  1414,  1423
   };
 
   // Report on the debug stream that the rule yyrule is going to be reduced.
