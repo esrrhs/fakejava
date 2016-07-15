@@ -16,10 +16,6 @@ import java_cup.runtime.*;
 %cup
 %cupdebug
 
-%eofval{
-	return symbol(EOF);
-%eofval}
-
 %{
   StringBuilder string = new StringBuilder();
   
@@ -322,6 +318,10 @@ WhiteSpace = {LineTerminator} | [ \t\f]
 
 {WhiteSpace} { }
 
+<<EOF>> { 
+	return symbol(EOF); 
+}
+
 }
 
 <STRING> {
@@ -340,3 +340,7 @@ WhiteSpace = {LineTerminator} | [ \t\f]
   "\\\\"                         { string.append( '\\' ); }
 
 }
+
+/* error fallback */
+[^]                              {  }
+<<EOF>>                          { return symbol(EOF); }
