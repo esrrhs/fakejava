@@ -1,6 +1,6 @@
 #! /bin/sh
 
-cd flexbison
+cd jflexcup
 jflex jflex.flex
 mv jflex.java ../src/fakescript/jflex.java -f
 
