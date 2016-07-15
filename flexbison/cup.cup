@@ -123,16 +123,14 @@ package_head ::=
 	|
 	PACKAGE IDENTIFIER:e
 	{:
-		System.out.print(e);
-		//FKLOG("[bison]: package %s", $2.c_str());
+		types.log("[CUP]: PACKAGE IDENTIFIER " + e);
 		//myflexer *l = (myflexer *)parm;
 		//l->set_package($2.c_str());
 	:}
 	|
 	PACKAGE IDENTIFIER_DOT:e
 	{:
-		System.out.print(e);
-		//FKLOG("[bison]: package %s", $2.c_str());
+		types.log("[CUP]: PACKAGE IDENTIFIER_DOT " + e);
 		//myflexer *l = (myflexer *)parm;
 		//l->set_package($2.c_str());
 	:}
@@ -150,8 +148,7 @@ include_head ::=
 include_define ::=
 	INCLUDE STRING_DEFINITION:e
 	{:
-		System.out.print(e);
-		//FKLOG("[bison]: include %s", $2.c_str());
+		types.log("[CUP]: INCLUDE STRING_DEFINITION " + e);
 		//myflexer *l = (myflexer *)parm;
 		//l->add_include($2.c_str());
 	:}
