@@ -32,14 +32,17 @@ public class cup extends java_cup.runtime.lr_parser {
   /** Production table. */
   protected static final short _production_table[][] = 
     unpackFromStrings(new String[] {
-    "\000\031\000\002\002\006\000\002\002\004\000\002\061" +
+    "\000\042\000\002\002\006\000\002\002\004\000\002\061" +
     "\002\000\002\061\004\000\002\061\004\000\002\063\002" +
     "\000\002\063\003\000\002\063\004\000\002\062\004\000" +
     "\002\047\002\000\002\047\003\000\002\047\004\000\002" +
     "\050\006\000\002\046\004\000\002\046\003\000\002\064" +
     "\002\000\002\064\003\000\002\064\004\000\002\065\006" +
     "\000\002\022\003\000\002\022\003\000\002\022\003\000" +
-    "\002\022\003\000\002\022\003\000\002\022\003" });
+    "\002\022\003\000\002\022\003\000\002\022\003\000\002" +
+    "\022\005\000\002\022\005\000\002\056\002\000\002\056" +
+    "\003\000\002\056\004\000\002\057\005\000\002\060\002" +
+    "\000\002\060\003\000\002\060\004" });
 
   /** Access to production table. */
   public short[][] production_table() {return _production_table;}
@@ -47,8 +50,8 @@ public class cup extends java_cup.runtime.lr_parser {
   /** Parse-action table. */
   protected static final short[][] _action_table = 
     unpackFromStrings(new String[] {
-    "\000\042\000\014\002\uffff\061\uffff\062\006\063\uffff\066" +
-    "\uffff\001\002\000\004\002\044\001\002\000\012\002\ufffc" +
+    "\000\057\000\014\002\uffff\061\uffff\062\006\063\uffff\066" +
+    "\uffff\001\002\000\004\002\061\001\002\000\012\002\ufffc" +
     "\061\ufffc\063\012\066\ufffc\001\002\000\006\020\007\064" +
     "\010\001\002\000\012\002\ufffe\061\ufffe\063\ufffe\066\ufffe" +
     "\001\002\000\012\002\ufffd\061\ufffd\063\ufffd\066\ufffd\001" +
@@ -64,13 +67,46 @@ public class cup extends java_cup.runtime.lr_parser {
     "\066\ufff5\001\002\000\006\002\001\061\030\001\002\000" +
     "\010\002\ufff6\061\ufff6\066\ufff6\001\002\000\004\020\032" +
     "\001\002\000\006\002\ufff1\061\ufff1\001\002\000\004\031" +
-    "\033\001\002\000\016\011\041\012\035\017\036\021\040" +
-    "\044\034\056\037\001\002\000\006\002\uffe9\061\uffe9\001" +
-    "\002\000\006\002\uffed\061\uffed\001\002\000\006\002\uffea" +
-    "\061\uffea\001\002\000\006\002\uffeb\061\uffeb\001\002\000" +
-    "\006\002\uffec\061\uffec\001\002\000\006\002\uffee\061\uffee" +
-    "\001\002\000\006\002\uffef\061\uffef\001\002\000\006\002" +
-    "\ufff0\061\ufff0\001\002\000\004\002\000\001\002" });
+    "\033\001\002\000\022\011\034\012\044\017\040\021\036" +
+    "\044\043\056\041\057\037\103\035\001\002\000\034\002" +
+    "\uffee\011\uffee\012\uffee\017\uffee\021\uffee\044\uffee\052\uffee" +
+    "\056\uffee\057\uffee\060\uffee\061\uffee\103\uffee\104\uffee\001" +
+    "\002\000\024\011\034\012\044\017\040\021\036\044\043" +
+    "\056\041\057\037\103\035\104\uffe6\001\002\000\034\002" +
+    "\uffec\011\uffec\012\uffec\017\uffec\021\uffec\044\uffec\052\uffec" +
+    "\056\uffec\057\uffec\060\uffec\061\uffec\103\uffec\104\uffec\001" +
+    "\002\000\024\011\034\012\044\017\040\021\036\044\043" +
+    "\056\041\057\037\060\uffe2\103\035\001\002\000\034\002" +
+    "\uffea\011\uffea\012\uffea\017\uffea\021\uffea\044\uffea\052\uffea" +
+    "\056\uffea\057\uffea\060\uffea\061\uffea\103\uffea\104\uffea\001" +
+    "\002\000\034\002\uffeb\011\uffeb\012\uffeb\017\uffeb\021\uffeb" +
+    "\044\uffeb\052\uffeb\056\uffeb\057\uffeb\060\uffeb\061\uffeb\103" +
+    "\uffeb\104\uffeb\001\002\000\006\002\uffef\061\uffef\001\002" +
+    "\000\034\002\uffe9\011\uffe9\012\uffe9\017\uffe9\021\uffe9\044" +
+    "\uffe9\052\uffe9\056\uffe9\057\uffe9\060\uffe9\061\uffe9\103\uffe9" +
+    "\104\uffe9\001\002\000\034\002\uffed\011\uffed\012\uffed\017" +
+    "\uffed\021\uffed\044\uffed\052\uffed\056\uffed\057\uffed\060\uffed" +
+    "\061\uffed\103\uffed\104\uffed\001\002\000\024\011\034\012" +
+    "\044\017\040\021\036\044\043\056\041\057\037\060\047" +
+    "\103\035\001\002\000\024\011\uffe1\012\uffe1\017\uffe1\021" +
+    "\uffe1\044\uffe1\056\uffe1\057\uffe1\060\uffe1\103\uffe1\001\002" +
+    "\000\034\002\uffe7\011\uffe7\012\uffe7\017\uffe7\021\uffe7\044" +
+    "\uffe7\052\uffe7\056\uffe7\057\uffe7\060\uffe7\061\uffe7\103\uffe7" +
+    "\104\uffe7\001\002\000\024\011\uffe0\012\uffe0\017\uffe0\021" +
+    "\uffe0\044\uffe0\056\uffe0\057\uffe0\060\uffe0\103\uffe0\001\002" +
+    "\000\024\011\uffe5\012\uffe5\017\uffe5\021\uffe5\044\uffe5\056" +
+    "\uffe5\057\uffe5\103\uffe5\104\uffe5\001\002\000\024\011\034" +
+    "\012\044\017\040\021\036\044\043\056\041\057\037\103" +
+    "\035\104\057\001\002\000\004\052\054\001\002\000\022" +
+    "\011\034\012\044\017\040\021\036\044\043\056\041\057" +
+    "\037\103\035\001\002\000\024\011\uffe3\012\uffe3\017\uffe3" +
+    "\021\uffe3\044\uffe3\056\uffe3\057\uffe3\103\uffe3\104\uffe3\001" +
+    "\002\000\024\011\uffe4\012\uffe4\017\uffe4\021\uffe4\044\uffe4" +
+    "\056\uffe4\057\uffe4\103\uffe4\104\uffe4\001\002\000\034\002" +
+    "\uffe8\011\uffe8\012\uffe8\017\uffe8\021\uffe8\044\uffe8\052\uffe8" +
+    "\056\uffe8\057\uffe8\060\uffe8\061\uffe8\103\uffe8\104\uffe8\001" +
+    "\002\000\006\002\ufff0\061\ufff0\001\002\000\004\002\000" +
+    "\001\002" });
 
   /** Access to parse-action table. */
   public short[][] action_table() {return _action_table;}
@@ -78,19 +114,25 @@ public class cup extends java_cup.runtime.lr_parser {
   /** <code>reduce_goto</code> table. */
   protected static final short[][] _reduce_table = 
     unpackFromStrings(new String[] {
-    "\000\042\000\006\002\003\061\004\001\001\000\002\001" +
+    "\000\057\000\006\002\003\061\004\001\001\000\002\001" +
     "\001\000\006\062\012\063\010\001\001\000\002\001\001" +
     "\000\002\001\001\000\002\001\001\000\010\047\015\050" +
     "\014\062\017\001\001\000\002\001\001\000\002\001\001" +
     "\000\002\001\001\000\002\001\001\000\010\050\026\064" +
     "\025\065\030\001\001\000\002\001\001\000\002\001\001" +
     "\000\004\046\022\001\001\000\002\001\001\000\002\001" +
-    "\001\000\002\001\001\000\002\001\001\000\004\065\042" +
+    "\001\000\002\001\001\000\002\001\001\000\004\065\057" +
     "\001\001\000\002\001\001\000\002\001\001\000\002\001" +
     "\001\000\002\001\001\000\004\022\041\001\001\000\002" +
+    "\001\001\000\010\022\052\056\051\057\050\001\001\000" +
+    "\002\001\001\000\006\022\045\060\044\001\001\000\002" +
     "\001\001\000\002\001\001\000\002\001\001\000\002\001" +
+    "\001\000\002\001\001\000\004\022\047\001\001\000\002" +
+    "\001\001\000\002\001\001\000\002\001\001\000\002\001" +
+    "\001\000\006\022\052\057\055\001\001\000\002\001\001" +
+    "\000\004\022\054\001\001\000\002\001\001\000\002\001" +
     "\001\000\002\001\001\000\002\001\001\000\002\001\001" +
-    "\000\002\001\001\000\002\001\001" });
+    "" });
 
   /** Access to <code>reduce_goto</code> table. */
   public short[][] reduce_table() {return _reduce_table;}
@@ -302,7 +344,7 @@ class CUP$cup$actions {
 		int eright = ((java_cup.runtime.Symbol)CUP$cup$stack.elementAt(CUP$cup$top-2)).right;
 		Object e = (Object)((java_cup.runtime.Symbol) CUP$cup$stack.elementAt(CUP$cup$top-2)).value;
 		
-		types.log("[CUP]: STRUCT IDENTIFIER struct_mem_declaration END " + e);
+		types.log("[CUP]: STRUCT IDENTIFIER struct_mem_declaration END ");
 		m_mycup.add_struct_desc(e.toString());
 	
               CUP$cup$result = parser.getSymbolFactory().newSymbol("struct_define",38, ((java_cup.runtime.Symbol)CUP$cup$stack.elementAt(CUP$cup$top-3)), ((java_cup.runtime.Symbol)CUP$cup$stack.peek()), RESULT);
@@ -317,7 +359,7 @@ class CUP$cup$actions {
 		int eright = ((java_cup.runtime.Symbol)CUP$cup$stack.peek()).right;
 		Object e = (Object)((java_cup.runtime.Symbol) CUP$cup$stack.peek()).value;
 		
-		types.log("[CUP]: struct_mem_declaration IDENTIFIER " + e);
+		types.log("[CUP]: struct_mem_declaration IDENTIFIER ");
 	
               CUP$cup$result = parser.getSymbolFactory().newSymbol("struct_mem_declaration",36, ((java_cup.runtime.Symbol)CUP$cup$stack.elementAt(CUP$cup$top-1)), ((java_cup.runtime.Symbol)CUP$cup$stack.peek()), RESULT);
             }
@@ -331,7 +373,7 @@ class CUP$cup$actions {
 		int eright = ((java_cup.runtime.Symbol)CUP$cup$stack.peek()).right;
 		Object e = (Object)((java_cup.runtime.Symbol) CUP$cup$stack.peek()).value;
 		
-		types.log("[CUP]: IDENTIFIER " + e);
+		types.log("[CUP]: IDENTIFIER ");
 	
               CUP$cup$result = parser.getSymbolFactory().newSymbol("struct_mem_declaration",36, ((java_cup.runtime.Symbol)CUP$cup$stack.peek()), ((java_cup.runtime.Symbol)CUP$cup$stack.peek()), RESULT);
             }
@@ -376,7 +418,7 @@ class CUP$cup$actions {
 		int e1right = ((java_cup.runtime.Symbol)CUP$cup$stack.peek()).right;
 		Object e1 = (Object)((java_cup.runtime.Symbol) CUP$cup$stack.peek()).value;
 		
-		types.log("[CUP]: FCONST IDENTIFIER ASSIGN explicit_value " + e + " " + e1);
+		types.log("[CUP]: FCONST IDENTIFIER ASSIGN explicit_value ");
 		m_mycup.add_const_desc(e.toString(), (syntree_node)e1);
 	
               CUP$cup$result = parser.getSymbolFactory().newSymbol("const_define",51, ((java_cup.runtime.Symbol)CUP$cup$stack.elementAt(CUP$cup$top-3)), ((java_cup.runtime.Symbol)CUP$cup$stack.peek()), RESULT);
@@ -486,6 +528,163 @@ class CUP$cup$actions {
 		RESULT = p;
 	
               CUP$cup$result = parser.getSymbolFactory().newSymbol("explicit_value",16, ((java_cup.runtime.Symbol)CUP$cup$stack.peek()), ((java_cup.runtime.Symbol)CUP$cup$stack.peek()), RESULT);
+            }
+          return CUP$cup$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 25: // explicit_value ::= OPEN_BIG_BRACKET const_map_list_value CLOSE_BIG_BRACKET 
+            {
+              Object RESULT =null;
+		int eleft = ((java_cup.runtime.Symbol)CUP$cup$stack.elementAt(CUP$cup$top-1)).left;
+		int eright = ((java_cup.runtime.Symbol)CUP$cup$stack.elementAt(CUP$cup$top-1)).right;
+		Object e = (Object)((java_cup.runtime.Symbol) CUP$cup$stack.elementAt(CUP$cup$top-1)).value;
+		
+		types.log("[CUP]: OPEN_BIG_BRACKET const_map_list_value CLOSE_BIG_BRACKET ");
+		explicit_value_node p = new explicit_value_node();
+		p.m_type = explicit_value_type.EVT_MAP;
+		p.m_v = (const_map_list_value_node)e;
+		RESULT = p;
+	
+              CUP$cup$result = parser.getSymbolFactory().newSymbol("explicit_value",16, ((java_cup.runtime.Symbol)CUP$cup$stack.elementAt(CUP$cup$top-2)), ((java_cup.runtime.Symbol)CUP$cup$stack.peek()), RESULT);
+            }
+          return CUP$cup$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 26: // explicit_value ::= OPEN_SQUARE_BRACKET const_array_list_value CLOSE_SQUARE_BRACKET 
+            {
+              Object RESULT =null;
+		int eleft = ((java_cup.runtime.Symbol)CUP$cup$stack.elementAt(CUP$cup$top-1)).left;
+		int eright = ((java_cup.runtime.Symbol)CUP$cup$stack.elementAt(CUP$cup$top-1)).right;
+		Object e = (Object)((java_cup.runtime.Symbol) CUP$cup$stack.elementAt(CUP$cup$top-1)).value;
+		
+		types.log("[CUP]: OPEN_BIG_BRACKET const_array_list_value CLOSE_BIG_BRACKET ");
+		explicit_value_node p = new explicit_value_node();
+		p.m_type = explicit_value_type.EVT_ARRAY;
+		p.m_v = (const_array_list_value_node)e;
+		RESULT = p;
+	
+              CUP$cup$result = parser.getSymbolFactory().newSymbol("explicit_value",16, ((java_cup.runtime.Symbol)CUP$cup$stack.elementAt(CUP$cup$top-2)), ((java_cup.runtime.Symbol)CUP$cup$stack.peek()), RESULT);
+            }
+          return CUP$cup$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 27: // const_map_list_value ::= 
+            {
+              Object RESULT =null;
+		
+		types.log("[CUP]: empty ");
+		const_map_list_value_node p = new const_map_list_value_node();
+		RESULT = p;
+	
+              CUP$cup$result = parser.getSymbolFactory().newSymbol("const_map_list_value",44, ((java_cup.runtime.Symbol)CUP$cup$stack.peek()), RESULT);
+            }
+          return CUP$cup$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 28: // const_map_list_value ::= const_map_value 
+            {
+              Object RESULT =null;
+		int eleft = ((java_cup.runtime.Symbol)CUP$cup$stack.peek()).left;
+		int eright = ((java_cup.runtime.Symbol)CUP$cup$stack.peek()).right;
+		Object e = (Object)((java_cup.runtime.Symbol) CUP$cup$stack.peek()).value;
+		
+		types.log("[CUP]: const_map_value ");
+		const_map_list_value_node p = new const_map_list_value_node();
+		p.add_ele((const_map_value_node)e);
+		RESULT = p;
+	
+              CUP$cup$result = parser.getSymbolFactory().newSymbol("const_map_list_value",44, ((java_cup.runtime.Symbol)CUP$cup$stack.peek()), ((java_cup.runtime.Symbol)CUP$cup$stack.peek()), RESULT);
+            }
+          return CUP$cup$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 29: // const_map_list_value ::= const_map_list_value const_map_value 
+            {
+              Object RESULT =null;
+		int eleft = ((java_cup.runtime.Symbol)CUP$cup$stack.elementAt(CUP$cup$top-1)).left;
+		int eright = ((java_cup.runtime.Symbol)CUP$cup$stack.elementAt(CUP$cup$top-1)).right;
+		Object e = (Object)((java_cup.runtime.Symbol) CUP$cup$stack.elementAt(CUP$cup$top-1)).value;
+		int e1left = ((java_cup.runtime.Symbol)CUP$cup$stack.peek()).left;
+		int e1right = ((java_cup.runtime.Symbol)CUP$cup$stack.peek()).right;
+		Object e1 = (Object)((java_cup.runtime.Symbol) CUP$cup$stack.peek()).value;
+		
+		types.log("[CUP]: const_map_list_value const_map_value ");
+		const_map_list_value_node p = (const_map_list_value_node)e;
+		p.add_ele((const_map_value_node)e1);
+		RESULT = p;
+	
+              CUP$cup$result = parser.getSymbolFactory().newSymbol("const_map_list_value",44, ((java_cup.runtime.Symbol)CUP$cup$stack.elementAt(CUP$cup$top-1)), ((java_cup.runtime.Symbol)CUP$cup$stack.peek()), RESULT);
+            }
+          return CUP$cup$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 30: // const_map_value ::= explicit_value COLON explicit_value 
+            {
+              Object RESULT =null;
+		int eleft = ((java_cup.runtime.Symbol)CUP$cup$stack.elementAt(CUP$cup$top-2)).left;
+		int eright = ((java_cup.runtime.Symbol)CUP$cup$stack.elementAt(CUP$cup$top-2)).right;
+		Object e = (Object)((java_cup.runtime.Symbol) CUP$cup$stack.elementAt(CUP$cup$top-2)).value;
+		int e1left = ((java_cup.runtime.Symbol)CUP$cup$stack.peek()).left;
+		int e1right = ((java_cup.runtime.Symbol)CUP$cup$stack.peek()).right;
+		Object e1 = (Object)((java_cup.runtime.Symbol) CUP$cup$stack.peek()).value;
+		
+		types.log("[CUP]: explicit_value COLON explicit_value ");
+		const_map_value_node p = new const_map_value_node();
+		p.m_k = (syntree_node)e;
+		p.m_v = (syntree_node)e1;
+		RESULT = p;
+	
+              CUP$cup$result = parser.getSymbolFactory().newSymbol("const_map_value",45, ((java_cup.runtime.Symbol)CUP$cup$stack.elementAt(CUP$cup$top-2)), ((java_cup.runtime.Symbol)CUP$cup$stack.peek()), RESULT);
+            }
+          return CUP$cup$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 31: // const_array_list_value ::= 
+            {
+              Object RESULT =null;
+		
+		types.log("[CUP]: empty ");
+		const_array_list_value_node p = new const_array_list_value_node();
+		RESULT = p;
+	
+              CUP$cup$result = parser.getSymbolFactory().newSymbol("const_array_list_value",46, ((java_cup.runtime.Symbol)CUP$cup$stack.peek()), RESULT);
+            }
+          return CUP$cup$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 32: // const_array_list_value ::= explicit_value 
+            {
+              Object RESULT =null;
+		int eleft = ((java_cup.runtime.Symbol)CUP$cup$stack.peek()).left;
+		int eright = ((java_cup.runtime.Symbol)CUP$cup$stack.peek()).right;
+		Object e = (Object)((java_cup.runtime.Symbol) CUP$cup$stack.peek()).value;
+		
+		types.log("[CUP]: explicit_value ");
+		const_array_list_value_node p = new const_array_list_value_node();
+		p.add_ele((explicit_value_node)e);
+		RESULT = p;
+	
+              CUP$cup$result = parser.getSymbolFactory().newSymbol("const_array_list_value",46, ((java_cup.runtime.Symbol)CUP$cup$stack.peek()), ((java_cup.runtime.Symbol)CUP$cup$stack.peek()), RESULT);
+            }
+          return CUP$cup$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 33: // const_array_list_value ::= const_array_list_value explicit_value 
+            {
+              Object RESULT =null;
+		int eleft = ((java_cup.runtime.Symbol)CUP$cup$stack.elementAt(CUP$cup$top-1)).left;
+		int eright = ((java_cup.runtime.Symbol)CUP$cup$stack.elementAt(CUP$cup$top-1)).right;
+		Object e = (Object)((java_cup.runtime.Symbol) CUP$cup$stack.elementAt(CUP$cup$top-1)).value;
+		int e1left = ((java_cup.runtime.Symbol)CUP$cup$stack.peek()).left;
+		int e1right = ((java_cup.runtime.Symbol)CUP$cup$stack.peek()).right;
+		Object e1 = (Object)((java_cup.runtime.Symbol) CUP$cup$stack.peek()).value;
+		
+		types.log("[CUP]: const_array_list_value explicit_value ");
+		const_array_list_value_node p = (const_array_list_value_node)e;
+		p.add_ele((explicit_value_node)e1);
+		RESULT = p;
+	
+              CUP$cup$result = parser.getSymbolFactory().newSymbol("const_array_list_value",46, ((java_cup.runtime.Symbol)CUP$cup$stack.elementAt(CUP$cup$top-1)), ((java_cup.runtime.Symbol)CUP$cup$stack.peek()), RESULT);
             }
           return CUP$cup$result;
 

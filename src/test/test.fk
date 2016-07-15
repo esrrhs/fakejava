@@ -24,3 +24,14 @@ const node_begin = 1.1214124
 const node_end = "123124"
 const node_normal = 3125125215235u
 const node_comment = true
+const c_table_data = {
+		"a" : 1
+		0.2 : "c"
+		3 : [1 2 3]
+		"f" : {
+			1 : 1
+			2 : 2
+			3 : 3
+		}
+	}
+const c_array_data = [1 {1 : "aa"} 3]

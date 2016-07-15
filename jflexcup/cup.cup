@@ -178,7 +178,7 @@ struct_head ::=
 struct_define ::=
 	STRUCT IDENTIFIER:e struct_mem_declaration END
 	{:
-		types.log("[CUP]: STRUCT IDENTIFIER struct_mem_declaration END " + e);
+		types.log("[CUP]: STRUCT IDENTIFIER struct_mem_declaration END ");
 		m_mycup.add_struct_desc(e.toString());
 	:}
 	;
@@ -186,12 +186,12 @@ struct_define ::=
 struct_mem_declaration ::=
 	struct_mem_declaration IDENTIFIER:e
 	{:
-		types.log("[CUP]: struct_mem_declaration IDENTIFIER " + e);
+		types.log("[CUP]: struct_mem_declaration IDENTIFIER ");
 	:}
 	| 
 	IDENTIFIER:e
 	{:
-		types.log("[CUP]: IDENTIFIER " + e);
+		types.log("[CUP]: IDENTIFIER ");
 	:}
 	;
 
@@ -208,7 +208,7 @@ const_head ::=
 const_define ::=
 	FCONST IDENTIFIER:e ASSIGN explicit_value:e1
 	{:
-		types.log("[CUP]: FCONST IDENTIFIER ASSIGN explicit_value " + e + " " + e1);
+		types.log("[CUP]: FCONST IDENTIFIER ASSIGN explicit_value ");
 		m_mycup.add_const_desc(e.toString(), (syntree_node)e1);
 	:}
 	;
@@ -265,5 +265,86 @@ explicit_value ::=
 		p.m_type = explicit_value_type.EVT_FLOAT;
 		RESULT = p;
 	:}
+	|
+	OPEN_BIG_BRACKET const_map_list_value:e CLOSE_BIG_BRACKET
+	{:
+		types.log("[CUP]: OPEN_BIG_BRACKET const_map_list_value CLOSE_BIG_BRACKET ");
+		explicit_value_node p = new explicit_value_node();
+		p.m_type = explicit_value_type.EVT_MAP;
+		p.m_v = (const_map_list_value_node)e;
+		RESULT = p;
+	:}
+	|
+	OPEN_SQUARE_BRACKET const_array_list_value:e CLOSE_SQUARE_BRACKET
+	{:
+		types.log("[CUP]: OPEN_BIG_BRACKET const_array_list_value CLOSE_BIG_BRACKET ");
+		explicit_value_node p = new explicit_value_node();
+		p.m_type = explicit_value_type.EVT_ARRAY;
+		p.m_v = (const_array_list_value_node)e;
+		RESULT = p;
+	:}
 	;
-      
+ 
+
+const_map_list_value ::=
+	/* empty */
+	{:
+		types.log("[CUP]: empty ");
+		const_map_list_value_node p = new const_map_list_value_node();
+		RESULT = p;
+	:}
+	|
+	const_map_value:e
+	{:
+		types.log("[CUP]: const_map_value ");
+		const_map_list_value_node p = new const_map_list_value_node();
+		p.add_ele((const_map_value_node)e);
+		RESULT = p;
+	:}
+	|
+	const_map_list_value:e const_map_value:e1
+	{:
+		types.log("[CUP]: const_map_list_value const_map_value ");
+		const_map_list_value_node p = (const_map_list_value_node)e;
+		p.add_ele((const_map_value_node)e1);
+		RESULT = p;
+	:}
+	;
+
+
+const_map_value ::=
+	explicit_value:e COLON explicit_value:e1
+	{:
+		types.log("[CUP]: explicit_value COLON explicit_value ");
+		const_map_value_node p = new const_map_value_node();
+		p.m_k = (syntree_node)e;
+		p.m_v = (syntree_node)e1;
+		RESULT = p;
+	:}
+	;
+
+const_array_list_value ::=
+	/* empty */
+	{:
+		types.log("[CUP]: empty ");
+		const_array_list_value_node p = new const_array_list_value_node();
+		RESULT = p;
+	:}
+	|
+	explicit_value:e
+	{:
+		types.log("[CUP]: explicit_value ");
+		const_array_list_value_node p = new const_array_list_value_node();
+		p.add_ele((explicit_value_node)e);
+		RESULT = p;
+	:}
+	|
+	const_array_list_value:e explicit_value:e1
+	{:
+		types.log("[CUP]: const_array_list_value explicit_value ");
+		const_array_list_value_node p = (const_array_list_value_node)e;
+		p.add_ele((explicit_value_node)e1);
+		RESULT = p;
+	:}
+	;
+	

@@ -20,6 +20,10 @@ public class explicit_value_node extends syntree_node
 		ret += "[explicit_value]:";
 		ret += m_str;
 		ret += "\n";
+		if (m_v != null)
+		{
+			ret += m_v.dump(indent + 1);
+		}
 		return ret;
 	}
 }
