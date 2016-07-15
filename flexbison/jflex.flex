@@ -5,7 +5,7 @@ import java_cup.runtime.*;
 %%
 
 %public
-%class Lexer
+%class jflex
 %implements sym
 
 %unicode
@@ -20,11 +20,11 @@ import java_cup.runtime.*;
   StringBuilder string = new StringBuilder();
   
   private Symbol symbol(int type) {
-    return new JavaSymbol(type, yyline+1, yycolumn+1);
+    return new javasymbol(type, yyline+1, yycolumn+1);
   }
 
   private Symbol symbol(int type, Object value) {
-    return new JavaSymbol(type, yyline+1, yycolumn+1, value);
+    return new javasymbol(type, yyline+1, yycolumn+1, value);
   }
 
   /** 
@@ -322,7 +322,7 @@ StringCharacter = [^\r\n\"\\]
 }
 
 <STRING> {
-  \"                             { yybegin(YYINITIAL); return STRING_DEFINITION; }
+  \"                             { yybegin(YYINITIAL); return symbol(STRING_DEFINITION, string); }
   
   {StringCharacter}+             { string.append( yytext() ); }
   

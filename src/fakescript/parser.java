@@ -7,8 +7,6 @@ import java.io.InputStreamReader;
 import java.io.Reader;
 import java.util.ArrayList;
 
-import fakescript.YYParser.Lexer;
-
 class parser 
 {
 	private fake m_f;
@@ -53,13 +51,22 @@ class parser
 			return false;
 		}
 		
-		Lexer yylexer;
-		YYParser yyp = new YYParser();
-		
+		java.io.Reader reader = new java.io.StringReader(content);
+		cup yyp = new cup();
+		yyp.setScanner(new jflex(reader));
+		try 
+		{
+			yyp.parse();
+		}
+		catch (Exception e) 
+		{
+			types.seterror(m_f, filename, 0, "", "parse " + filename + " fail " + e.toString());
+			return false;
+	    }
 		
 		return true;
 	}
-	
+
 	private String read_file(String filename)
 	{
 		File file = new File(filename);
