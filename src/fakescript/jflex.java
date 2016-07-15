@@ -10,7 +10,7 @@ import java_cup.runtime.*;
  * <a href="http://www.jflex.de/">JFlex</a> 1.6.1
  * from the specification file <tt>jflex.flex</tt>
  */
-public class Lexer implements sym, java_cup.runtime.Scanner {
+public class jflex implements sym, java_cup.runtime.Scanner {
 
   /** This character denotes the end of file */
   public static final int YYEOF = -1;
@@ -375,11 +375,11 @@ public class Lexer implements sym, java_cup.runtime.Scanner {
   StringBuilder string = new StringBuilder();
   
   private Symbol symbol(int type) {
-    return new JavaSymbol(type, yyline+1, yycolumn+1);
+    return new javasymbol(type, yyline+1, yycolumn+1);
   }
 
   private Symbol symbol(int type, Object value) {
-    return new JavaSymbol(type, yyline+1, yycolumn+1, value);
+    return new javasymbol(type, yyline+1, yycolumn+1, value);
   }
 
   /** 
@@ -406,7 +406,7 @@ public class Lexer implements sym, java_cup.runtime.Scanner {
    *
    * @param   in  the java.io.Reader to read input from.
    */
-  public Lexer(java.io.Reader in) {
+  public jflex(java.io.Reader in) {
     this.zzReader = in;
   }
 
@@ -869,7 +869,7 @@ public class Lexer implements sym, java_cup.runtime.Scanner {
             }
           case 97: break;
           case 22: 
-            { yybegin(YYINITIAL); return STRING_DEFINITION;
+            { yybegin(YYINITIAL); return symbol(STRING_DEFINITION, string);
             }
           case 98: break;
           case 23: 
@@ -1140,7 +1140,7 @@ public class Lexer implements sym, java_cup.runtime.Scanner {
    */
   public static void main(String argv[]) {
     if (argv.length == 0) {
-      System.out.println("Usage : java Lexer [ --encoding <name> ] <inputfile(s)>");
+      System.out.println("Usage : java jflex [ --encoding <name> ] <inputfile(s)>");
     }
     else {
       int firstFilePos = 0;
@@ -1156,11 +1156,11 @@ public class Lexer implements sym, java_cup.runtime.Scanner {
         }
       }
       for (int i = firstFilePos; i < argv.length; i++) {
-        Lexer scanner = null;
+        jflex scanner = null;
         try {
           java.io.FileInputStream stream = new java.io.FileInputStream(argv[i]);
           java.io.Reader reader = new java.io.InputStreamReader(stream, encodingName);
-          scanner = new Lexer(reader);
+          scanner = new jflex(reader);
           while ( !scanner.zzAtEOF ) scanner.debug_next_token();
         }
         catch (java.io.FileNotFoundException e) {

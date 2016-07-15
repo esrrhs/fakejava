@@ -1,0 +1,158 @@
+package fakescript;
+
+import java_cup.runtime.*;
+
+/* Terminals (tokens returned by the scanner). */
+terminal VAR_BEGIN;
+terminal RETURN;
+terminal BREAK;
+terminal FUNC;
+terminal WHILE;
+terminal FTRUE;
+terminal FFALSE;
+terminal IF;
+terminal THEN;
+terminal ELSE;
+terminal END;
+terminal STRING_DEFINITION;
+terminal IDENTIFIER;
+terminal NUMBER;
+terminal SINGLE_LINE_COMMENT;
+terminal DIVIDE_MOD;
+terminal ARG_SPLITTER;
+terminal PLUS;
+terminal MINUS;
+terminal DIVIDE;
+terminal MULTIPLY;
+terminal ASSIGN;
+terminal MORE;
+terminal LESS;
+terminal MORE_OR_EQUAL;
+terminal LESS_OR_EQUAL;
+terminal EQUAL;
+terminal NOT_EQUAL;
+terminal OPEN_BRACKET;
+terminal CLOSE_BRACKET;
+terminal AND;
+terminal OR;
+terminal FKFLOAT;
+terminal PLUS_ASSIGN, MINUS_ASSIGN, DIVIDE_ASSIGN, MULTIPLY_ASSIGN, DIVIDE_MOD_ASSIGN;
+terminal COLON;
+terminal FOR;
+terminal INC;
+terminal FAKE;
+terminal FKUUID;
+terminal OPEN_SQUARE_BRACKET;
+terminal CLOSE_SQUARE_BRACKET;
+terminal FCONST;
+terminal PACKAGE;
+terminal INCLUDE;
+terminal IDENTIFIER_DOT;
+terminal IDENTIFIER_POINTER;
+terminal STRUCT;
+terminal IS, NOT, CONTINUE;
+terminal YIELD, SLEEP;
+terminal SWITCH, CASE, DEFAULT;
+terminal NEW_ASSIGN;
+terminal ELSEIF;
+terminal RIGHT_POINTER;
+terminal STRING_CAT;
+terminal OPEN_BIG_BRACKET;
+terminal CLOSE_BIG_BRACKET;
+
+/* Non-terminals */
+non terminal program;
+non terminal break, continue;
+non terminal function_declaration;
+non terminal block;
+non terminal stmt;
+non terminal while_stmt;
+non terminal else_stmt;
+non terminal elseif_stmt;
+non terminal elseif_stmt_list;
+non terminal if_stmt;
+non terminal cmp;
+non terminal body;
+non terminal return_stmt;
+non terminal return_value;
+non terminal return_value_list;
+non terminal explicit_value;
+non terminal variable;
+non terminal arg_expr;
+non terminal expr;
+non terminal math_expr;
+non terminal function_call;
+non terminal var;
+non terminal arg;
+non terminal function_call_arguments;
+non terminal function_declaration_arguments;
+non terminal assign_stmt;
+non terminal cmp_value;
+non terminal assign_value;
+non terminal expr_value;
+non terminal math_assign_stmt;
+non terminal for_stmt;
+non terminal for_loop_stmt;
+non terminal multi_assign_stmt;
+non terminal var_list;
+non terminal fake_call_stmt;
+non terminal struct_mem_declaration;
+non terminal sleep;
+non terminal yield;
+non terminal switch_stmt;
+non terminal switch_case_define;
+non terminal switch_case_list;
+non terminal const_map_list_value;
+non terminal const_map_value;
+non terminal const_array_list_value;
+non terminal package_head, include_head, include_define;
+
+/* Precedences */
+precedence left PLUS, MINUS;
+precedence left DIVIDE, MULTIPLY, DIVIDE_MOD;
+precedence left STRING_CAT;
+
+/* Top level rules */
+program ::= package_head
+	include_head
+	;
+	
+package_head ::=
+	{:
+	:}
+	|
+	PACKAGE IDENTIFIER:e
+	{:
+		System.out.print(e);
+		//FKLOG("[bison]: package %s", $2.c_str());
+		//myflexer *l = (myflexer *)parm;
+		//l->set_package($2.c_str());
+	:}
+	|
+	PACKAGE IDENTIFIER_DOT:e
+	{:
+		System.out.print(e);
+		//FKLOG("[bison]: package %s", $2.c_str());
+		//myflexer *l = (myflexer *)parm;
+		//l->set_package($2.c_str());
+	:}
+	;
+	
+include_head ::=
+	{:
+	:}
+	|
+	include_define
+	|
+	include_head include_define
+	;
+	
+include_define ::=
+	INCLUDE STRING_DEFINITION:e
+	{:
+		System.out.print(e);
+		//FKLOG("[bison]: include %s", $2.c_str());
+		//myflexer *l = (myflexer *)parm;
+		//l->add_include($2.c_str());
+	:}
+	;
