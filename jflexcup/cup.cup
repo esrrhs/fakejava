@@ -127,8 +127,673 @@ program ::= package_head
 	include_head
 	struct_head
 	const_head
+	body
 	;
 	
+body ::=
+	/* empty */
+	{:
+	:}
+	|
+	function_declaration
+	|
+	body function_declaration
+	;
+
+function_declaration ::=
+	FUNC IDENTIFIER OPEN_BRACKET function_declaration_arguments CLOSE_BRACKET block END
+	{:
+		types.log("[CUP]: FUNC IDENTIFIER OPEN_BRACKET function_declaration_arguments CLOSE_BRACKET block END");
+	:}
+	|
+	FUNC IDENTIFIER OPEN_BRACKET function_declaration_arguments CLOSE_BRACKET END
+	{:
+		types.log("[CUP]: FUNC IDENTIFIER OPEN_BRACKET function_declaration_arguments CLOSE_BRACKET END");
+	:}
+	;
+
+function_declaration_arguments ::=
+	/* empty */
+	{:
+		types.log("[CUP]: empty");
+	:}
+	| 
+	function_declaration_arguments ARG_SPLITTER arg 
+	{:
+		types.log("[CUP]: function_declaration_arguments ARG_SPLITTER arg ");
+	:}
+	| 
+	arg
+	{:
+		types.log("[CUP]: arg");
+	:}
+	;
+
+arg ::=
+	IDENTIFIER
+	{:
+		types.log("[CUP]: IDENTIFIER");
+	:}
+	;
+	
+	
+function_call ::=
+	IDENTIFIER OPEN_BRACKET function_call_arguments CLOSE_BRACKET 
+	{:
+		types.log("[CUP]: IDENTIFIER OPEN_BRACKET function_call_arguments CLOSE_BRACKET ");
+	:} 
+	|
+	IDENTIFIER_DOT OPEN_BRACKET function_call_arguments CLOSE_BRACKET 
+	{:
+		types.log("[CUP]: IDENTIFIER_DOT OPEN_BRACKET function_call_arguments CLOSE_BRACKET ");
+	:} 
+	|
+	variable COLON IDENTIFIER OPEN_BRACKET function_call_arguments CLOSE_BRACKET 
+	{:
+		types.log("[CUP]: variable COLON IDENTIFIER OPEN_BRACKET function_call_arguments CLOSE_BRACKET ");
+	:} 
+	;
+	
+function_call_arguments ::=
+	/* empty */
+	{:
+		types.log("[CUP]: empty ");
+	:}
+	| 
+	function_call_arguments ARG_SPLITTER arg_expr
+	{:
+		types.log("[CUP]: function_call_arguments ARG_SPLITTER arg_expr ");
+	:}
+	| 
+	arg_expr
+	{:
+		types.log("[CUP]: arg_expr ");
+	:}
+	;  
+
+arg_expr ::=
+	expr_value
+	{:
+		types.log("[CUP]: expr_value");
+	:}
+	;
+
+/* function declaration end */
+
+block ::=
+	block stmt 
+	{:
+		types.log("[CUP]: block stmt ");
+	:}
+	|
+	stmt 
+	{:
+		types.log("[CUP]: stmt");
+	:}
+	;
+  
+stmt ::=
+	while_stmt
+	{:
+		types.log("[CUP]: while_stmt");
+	:}
+	|
+	if_stmt
+	{:
+		types.log("[CUP]: if_stmt");
+	:}
+	|
+	return_stmt
+	{:
+		types.log("[CUP]: return_stmt");
+	:}
+	|
+	assign_stmt
+	{:
+		types.log("[CUP]: assign_stmt");
+	:}
+	|
+	multi_assign_stmt
+	{:
+		types.log("[CUP]: multi_assign_stmt");
+	:}
+	|
+	break
+	{:
+		types.log("[CUP]: break");
+	:}
+	|
+	continue
+	{:
+		types.log("[CUP]: continue");
+	:}
+	|
+	expr
+	{:
+		types.log("[CUP]: expr");
+	:}
+	|
+	math_assign_stmt
+	{:
+		types.log("[CUP]: math_assign_stmt");
+	:}
+	|
+	for_stmt
+	{:
+		types.log("[CUP]: for_stmt");
+	:}
+	|
+	for_loop_stmt
+	{:
+		types.log("[CUP]: for_loop_stmt");
+	:}
+	|
+	fake_call_stmt
+	{:
+		types.log("[CUP]: fake_call_stmt");
+	:}
+	|
+	sleep
+	{:
+		types.log("[CUP]: sleep_stmt");
+	:}
+	|
+	yield
+	{:
+		types.log("[CUP]: yield_stmt");
+	:}
+	|
+	switch_stmt
+	{:
+		types.log("[CUP]: switch_stmt");
+	:}
+	;
+
+fake_call_stmt ::=
+	FAKE function_call
+	{:
+		types.log("[CUP]: FAKE function_call");
+	:}
+	;
+	
+for_stmt ::=
+	FOR block ARG_SPLITTER cmp ARG_SPLITTER block THEN block END
+	{:
+		types.log("[CUP]: FOR block ARG_SPLITTER cmp ARG_SPLITTER block THEN block END");
+	:}
+	|
+	FOR block ARG_SPLITTER cmp ARG_SPLITTER block THEN END
+	{:
+		types.log("[CUP]: FOR block ARG_SPLITTER cmp ARG_SPLITTER block THEN END");
+	:}
+	;
+
+for_loop_stmt ::=
+	FOR var ASSIGN assign_value RIGHT_POINTER cmp_value ARG_SPLITTER expr_value THEN block END
+	{:
+		types.log("[CUP]: FOR var ASSIGN assign_value RIGHT_POINTER cmp_value ARG_SPLITTER expr_value THEN block END");
+	:}
+	|
+	FOR var ASSIGN assign_value RIGHT_POINTER cmp_value ARG_SPLITTER expr_value THEN END
+	{:
+		types.log("[CUP]: FOR var ASSIGN assign_value RIGHT_POINTER cmp_value ARG_SPLITTER expr_value THEN END");
+	:}
+	;
+	
+while_stmt ::=
+	WHILE cmp THEN block END 
+	{:
+		types.log("[CUP]: WHILE cmp THEN block END ");
+	:}
+	|
+	WHILE cmp THEN END 
+	{:
+		types.log("[CUP]: WHILE cmp THEN END ");
+	:}
+	;
+	
+if_stmt ::=
+	IF cmp THEN block elseif_stmt_list else_stmt END
+	{:
+		types.log("[CUP]: IF cmp THEN block elseif_stmt_list else_stmt END");
+	:}
+	|
+	IF cmp THEN elseif_stmt_list else_stmt END
+	{:
+		types.log("[CUP]: IF cmp THEN elseif_stmt_list else_stmt END");
+	:}
+	;
+	
+elseif_stmt_list ::=
+	/* empty */
+	{:
+		types.log("[CUP]: empty");
+	:}
+	| 
+	elseif_stmt_list elseif_stmt
+	{:
+		types.log("[CUP]: elseif_stmt_list elseif_stmt");
+	:}
+	| 
+	elseif_stmt
+	{:
+		types.log("[CUP]: elseif_stmt");
+	:}
+	;
+	
+elseif_stmt ::=
+	ELSEIF cmp THEN block
+	{:
+		types.log("[CUP]: ELSEIF cmp THEN block");
+	:}
+	|
+	ELSEIF cmp THEN
+	{:
+		types.log("[CUP]: ELSEIF cmp THEN");
+	:}
+	;
+	
+else_stmt ::=
+	/*empty*/
+	{:
+		types.log("[CUP]: empty");
+	:}
+	|
+	ELSE block
+	{:
+		types.log("[CUP]: ELSE block");
+	:}
+	|
+	ELSE
+	{:
+		types.log("[CUP]: ELSE");
+	:}
+	;
+
+cmp ::=
+	OPEN_BRACKET cmp CLOSE_BRACKET
+	{:
+		types.log("[CUP]: OPEN_BRACKET cmp CLOSE_BRACKET");
+	:}
+	|
+	cmp AND cmp
+	{:
+		types.log("[CUP]: cmp AND cmp");
+	:}
+	|
+	cmp OR cmp
+	{:
+		types.log("[CUP]: cmp OR cmp");
+	:}
+	|
+	cmp_value LESS cmp_value
+	{:
+		types.log("[CUP]: cmp_value LESS cmp_value");
+	:}
+	|
+	cmp_value MORE cmp_value
+	{:
+		types.log("[CUP]: cmp_value MORE cmp_value");
+	:}
+	|
+	cmp_value EQUAL cmp_value
+	{:
+		types.log("[CUP]: cmp_value EQUAL cmp_value");
+	:}
+	|
+	cmp_value MORE_OR_EQUAL cmp_value
+	{:
+		types.log("[CUP]: cmp_value MORE_OR_EQUAL cmp_value");
+	:}
+	|
+	cmp_value LESS_OR_EQUAL cmp_value
+	{:
+		types.log("[CUP]: cmp_value LESS_OR_EQUAL cmp_value");
+	:}
+	|
+	cmp_value NOT_EQUAL cmp_value
+	{:
+		types.log("[CUP]: cmp_value NOT_EQUAL cmp_value");
+	:}
+	|
+	FTRUE
+	{:
+		types.log("[CUP]: FTRUE");
+	:}
+	|
+	FFALSE
+	{:
+		types.log("[CUP]: FFALSE");
+	:}
+	|
+	IS cmp_value
+	{:
+		types.log("[CUP]: IS cmp_value");
+	:}
+	|
+	NOT cmp_value
+	{:
+		types.log("[CUP]: NOT cmp_value");
+	:}
+	;
+
+cmp_value ::=
+	explicit_value
+	{:
+		types.log("[CUP]: explicit_value");
+	:}
+	|
+	variable
+	{:
+		types.log("[CUP]: variable");
+	:}
+	|
+	expr
+	{:
+		types.log("[CUP]: expr");
+	:}
+	;
+	
+return_stmt ::=
+	RETURN return_value_list
+	{:
+		types.log("[CUP]: RETURN return_value_list");
+	:}
+	|
+	RETURN
+	{:
+		types.log("[CUP]: RETURN");
+	:}
+	;
+ 
+return_value_list ::=
+	return_value_list ARG_SPLITTER return_value
+	{:
+		types.log("[CUP]: return_value_list ARG_SPLITTER return_value");
+	:}
+	|
+	return_value
+	{:
+		types.log("[CUP]: return_value");
+	:}
+	;
+ 
+return_value ::=
+	explicit_value
+	{:
+		types.log("[CUP]: explicit_value");
+	:}
+	|
+	variable
+	{:
+		types.log("[CUP]: variable");
+	:}
+	|
+	expr
+	{:
+		types.log("[CUP]: expr");
+	:}
+	;
+
+assign_stmt ::=
+	var ASSIGN assign_value
+	{:
+		types.log("[CUP]: var ASSIGN assign_value");
+	:}
+	|
+	var NEW_ASSIGN assign_value
+	{:
+		types.log("[CUP]: var NEW_ASSIGN assign_value");
+	:}
+	;
+
+multi_assign_stmt ::=
+	var_list ASSIGN function_call
+	{:
+		types.log("[CUP]: var_list ASSIGN function_call");
+	:}
+	|
+	var_list NEW_ASSIGN function_call
+	{:
+		types.log("[CUP]: var_list NEW_ASSIGN function_call");
+	:}
+	;
+	
+var_list ::=
+	var_list ARG_SPLITTER var
+	{:
+		types.log("[CUP]: var_list ARG_SPLITTER var");
+	:}
+	|
+	var
+	{:
+		types.log("[CUP]: var");
+	:}
+	;
+	
+assign_value ::=
+	explicit_value
+	{:
+		types.log("[CUP]: explicit_value");
+	:}
+	|
+	variable
+	{:
+		types.log("[CUP]: variable");
+	:}
+	|
+	expr
+	{:
+		types.log("[CUP]: expr");
+	:}
+	;
+	
+math_assign_stmt ::=
+	variable PLUS_ASSIGN assign_value
+	{:
+		types.log("[CUP]: variable PLUS_ASSIGN assign_value");
+	:}
+	|
+	variable MINUS_ASSIGN assign_value
+	{:
+		types.log("[CUP]: variable MINUS_ASSIGN assign_value");
+	:}
+	|
+	variable DIVIDE_ASSIGN assign_value
+	{:
+		types.log("[CUP]: variable DIVIDE_ASSIGN assign_value");
+	:}
+	|
+	variable MULTIPLY_ASSIGN assign_value
+	{:
+		types.log("[CUP]: variable MULTIPLY_ASSIGN assign_value");
+	:}
+	|
+	variable DIVIDE_MOD_ASSIGN assign_value
+	{:
+		types.log("[CUP]: variable DIVIDE_MOD_ASSIGN assign_value");
+	:}
+	|
+	variable INC
+	{:
+		types.log("[CUP]: variable INC");
+	:}
+	;
+	
+var ::=
+	VAR_BEGIN IDENTIFIER
+	{:
+		types.log("[CUP]: VAR_BEGIN IDENTIFIER");
+	:}
+	|
+	variable
+	{:
+		types.log("[CUP]: variable");
+	:}
+	;
+
+variable ::=
+	IDENTIFIER
+	{:
+		types.log("[CUP]: IDENTIFIER");
+	:}
+	|
+	IDENTIFIER OPEN_SQUARE_BRACKET expr_value CLOSE_SQUARE_BRACKET
+	{:
+		types.log("[CUP]: IDENTIFIER OPEN_SQUARE_BRACKET expr_value CLOSE_SQUARE_BRACKET");
+	:}
+	|
+	IDENTIFIER_POINTER
+	{:
+		types.log("[CUP]: IDENTIFIER_POINTER");
+	:}
+	|
+	IDENTIFIER_DOT
+	{:
+		types.log("[CUP]: IDENTIFIER_DOT");
+	:}
+	;
+
+expr ::=
+	OPEN_BRACKET expr CLOSE_BRACKET
+	{:
+		types.log("[CUP]: OPEN_BRACKET expr CLOSE_BRACKET");
+	:}
+	|
+	function_call
+	{:
+		types.log("[CUP]: function_call");
+	:}
+	|
+	math_expr
+	{:
+		types.log("[CUP]: math_expr");
+	:}
+	;
+
+math_expr ::=
+	OPEN_BRACKET math_expr CLOSE_BRACKET
+	{:
+		types.log("[CUP]: OPEN_BRACKET math_expr CLOSE_BRACKET");
+	:}
+	|
+	expr_value PLUS expr_value
+	{:
+		types.log("[CUP]: expr_value PLUS expr_value");
+	:}
+	|
+	expr_value MINUS expr_value
+	{:
+		types.log("[CUP]: expr_value MINUS expr_value");
+	:}
+	|
+	expr_value MULTIPLY expr_value
+	{:
+		types.log("[CUP]: expr_value MULTIPLY expr_value");
+	:}
+	|
+	expr_value DIVIDE expr_value
+	{:
+		types.log("[CUP]: expr_value DIVIDE expr_value");
+	:}
+	|
+	expr_value DIVIDE_MOD expr_value
+	{:
+		types.log("[CUP]: expr_value DIVIDE_MOD expr_value");
+	:}
+	|
+	expr_value STRING_CAT expr_value
+	{:
+		types.log("[CUP]: expr_value STRING_CAT expr_value");
+	:}
+	;	
+
+expr_value ::=
+	math_expr
+	{:
+		types.log("[CUP]: math_expr");
+	:}
+	|
+	explicit_value
+	{:
+		types.log("[CUP]: explicit_value");
+	:}
+	|
+	function_call
+	{:
+		types.log("[CUP]: function_call");
+	:}
+	|
+	variable
+	{:
+		types.log("[CUP]: variable");
+	:}
+	;
+	
+break ::=
+	BREAK 
+	{:
+		types.log("[CUP]: BREAK");
+	:}
+	;
+	
+continue ::=
+	CONTINUE 
+	{:
+		types.log("[CUP]: CONTINUE");
+	:}
+	;
+
+sleep ::=
+	SLEEP expr_value 
+	{:
+		types.log("[CUP]: SLEEP");
+	:}
+	;
+	
+yield ::=
+	YIELD expr_value
+	{:
+		types.log("[CUP]: YIELD");
+	:}
+	;
+	
+switch_stmt ::=
+	SWITCH cmp_value switch_case_list DEFAULT block END
+	{:
+		types.log("[CUP]: SWITCH cmp_value switch_case_list DEFAULT block END");
+	:}
+	|
+	SWITCH cmp_value switch_case_list DEFAULT END
+	{:
+		types.log("[CUP]: SWITCH cmp_value switch_case_list DEFAULT END");
+	:}
+	;
+	
+switch_case_list ::=
+	switch_case_define
+	{:
+		types.log("[CUP]: switch_case_define");
+	:}
+	|
+	switch_case_list switch_case_define
+	{:
+		types.log("[CUP]: switch_case_list switch_case_define");
+	:}
+	;
+
+switch_case_define ::=
+	CASE cmp_value THEN block
+	{:
+		types.log("[CUP]: CASE cmp_value THEN block");
+	:}
+	|
+	CASE cmp_value THEN
+	{:
+		types.log("[CUP]: CASE cmp_value THEN");
+	:}
+	;
+		
 package_head ::=
 	/* empty */
 	{:
@@ -136,13 +801,13 @@ package_head ::=
 	|
 	PACKAGE IDENTIFIER:e
 	{:
-		types.log("[CUP]: PACKAGE IDENTIFIER " + e);
+		types.log("[CUP]: PACKAGE IDENTIFIER ");
 		m_mycup.set_package(e.toString());
 	:}
 	|
 	PACKAGE IDENTIFIER_DOT:e
 	{:
-		types.log("[CUP]: PACKAGE IDENTIFIER_DOT " + e);
+		types.log("[CUP]: PACKAGE IDENTIFIER_DOT ");
 		m_mycup.set_package(e.toString());
 	:}
 	;
@@ -160,7 +825,7 @@ include_head ::=
 include_define ::=
 	INCLUDE STRING_DEFINITION:e
 	{:
-		types.log("[CUP]: INCLUDE STRING_DEFINITION " + e);
+		types.log("[CUP]: INCLUDE STRING_DEFINITION ");
 		m_mycup.add_include(e.toString());
 	:}
 	;
