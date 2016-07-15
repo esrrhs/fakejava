@@ -1,6 +1,15 @@
 package fakescript;
 
 import java_cup.runtime.*;
+import fakescript.syntree.*;
+
+parser code {:
+  private mycup m_mycup;
+  public void set_mycup(mycup mc)
+  {
+	m_mycup = mc;
+  }
+:};
 
 /* Terminals (tokens returned by the scanner). */
 terminal VAR_BEGIN;
@@ -96,7 +105,7 @@ non terminal for_loop_stmt;
 non terminal multi_assign_stmt;
 non terminal var_list;
 non terminal fake_call_stmt;
-non terminal struct_mem_declaration;
+non terminal struct_mem_declaration, struct_head, struct_define;
 non terminal sleep;
 non terminal yield;
 non terminal switch_stmt;
@@ -105,7 +114,8 @@ non terminal switch_case_list;
 non terminal const_map_list_value;
 non terminal const_map_value;
 non terminal const_array_list_value;
-non terminal package_head, include_head, include_define;
+non terminal package_head, include_define, include_head;
+non terminal const_head, const_define;
 
 /* Precedences */
 precedence left PLUS, MINUS;
@@ -115,28 +125,30 @@ precedence left STRING_CAT;
 /* Top level rules */
 program ::= package_head
 	include_head
+	struct_head
+	const_head
 	;
 	
 package_head ::=
+	/* empty */
 	{:
 	:}
 	|
 	PACKAGE IDENTIFIER:e
 	{:
 		types.log("[CUP]: PACKAGE IDENTIFIER " + e);
-		//myflexer *l = (myflexer *)parm;
-		//l->set_package($2.c_str());
+		m_mycup.set_package(e.toString());
 	:}
 	|
 	PACKAGE IDENTIFIER_DOT:e
 	{:
 		types.log("[CUP]: PACKAGE IDENTIFIER_DOT " + e);
-		//myflexer *l = (myflexer *)parm;
-		//l->set_package($2.c_str());
+		m_mycup.set_package(e.toString());
 	:}
 	;
-	
+
 include_head ::=
+	/* empty */
 	{:
 	:}
 	|
@@ -149,7 +161,109 @@ include_define ::=
 	INCLUDE STRING_DEFINITION:e
 	{:
 		types.log("[CUP]: INCLUDE STRING_DEFINITION " + e);
-		//myflexer *l = (myflexer *)parm;
-		//l->add_include($2.c_str());
+		m_mycup.add_include(e.toString());
 	:}
 	;
+
+struct_head ::=
+	/* empty */
+	{:
+	:}
+	|
+	struct_define
+	|
+	struct_head struct_define
+	;
+
+struct_define ::=
+	STRUCT IDENTIFIER:e struct_mem_declaration END
+	{:
+		types.log("[CUP]: STRUCT IDENTIFIER struct_mem_declaration END " + e);
+		m_mycup.add_struct_desc(e.toString());
+	:}
+	;
+	
+struct_mem_declaration ::=
+	struct_mem_declaration IDENTIFIER:e
+	{:
+		types.log("[CUP]: struct_mem_declaration IDENTIFIER " + e);
+	:}
+	| 
+	IDENTIFIER:e
+	{:
+		types.log("[CUP]: IDENTIFIER " + e);
+	:}
+	;
+
+const_head ::=
+	/* empty */
+	{:
+	:}
+	|
+	const_define
+	|
+	const_head const_define
+	;
+
+const_define ::=
+	FCONST IDENTIFIER:e ASSIGN explicit_value:e1
+	{:
+		types.log("[CUP]: FCONST IDENTIFIER ASSIGN explicit_value " + e + " " + e1);
+		m_mycup.add_const_desc(e.toString(), (syntree_node)e1);
+	:}
+	;
+
+explicit_value ::=
+	FTRUE:e
+	{:
+		types.log("[CUP]: FTRUE ");
+		explicit_value_node p = new explicit_value_node();
+		p.m_type = explicit_value_type.EVT_TRUE;
+		RESULT = p;
+	:}
+	|
+	FFALSE:e
+	{:
+		types.log("[CUP]: FFALSE ");
+		explicit_value_node p = new explicit_value_node();
+		p.m_type = explicit_value_type.EVT_FALSE;
+		RESULT = p;
+	:}
+	|
+	NUMBER:e 
+	{:
+		types.log("[CUP]: NUMBER ");
+		explicit_value_node p = new explicit_value_node();
+		p.m_str = e.toString();
+		p.m_type = explicit_value_type.EVT_NUM;
+		RESULT = p;
+	:}
+	|
+	FKUUID:e
+	{:
+		types.log("[CUP]: FKUUID ");
+		explicit_value_node p = new explicit_value_node();
+		p.m_str = e.toString();
+		p.m_type = explicit_value_type.EVT_UUID;
+		RESULT = p;
+	:}
+	|
+	STRING_DEFINITION:e 
+	{:
+		types.log("[CUP]: STRING_DEFINITION ");
+		explicit_value_node p = new explicit_value_node();
+		p.m_str = e.toString();
+		p.m_type = explicit_value_type.EVT_STR;
+		RESULT = p;
+	:}
+	|
+	FKFLOAT:e
+	{:
+		types.log("[CUP]: FKFLOAT ");
+		explicit_value_node p = new explicit_value_node();
+		p.m_str = e.toString();
+		p.m_type = explicit_value_type.EVT_FLOAT;
+		RESULT = p;
+	:}
+	;
+      

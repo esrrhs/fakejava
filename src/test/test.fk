@@ -1,0 +1,26 @@
+package template
+
+include "string.fk"
+include "xml.fk"
+
+struct _tcp_client
+	is_open
+	recvbuffer
+	sendbuffer
+end
+
+struct _tcp_server
+	is_open
+	svuserdata
+end
+
+struct _tcp_link
+	recvbuffer
+	sendbuffer
+end
+
+const node_header = 112
+const node_begin = 1.1214124
+const node_end = "123124"
+const node_normal = 3125125215235u
+const node_comment = true

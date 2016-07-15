@@ -6,6 +6,7 @@ import java.io.FileInputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 class parser 
 {
@@ -54,13 +55,14 @@ class parser
 		java.io.Reader reader = new java.io.StringReader(content);
 		cup yyp = new cup();
 		yyp.setScanner(new jflex(reader));
+		yyp.set_mycup(new mycup());
 		try 
 		{
 			yyp.parse();
 		}
 		catch (Exception e) 
 		{
-			types.seterror(m_f, filename, 0, "", "parse " + filename + " fail " + e.toString());
+			types.seterror(m_f, filename, 0, "", "parse " + filename + " fail " + types.show_exception(e));
 			return false;
 	    }
 		
@@ -87,6 +89,7 @@ class parser
             while(bufferedReader.read(readbuff) != -1)
             {
             	ret += String.valueOf(readbuff);
+            	Arrays.fill(readbuff, '\0');
             }
             reader.close();
 	        
@@ -94,7 +97,7 @@ class parser
 	    } 
 		catch (Exception e) 
 		{
-			types.seterror(m_f, filename, 0, "", "read " + filename + " fail " + e.toString());
+			types.seterror(m_f, filename, 0, "", "read " + filename + " fail " + types.show_exception(e));
 			return "";
 	    }
 	}

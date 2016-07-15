@@ -6,6 +6,7 @@
 package fakescript;
 
 import java_cup.runtime.*;
+import fakescript.syntree.*;
 import java_cup.runtime.XMLElement;
 
 /** CUP v0.11b 20160615 (GIT 4ac7450) generated parser.
@@ -31,9 +32,14 @@ public class cup extends java_cup.runtime.lr_parser {
   /** Production table. */
   protected static final short _production_table[][] = 
     unpackFromStrings(new String[] {
-    "\000\011\000\002\002\004\000\002\002\004\000\002\057" +
-    "\002\000\002\057\004\000\002\057\004\000\002\060\002" +
-    "\000\002\060\003\000\002\060\004\000\002\061\004" });
+    "\000\031\000\002\002\006\000\002\002\004\000\002\061" +
+    "\002\000\002\061\004\000\002\061\004\000\002\063\002" +
+    "\000\002\063\003\000\002\063\004\000\002\062\004\000" +
+    "\002\047\002\000\002\047\003\000\002\047\004\000\002" +
+    "\050\006\000\002\046\004\000\002\046\003\000\002\064" +
+    "\002\000\002\064\003\000\002\064\004\000\002\065\006" +
+    "\000\002\022\003\000\002\022\003\000\002\022\003\000" +
+    "\002\022\003\000\002\022\003\000\002\022\003" });
 
   /** Access to production table. */
   public short[][] production_table() {return _production_table;}
@@ -41,14 +47,30 @@ public class cup extends java_cup.runtime.lr_parser {
   /** Parse-action table. */
   protected static final short[][] _action_table = 
     unpackFromStrings(new String[] {
-    "\000\014\000\010\002\uffff\062\006\063\uffff\001\002\000" +
-    "\004\002\016\001\002\000\006\002\ufffc\063\012\001\002" +
-    "\000\006\020\007\064\010\001\002\000\006\002\ufffe\063" +
-    "\ufffe\001\002\000\006\002\ufffd\063\ufffd\001\002\000\006" +
-    "\002\001\063\012\001\002\000\004\017\014\001\002\000" +
-    "\006\002\ufffb\063\ufffb\001\002\000\006\002\ufff9\063\ufff9" +
-    "\001\002\000\006\002\ufffa\063\ufffa\001\002\000\004\002" +
-    "\000\001\002" });
+    "\000\042\000\014\002\uffff\061\uffff\062\006\063\uffff\066" +
+    "\uffff\001\002\000\004\002\044\001\002\000\012\002\ufffc" +
+    "\061\ufffc\063\012\066\ufffc\001\002\000\006\020\007\064" +
+    "\010\001\002\000\012\002\ufffe\061\ufffe\063\ufffe\066\ufffe" +
+    "\001\002\000\012\002\ufffd\061\ufffd\063\ufffd\066\ufffd\001" +
+    "\002\000\012\002\ufff8\061\ufff8\063\012\066\017\001\002" +
+    "\000\004\017\014\001\002\000\012\002\ufffb\061\ufffb\063" +
+    "\ufffb\066\ufffb\001\002\000\012\002\ufff9\061\ufff9\063\ufff9" +
+    "\066\ufff9\001\002\000\010\002\ufff7\061\ufff7\066\ufff7\001" +
+    "\002\000\010\002\ufff2\061\030\066\017\001\002\000\004" +
+    "\020\021\001\002\000\012\002\ufffa\061\ufffa\063\ufffa\066" +
+    "\ufffa\001\002\000\004\020\022\001\002\000\006\016\ufff3" +
+    "\020\ufff3\001\002\000\006\016\025\020\024\001\002\000" +
+    "\006\016\ufff4\020\ufff4\001\002\000\010\002\ufff5\061\ufff5" +
+    "\066\ufff5\001\002\000\006\002\001\061\030\001\002\000" +
+    "\010\002\ufff6\061\ufff6\066\ufff6\001\002\000\004\020\032" +
+    "\001\002\000\006\002\ufff1\061\ufff1\001\002\000\004\031" +
+    "\033\001\002\000\016\011\041\012\035\017\036\021\040" +
+    "\044\034\056\037\001\002\000\006\002\uffe9\061\uffe9\001" +
+    "\002\000\006\002\uffed\061\uffed\001\002\000\006\002\uffea" +
+    "\061\uffea\001\002\000\006\002\uffeb\061\uffeb\001\002\000" +
+    "\006\002\uffec\061\uffec\001\002\000\006\002\uffee\061\uffee" +
+    "\001\002\000\006\002\uffef\061\uffef\001\002\000\006\002" +
+    "\ufff0\061\ufff0\001\002\000\004\002\000\001\002" });
 
   /** Access to parse-action table. */
   public short[][] action_table() {return _action_table;}
@@ -56,9 +78,17 @@ public class cup extends java_cup.runtime.lr_parser {
   /** <code>reduce_goto</code> table. */
   protected static final short[][] _reduce_table = 
     unpackFromStrings(new String[] {
-    "\000\014\000\006\002\003\057\004\001\001\000\002\001" +
-    "\001\000\006\060\010\061\012\001\001\000\002\001\001" +
-    "\000\002\001\001\000\002\001\001\000\004\061\014\001" +
+    "\000\042\000\006\002\003\061\004\001\001\000\002\001" +
+    "\001\000\006\062\012\063\010\001\001\000\002\001\001" +
+    "\000\002\001\001\000\002\001\001\000\010\047\015\050" +
+    "\014\062\017\001\001\000\002\001\001\000\002\001\001" +
+    "\000\002\001\001\000\002\001\001\000\010\050\026\064" +
+    "\025\065\030\001\001\000\002\001\001\000\002\001\001" +
+    "\000\004\046\022\001\001\000\002\001\001\000\002\001" +
+    "\001\000\002\001\001\000\002\001\001\000\004\065\042" +
+    "\001\001\000\002\001\001\000\002\001\001\000\002\001" +
+    "\001\000\002\001\001\000\004\022\041\001\001\000\002" +
+    "\001\001\000\002\001\001\000\002\001\001\000\002\001" +
     "\001\000\002\001\001\000\002\001\001\000\002\001\001" +
     "\000\002\001\001\000\002\001\001" });
 
@@ -98,6 +128,14 @@ public class cup extends java_cup.runtime.lr_parser {
   public int error_sym() {return 1;}
 
 
+
+  private mycup m_mycup;
+  public void set_mycup(mycup mc)
+  {
+	m_mycup = mc;
+  }
+
+
 /** Cup generated class to encapsulate user supplied action code.*/
 @SuppressWarnings({"rawtypes", "unchecked", "unused"})
 class CUP$cup$actions {
@@ -123,11 +161,11 @@ class CUP$cup$actions {
       switch (CUP$cup$act_num)
         {
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 0: // program ::= package_head include_head 
+          case 0: // program ::= package_head include_head struct_head const_head 
             {
               Object RESULT =null;
 
-              CUP$cup$result = parser.getSymbolFactory().newSymbol("program",0, ((java_cup.runtime.Symbol)CUP$cup$stack.elementAt(CUP$cup$top-1)), ((java_cup.runtime.Symbol)CUP$cup$stack.peek()), RESULT);
+              CUP$cup$result = parser.getSymbolFactory().newSymbol("program",0, ((java_cup.runtime.Symbol)CUP$cup$stack.elementAt(CUP$cup$top-3)), ((java_cup.runtime.Symbol)CUP$cup$stack.peek()), RESULT);
             }
           return CUP$cup$result;
 
@@ -151,7 +189,7 @@ class CUP$cup$actions {
               Object RESULT =null;
 		
 	
-              CUP$cup$result = parser.getSymbolFactory().newSymbol("package_head",45, ((java_cup.runtime.Symbol)CUP$cup$stack.peek()), RESULT);
+              CUP$cup$result = parser.getSymbolFactory().newSymbol("package_head",47, ((java_cup.runtime.Symbol)CUP$cup$stack.peek()), RESULT);
             }
           return CUP$cup$result;
 
@@ -164,10 +202,9 @@ class CUP$cup$actions {
 		Object e = (Object)((java_cup.runtime.Symbol) CUP$cup$stack.peek()).value;
 		
 		types.log("[CUP]: PACKAGE IDENTIFIER " + e);
-		//myflexer *l = (myflexer *)parm;
-		//l->set_package($2.c_str());
+		m_mycup.set_package(e.toString());
 	
-              CUP$cup$result = parser.getSymbolFactory().newSymbol("package_head",45, ((java_cup.runtime.Symbol)CUP$cup$stack.elementAt(CUP$cup$top-1)), ((java_cup.runtime.Symbol)CUP$cup$stack.peek()), RESULT);
+              CUP$cup$result = parser.getSymbolFactory().newSymbol("package_head",47, ((java_cup.runtime.Symbol)CUP$cup$stack.elementAt(CUP$cup$top-1)), ((java_cup.runtime.Symbol)CUP$cup$stack.peek()), RESULT);
             }
           return CUP$cup$result;
 
@@ -180,10 +217,9 @@ class CUP$cup$actions {
 		Object e = (Object)((java_cup.runtime.Symbol) CUP$cup$stack.peek()).value;
 		
 		types.log("[CUP]: PACKAGE IDENTIFIER_DOT " + e);
-		//myflexer *l = (myflexer *)parm;
-		//l->set_package($2.c_str());
+		m_mycup.set_package(e.toString());
 	
-              CUP$cup$result = parser.getSymbolFactory().newSymbol("package_head",45, ((java_cup.runtime.Symbol)CUP$cup$stack.elementAt(CUP$cup$top-1)), ((java_cup.runtime.Symbol)CUP$cup$stack.peek()), RESULT);
+              CUP$cup$result = parser.getSymbolFactory().newSymbol("package_head",47, ((java_cup.runtime.Symbol)CUP$cup$stack.elementAt(CUP$cup$top-1)), ((java_cup.runtime.Symbol)CUP$cup$stack.peek()), RESULT);
             }
           return CUP$cup$result;
 
@@ -193,7 +229,7 @@ class CUP$cup$actions {
               Object RESULT =null;
 		
 	
-              CUP$cup$result = parser.getSymbolFactory().newSymbol("include_head",46, ((java_cup.runtime.Symbol)CUP$cup$stack.peek()), RESULT);
+              CUP$cup$result = parser.getSymbolFactory().newSymbol("include_head",49, ((java_cup.runtime.Symbol)CUP$cup$stack.peek()), RESULT);
             }
           return CUP$cup$result;
 
@@ -202,7 +238,7 @@ class CUP$cup$actions {
             {
               Object RESULT =null;
 
-              CUP$cup$result = parser.getSymbolFactory().newSymbol("include_head",46, ((java_cup.runtime.Symbol)CUP$cup$stack.peek()), ((java_cup.runtime.Symbol)CUP$cup$stack.peek()), RESULT);
+              CUP$cup$result = parser.getSymbolFactory().newSymbol("include_head",49, ((java_cup.runtime.Symbol)CUP$cup$stack.peek()), ((java_cup.runtime.Symbol)CUP$cup$stack.peek()), RESULT);
             }
           return CUP$cup$result;
 
@@ -211,7 +247,7 @@ class CUP$cup$actions {
             {
               Object RESULT =null;
 
-              CUP$cup$result = parser.getSymbolFactory().newSymbol("include_head",46, ((java_cup.runtime.Symbol)CUP$cup$stack.elementAt(CUP$cup$top-1)), ((java_cup.runtime.Symbol)CUP$cup$stack.peek()), RESULT);
+              CUP$cup$result = parser.getSymbolFactory().newSymbol("include_head",49, ((java_cup.runtime.Symbol)CUP$cup$stack.elementAt(CUP$cup$top-1)), ((java_cup.runtime.Symbol)CUP$cup$stack.peek()), RESULT);
             }
           return CUP$cup$result;
 
@@ -224,10 +260,232 @@ class CUP$cup$actions {
 		Object e = (Object)((java_cup.runtime.Symbol) CUP$cup$stack.peek()).value;
 		
 		types.log("[CUP]: INCLUDE STRING_DEFINITION " + e);
-		//myflexer *l = (myflexer *)parm;
-		//l->add_include($2.c_str());
+		m_mycup.add_include(e.toString());
 	
-              CUP$cup$result = parser.getSymbolFactory().newSymbol("include_define",47, ((java_cup.runtime.Symbol)CUP$cup$stack.elementAt(CUP$cup$top-1)), ((java_cup.runtime.Symbol)CUP$cup$stack.peek()), RESULT);
+              CUP$cup$result = parser.getSymbolFactory().newSymbol("include_define",48, ((java_cup.runtime.Symbol)CUP$cup$stack.elementAt(CUP$cup$top-1)), ((java_cup.runtime.Symbol)CUP$cup$stack.peek()), RESULT);
+            }
+          return CUP$cup$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 9: // struct_head ::= 
+            {
+              Object RESULT =null;
+		
+	
+              CUP$cup$result = parser.getSymbolFactory().newSymbol("struct_head",37, ((java_cup.runtime.Symbol)CUP$cup$stack.peek()), RESULT);
+            }
+          return CUP$cup$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 10: // struct_head ::= struct_define 
+            {
+              Object RESULT =null;
+
+              CUP$cup$result = parser.getSymbolFactory().newSymbol("struct_head",37, ((java_cup.runtime.Symbol)CUP$cup$stack.peek()), ((java_cup.runtime.Symbol)CUP$cup$stack.peek()), RESULT);
+            }
+          return CUP$cup$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 11: // struct_head ::= struct_head struct_define 
+            {
+              Object RESULT =null;
+
+              CUP$cup$result = parser.getSymbolFactory().newSymbol("struct_head",37, ((java_cup.runtime.Symbol)CUP$cup$stack.elementAt(CUP$cup$top-1)), ((java_cup.runtime.Symbol)CUP$cup$stack.peek()), RESULT);
+            }
+          return CUP$cup$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 12: // struct_define ::= STRUCT IDENTIFIER struct_mem_declaration END 
+            {
+              Object RESULT =null;
+		int eleft = ((java_cup.runtime.Symbol)CUP$cup$stack.elementAt(CUP$cup$top-2)).left;
+		int eright = ((java_cup.runtime.Symbol)CUP$cup$stack.elementAt(CUP$cup$top-2)).right;
+		Object e = (Object)((java_cup.runtime.Symbol) CUP$cup$stack.elementAt(CUP$cup$top-2)).value;
+		
+		types.log("[CUP]: STRUCT IDENTIFIER struct_mem_declaration END " + e);
+		m_mycup.add_struct_desc(e.toString());
+	
+              CUP$cup$result = parser.getSymbolFactory().newSymbol("struct_define",38, ((java_cup.runtime.Symbol)CUP$cup$stack.elementAt(CUP$cup$top-3)), ((java_cup.runtime.Symbol)CUP$cup$stack.peek()), RESULT);
+            }
+          return CUP$cup$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 13: // struct_mem_declaration ::= struct_mem_declaration IDENTIFIER 
+            {
+              Object RESULT =null;
+		int eleft = ((java_cup.runtime.Symbol)CUP$cup$stack.peek()).left;
+		int eright = ((java_cup.runtime.Symbol)CUP$cup$stack.peek()).right;
+		Object e = (Object)((java_cup.runtime.Symbol) CUP$cup$stack.peek()).value;
+		
+		types.log("[CUP]: struct_mem_declaration IDENTIFIER " + e);
+	
+              CUP$cup$result = parser.getSymbolFactory().newSymbol("struct_mem_declaration",36, ((java_cup.runtime.Symbol)CUP$cup$stack.elementAt(CUP$cup$top-1)), ((java_cup.runtime.Symbol)CUP$cup$stack.peek()), RESULT);
+            }
+          return CUP$cup$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 14: // struct_mem_declaration ::= IDENTIFIER 
+            {
+              Object RESULT =null;
+		int eleft = ((java_cup.runtime.Symbol)CUP$cup$stack.peek()).left;
+		int eright = ((java_cup.runtime.Symbol)CUP$cup$stack.peek()).right;
+		Object e = (Object)((java_cup.runtime.Symbol) CUP$cup$stack.peek()).value;
+		
+		types.log("[CUP]: IDENTIFIER " + e);
+	
+              CUP$cup$result = parser.getSymbolFactory().newSymbol("struct_mem_declaration",36, ((java_cup.runtime.Symbol)CUP$cup$stack.peek()), ((java_cup.runtime.Symbol)CUP$cup$stack.peek()), RESULT);
+            }
+          return CUP$cup$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 15: // const_head ::= 
+            {
+              Object RESULT =null;
+		
+	
+              CUP$cup$result = parser.getSymbolFactory().newSymbol("const_head",50, ((java_cup.runtime.Symbol)CUP$cup$stack.peek()), RESULT);
+            }
+          return CUP$cup$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 16: // const_head ::= const_define 
+            {
+              Object RESULT =null;
+
+              CUP$cup$result = parser.getSymbolFactory().newSymbol("const_head",50, ((java_cup.runtime.Symbol)CUP$cup$stack.peek()), ((java_cup.runtime.Symbol)CUP$cup$stack.peek()), RESULT);
+            }
+          return CUP$cup$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 17: // const_head ::= const_head const_define 
+            {
+              Object RESULT =null;
+
+              CUP$cup$result = parser.getSymbolFactory().newSymbol("const_head",50, ((java_cup.runtime.Symbol)CUP$cup$stack.elementAt(CUP$cup$top-1)), ((java_cup.runtime.Symbol)CUP$cup$stack.peek()), RESULT);
+            }
+          return CUP$cup$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 18: // const_define ::= FCONST IDENTIFIER ASSIGN explicit_value 
+            {
+              Object RESULT =null;
+		int eleft = ((java_cup.runtime.Symbol)CUP$cup$stack.elementAt(CUP$cup$top-2)).left;
+		int eright = ((java_cup.runtime.Symbol)CUP$cup$stack.elementAt(CUP$cup$top-2)).right;
+		Object e = (Object)((java_cup.runtime.Symbol) CUP$cup$stack.elementAt(CUP$cup$top-2)).value;
+		int e1left = ((java_cup.runtime.Symbol)CUP$cup$stack.peek()).left;
+		int e1right = ((java_cup.runtime.Symbol)CUP$cup$stack.peek()).right;
+		Object e1 = (Object)((java_cup.runtime.Symbol) CUP$cup$stack.peek()).value;
+		
+		types.log("[CUP]: FCONST IDENTIFIER ASSIGN explicit_value " + e + " " + e1);
+		m_mycup.add_const_desc(e.toString(), (syntree_node)e1);
+	
+              CUP$cup$result = parser.getSymbolFactory().newSymbol("const_define",51, ((java_cup.runtime.Symbol)CUP$cup$stack.elementAt(CUP$cup$top-3)), ((java_cup.runtime.Symbol)CUP$cup$stack.peek()), RESULT);
+            }
+          return CUP$cup$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 19: // explicit_value ::= FTRUE 
+            {
+              Object RESULT =null;
+		int eleft = ((java_cup.runtime.Symbol)CUP$cup$stack.peek()).left;
+		int eright = ((java_cup.runtime.Symbol)CUP$cup$stack.peek()).right;
+		Object e = (Object)((java_cup.runtime.Symbol) CUP$cup$stack.peek()).value;
+		
+		types.log("[CUP]: FTRUE ");
+		explicit_value_node p = new explicit_value_node();
+		p.m_type = explicit_value_type.EVT_TRUE;
+		RESULT = p;
+	
+              CUP$cup$result = parser.getSymbolFactory().newSymbol("explicit_value",16, ((java_cup.runtime.Symbol)CUP$cup$stack.peek()), ((java_cup.runtime.Symbol)CUP$cup$stack.peek()), RESULT);
+            }
+          return CUP$cup$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 20: // explicit_value ::= FFALSE 
+            {
+              Object RESULT =null;
+		int eleft = ((java_cup.runtime.Symbol)CUP$cup$stack.peek()).left;
+		int eright = ((java_cup.runtime.Symbol)CUP$cup$stack.peek()).right;
+		Object e = (Object)((java_cup.runtime.Symbol) CUP$cup$stack.peek()).value;
+		
+		types.log("[CUP]: FFALSE ");
+		explicit_value_node p = new explicit_value_node();
+		p.m_type = explicit_value_type.EVT_FALSE;
+		RESULT = p;
+	
+              CUP$cup$result = parser.getSymbolFactory().newSymbol("explicit_value",16, ((java_cup.runtime.Symbol)CUP$cup$stack.peek()), ((java_cup.runtime.Symbol)CUP$cup$stack.peek()), RESULT);
+            }
+          return CUP$cup$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 21: // explicit_value ::= NUMBER 
+            {
+              Object RESULT =null;
+		int eleft = ((java_cup.runtime.Symbol)CUP$cup$stack.peek()).left;
+		int eright = ((java_cup.runtime.Symbol)CUP$cup$stack.peek()).right;
+		Object e = (Object)((java_cup.runtime.Symbol) CUP$cup$stack.peek()).value;
+		
+		types.log("[CUP]: NUMBER ");
+		explicit_value_node p = new explicit_value_node();
+		p.m_str = e.toString();
+		p.m_type = explicit_value_type.EVT_NUM;
+		RESULT = p;
+	
+              CUP$cup$result = parser.getSymbolFactory().newSymbol("explicit_value",16, ((java_cup.runtime.Symbol)CUP$cup$stack.peek()), ((java_cup.runtime.Symbol)CUP$cup$stack.peek()), RESULT);
+            }
+          return CUP$cup$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 22: // explicit_value ::= FKUUID 
+            {
+              Object RESULT =null;
+		int eleft = ((java_cup.runtime.Symbol)CUP$cup$stack.peek()).left;
+		int eright = ((java_cup.runtime.Symbol)CUP$cup$stack.peek()).right;
+		Object e = (Object)((java_cup.runtime.Symbol) CUP$cup$stack.peek()).value;
+		
+		types.log("[CUP]: FKUUID ");
+		explicit_value_node p = new explicit_value_node();
+		p.m_str = e.toString();
+		p.m_type = explicit_value_type.EVT_UUID;
+		RESULT = p;
+	
+              CUP$cup$result = parser.getSymbolFactory().newSymbol("explicit_value",16, ((java_cup.runtime.Symbol)CUP$cup$stack.peek()), ((java_cup.runtime.Symbol)CUP$cup$stack.peek()), RESULT);
+            }
+          return CUP$cup$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 23: // explicit_value ::= STRING_DEFINITION 
+            {
+              Object RESULT =null;
+		int eleft = ((java_cup.runtime.Symbol)CUP$cup$stack.peek()).left;
+		int eright = ((java_cup.runtime.Symbol)CUP$cup$stack.peek()).right;
+		Object e = (Object)((java_cup.runtime.Symbol) CUP$cup$stack.peek()).value;
+		
+		types.log("[CUP]: STRING_DEFINITION ");
+		explicit_value_node p = new explicit_value_node();
+		p.m_str = e.toString();
+		p.m_type = explicit_value_type.EVT_STR;
+		RESULT = p;
+	
+              CUP$cup$result = parser.getSymbolFactory().newSymbol("explicit_value",16, ((java_cup.runtime.Symbol)CUP$cup$stack.peek()), ((java_cup.runtime.Symbol)CUP$cup$stack.peek()), RESULT);
+            }
+          return CUP$cup$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 24: // explicit_value ::= FKFLOAT 
+            {
+              Object RESULT =null;
+		int eleft = ((java_cup.runtime.Symbol)CUP$cup$stack.peek()).left;
+		int eright = ((java_cup.runtime.Symbol)CUP$cup$stack.peek()).right;
+		Object e = (Object)((java_cup.runtime.Symbol) CUP$cup$stack.peek()).value;
+		
+		types.log("[CUP]: FKFLOAT ");
+		explicit_value_node p = new explicit_value_node();
+		p.m_str = e.toString();
+		p.m_type = explicit_value_type.EVT_FLOAT;
+		RESULT = p;
+	
+              CUP$cup$result = parser.getSymbolFactory().newSymbol("explicit_value",16, ((java_cup.runtime.Symbol)CUP$cup$stack.peek()), ((java_cup.runtime.Symbol)CUP$cup$stack.peek()), RESULT);
             }
           return CUP$cup$result;
 
