@@ -11,4 +11,9 @@ class types
 			f.cb.on_error(f, file, lineno, func, errorstr);
 		}
 	}
+	
+	public static void log(String str)
+	{
+		System.out.println(str);
+	}
 }

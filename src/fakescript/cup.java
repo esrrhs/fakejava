@@ -163,8 +163,7 @@ class CUP$cup$actions {
 		int eright = ((java_cup.runtime.Symbol)CUP$cup$stack.peek()).right;
 		Object e = (Object)((java_cup.runtime.Symbol) CUP$cup$stack.peek()).value;
 		
-		System.out.print(e);
-		//FKLOG("[bison]: package %s", $2.c_str());
+		types.log("[CUP]: PACKAGE IDENTIFIER " + e);
 		//myflexer *l = (myflexer *)parm;
 		//l->set_package($2.c_str());
 	
@@ -180,8 +179,7 @@ class CUP$cup$actions {
 		int eright = ((java_cup.runtime.Symbol)CUP$cup$stack.peek()).right;
 		Object e = (Object)((java_cup.runtime.Symbol) CUP$cup$stack.peek()).value;
 		
-		System.out.print(e);
-		//FKLOG("[bison]: package %s", $2.c_str());
+		types.log("[CUP]: PACKAGE IDENTIFIER_DOT " + e);
 		//myflexer *l = (myflexer *)parm;
 		//l->set_package($2.c_str());
 	
@@ -225,8 +223,7 @@ class CUP$cup$actions {
 		int eright = ((java_cup.runtime.Symbol)CUP$cup$stack.peek()).right;
 		Object e = (Object)((java_cup.runtime.Symbol) CUP$cup$stack.peek()).value;
 		
-		System.out.print(e);
-		//FKLOG("[bison]: include %s", $2.c_str());
+		types.log("[CUP]: INCLUDE STRING_DEFINITION " + e);
 		//myflexer *l = (myflexer *)parm;
 		//l->add_include($2.c_str());
 	

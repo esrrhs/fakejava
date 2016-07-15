@@ -83,10 +83,10 @@ class parser
 			
 			Reader reader = new InputStreamReader(new FileInputStream(file), encoding);
 			BufferedReader bufferedReader = new BufferedReader(reader);
-            String lineTxt = null;
-            while((lineTxt = bufferedReader.readLine()) != null)
+            char[] readbuff = new char[10];
+            while(bufferedReader.read(readbuff) != -1)
             {
-            	ret += lineTxt;
+            	ret += String.valueOf(readbuff);
             }
             reader.close();
 	        

@@ -16,14 +16,20 @@ import java_cup.runtime.*;
 %cup
 %cupdebug
 
+%eofval{
+	return symbol(EOF);
+%eofval}
+
 %{
   StringBuilder string = new StringBuilder();
   
   private Symbol symbol(int type) {
+	types.log("[JFLEX]: " + sym.terminalNames[type]);
     return new javasymbol(type, yyline+1, yycolumn+1);
   }
 
   private Symbol symbol(int type, Object value) {
+	types.log("[JFLEX]: " + sym.terminalNames[type] + "(" + value.toString() + ")");
     return new javasymbol(type, yyline+1, yycolumn+1, value);
   }
 
@@ -50,6 +56,7 @@ LineTerminator = \r|\n|\r\n
 InputCharacter = [^\r\n]
 Comment = "//" {InputCharacter}* {LineTerminator}?
 StringCharacter = [^\r\n\"\\]
+WhiteSpace = {LineTerminator} | [ \t\f]
 
 %state STRING
 
@@ -313,11 +320,7 @@ StringCharacter = [^\r\n\"\\]
 	return symbol(STRING_CAT);
 }
 
-\n {
-}
-
-. {
-}
+{WhiteSpace} { }
 
 }
 
