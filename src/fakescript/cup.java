@@ -1226,8 +1226,26 @@ class CUP$cup$actions {
           case 5: // function_declaration ::= FUNC IDENTIFIER OPEN_BRACKET function_declaration_arguments CLOSE_BRACKET block END 
             {
               Object RESULT =null;
+		int eleft = ((java_cup.runtime.Symbol)CUP$cup$stack.elementAt(CUP$cup$top-5)).left;
+		int eright = ((java_cup.runtime.Symbol)CUP$cup$stack.elementAt(CUP$cup$top-5)).right;
+		Object e = (Object)((java_cup.runtime.Symbol) CUP$cup$stack.elementAt(CUP$cup$top-5)).value;
+		int e1left = ((java_cup.runtime.Symbol)CUP$cup$stack.elementAt(CUP$cup$top-3)).left;
+		int e1right = ((java_cup.runtime.Symbol)CUP$cup$stack.elementAt(CUP$cup$top-3)).right;
+		Object e1 = (Object)((java_cup.runtime.Symbol) CUP$cup$stack.elementAt(CUP$cup$top-3)).value;
+		int e2left = ((java_cup.runtime.Symbol)CUP$cup$stack.elementAt(CUP$cup$top-1)).left;
+		int e2right = ((java_cup.runtime.Symbol)CUP$cup$stack.elementAt(CUP$cup$top-1)).right;
+		Object e2 = (Object)((java_cup.runtime.Symbol) CUP$cup$stack.elementAt(CUP$cup$top-1)).value;
+		int e3left = ((java_cup.runtime.Symbol)CUP$cup$stack.peek()).left;
+		int e3right = ((java_cup.runtime.Symbol)CUP$cup$stack.peek()).right;
+		Object e3 = (Object)((java_cup.runtime.Symbol) CUP$cup$stack.peek()).value;
 		
 		types.log("[CUP]: FUNC IDENTIFIER OPEN_BRACKET function_declaration_arguments CLOSE_BRACKET block END");
+		func_desc_node p = new func_desc_node();
+		p.m_funcname = e.toString();
+		p.m_arglist = (func_desc_arglist_node)e1;
+		p.m_block = (block_node)e2;
+		p.m_endline = ((javasymbol)e3).getLine();
+		m_mycup.dd_func_desc(p);
 	
               CUP$cup$result = parser.getSymbolFactory().newSymbol("function_declaration",3, ((java_cup.runtime.Symbol)CUP$cup$stack.elementAt(CUP$cup$top-6)), ((java_cup.runtime.Symbol)CUP$cup$stack.peek()), RESULT);
             }
@@ -1237,8 +1255,22 @@ class CUP$cup$actions {
           case 6: // function_declaration ::= FUNC IDENTIFIER OPEN_BRACKET function_declaration_arguments CLOSE_BRACKET END 
             {
               Object RESULT =null;
+		int eleft = ((java_cup.runtime.Symbol)CUP$cup$stack.elementAt(CUP$cup$top-4)).left;
+		int eright = ((java_cup.runtime.Symbol)CUP$cup$stack.elementAt(CUP$cup$top-4)).right;
+		Object e = (Object)((java_cup.runtime.Symbol) CUP$cup$stack.elementAt(CUP$cup$top-4)).value;
+		int e1left = ((java_cup.runtime.Symbol)CUP$cup$stack.elementAt(CUP$cup$top-2)).left;
+		int e1right = ((java_cup.runtime.Symbol)CUP$cup$stack.elementAt(CUP$cup$top-2)).right;
+		Object e1 = (Object)((java_cup.runtime.Symbol) CUP$cup$stack.elementAt(CUP$cup$top-2)).value;
+		int e3left = ((java_cup.runtime.Symbol)CUP$cup$stack.peek()).left;
+		int e3right = ((java_cup.runtime.Symbol)CUP$cup$stack.peek()).right;
+		Object e3 = (Object)((java_cup.runtime.Symbol) CUP$cup$stack.peek()).value;
 		
 		types.log("[CUP]: FUNC IDENTIFIER OPEN_BRACKET function_declaration_arguments CLOSE_BRACKET END");
+		func_desc_node p = new func_desc_node();
+		p.m_funcname = e.toString();
+		p.m_arglist = (func_desc_arglist_node)e1;
+		p.m_endline = ((javasymbol)e3).getLine();
+		m_mycup.dd_func_desc(p);
 	
               CUP$cup$result = parser.getSymbolFactory().newSymbol("function_declaration",3, ((java_cup.runtime.Symbol)CUP$cup$stack.elementAt(CUP$cup$top-5)), ((java_cup.runtime.Symbol)CUP$cup$stack.peek()), RESULT);
             }

@@ -141,14 +141,25 @@ body ::=
 	;
 
 function_declaration ::=
-	FUNC IDENTIFIER OPEN_BRACKET function_declaration_arguments CLOSE_BRACKET block END
+	FUNC IDENTIFIER:e OPEN_BRACKET function_declaration_arguments:e1 CLOSE_BRACKET block:e2 END:e3
 	{:
 		types.log("[CUP]: FUNC IDENTIFIER OPEN_BRACKET function_declaration_arguments CLOSE_BRACKET block END");
+		func_desc_node p = new func_desc_node();
+		p.m_funcname = e.toString();
+		p.m_arglist = (func_desc_arglist_node)e1;
+		p.m_block = (block_node)e2;
+		p.m_endline = ((javasymbol)e3).getLine();
+		m_mycup.dd_func_desc(p);
 	:}
 	|
-	FUNC IDENTIFIER OPEN_BRACKET function_declaration_arguments CLOSE_BRACKET END
+	FUNC IDENTIFIER:e OPEN_BRACKET function_declaration_arguments:e1 CLOSE_BRACKET END:e3
 	{:
 		types.log("[CUP]: FUNC IDENTIFIER OPEN_BRACKET function_declaration_arguments CLOSE_BRACKET END");
+		func_desc_node p = new func_desc_node();
+		p.m_funcname = e.toString();
+		p.m_arglist = (func_desc_arglist_node)e1;
+		p.m_endline = ((javasymbol)e3).getLine();
+		m_mycup.dd_func_desc(p);
 	:}
 	;
 

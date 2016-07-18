@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 
+import fakescript.syntree.func_desc_node;
 import fakescript.syntree.syntree_node;
 
 public class mycup
@@ -12,6 +13,7 @@ public class mycup
 	private ArrayList<String> m_includelist = new ArrayList<String>();
 	private HashSet<String> m_struct_list = new HashSet<String>();
 	private HashMap<String, syntree_node> m_constmap = new HashMap<String, syntree_node>();
+	private ArrayList<func_desc_node> m_funclist = new ArrayList<func_desc_node>();
 	
 	public mycup()
 	{
@@ -43,5 +45,12 @@ public class mycup
 	{
 		m_constmap.put(name, node);
 		types.log("add_const_desc " + name + " " + node.dump(0));
+	}
+	
+	public void dd_func_desc(func_desc_node p)
+	{
+		types.log("add_func_desc " + p.m_funcname);
+		types.log("func " + p.m_funcname + " dump " + p.dump(0));
+		m_funclist.add(p);
 	}
 }
