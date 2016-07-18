@@ -1,4 +1,0 @@
-package template
-
-include "string.fk"
-include "xml.fk"
