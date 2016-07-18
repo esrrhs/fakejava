@@ -29,7 +29,7 @@ public class block_node extends syntree_node
 		return ret;
 	}
 	
-	void add_stmt(syntree_node stmt)
+	public void add_stmt(syntree_node stmt)
 	{
 		m_stmtlist.add(stmt);
 	}
