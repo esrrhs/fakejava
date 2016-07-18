@@ -1291,8 +1291,17 @@ class CUP$cup$actions {
           case 8: // function_declaration_arguments ::= function_declaration_arguments ARG_SPLITTER arg 
             {
               Object RESULT =null;
+		int eleft = ((java_cup.runtime.Symbol)CUP$cup$stack.elementAt(CUP$cup$top-2)).left;
+		int eright = ((java_cup.runtime.Symbol)CUP$cup$stack.elementAt(CUP$cup$top-2)).right;
+		Object e = (Object)((java_cup.runtime.Symbol) CUP$cup$stack.elementAt(CUP$cup$top-2)).value;
+		int e1left = ((java_cup.runtime.Symbol)CUP$cup$stack.peek()).left;
+		int e1right = ((java_cup.runtime.Symbol)CUP$cup$stack.peek()).right;
+		Object e1 = (Object)((java_cup.runtime.Symbol) CUP$cup$stack.peek()).value;
 		
 		types.log("[CUP]: function_declaration_arguments ARG_SPLITTER arg ");
+		func_desc_arglist_node p = (func_desc_arglist_node)e;
+		p.add_arg((syntree_node)e1);
+		RESULT = p;
 	
               CUP$cup$result = parser.getSymbolFactory().newSymbol("function_declaration_arguments",25, ((java_cup.runtime.Symbol)CUP$cup$stack.elementAt(CUP$cup$top-2)), ((java_cup.runtime.Symbol)CUP$cup$stack.peek()), RESULT);
             }
@@ -1302,8 +1311,14 @@ class CUP$cup$actions {
           case 9: // function_declaration_arguments ::= arg 
             {
               Object RESULT =null;
+		int eleft = ((java_cup.runtime.Symbol)CUP$cup$stack.peek()).left;
+		int eright = ((java_cup.runtime.Symbol)CUP$cup$stack.peek()).right;
+		Object e = (Object)((java_cup.runtime.Symbol) CUP$cup$stack.peek()).value;
 		
 		types.log("[CUP]: arg");
+		func_desc_arglist_node p = new func_desc_arglist_node();
+		p.add_arg((syntree_node)e);
+		RESULT = p;
 	
               CUP$cup$result = parser.getSymbolFactory().newSymbol("function_declaration_arguments",25, ((java_cup.runtime.Symbol)CUP$cup$stack.peek()), ((java_cup.runtime.Symbol)CUP$cup$stack.peek()), RESULT);
             }
@@ -1313,8 +1328,14 @@ class CUP$cup$actions {
           case 10: // arg ::= IDENTIFIER 
             {
               Object RESULT =null;
+		int eleft = ((java_cup.runtime.Symbol)CUP$cup$stack.peek()).left;
+		int eright = ((java_cup.runtime.Symbol)CUP$cup$stack.peek()).right;
+		Object e = (Object)((java_cup.runtime.Symbol) CUP$cup$stack.peek()).value;
 		
 		types.log("[CUP]: IDENTIFIER");
+		identifier_node p = new identifier_node();
+		p.m_str = e.toString();
+		RESULT = p;
 	
               CUP$cup$result = parser.getSymbolFactory().newSymbol("arg",23, ((java_cup.runtime.Symbol)CUP$cup$stack.peek()), ((java_cup.runtime.Symbol)CUP$cup$stack.peek()), RESULT);
             }
@@ -1324,8 +1345,20 @@ class CUP$cup$actions {
           case 11: // function_call ::= IDENTIFIER OPEN_BRACKET function_call_arguments CLOSE_BRACKET 
             {
               Object RESULT =null;
+		int eleft = ((java_cup.runtime.Symbol)CUP$cup$stack.elementAt(CUP$cup$top-3)).left;
+		int eright = ((java_cup.runtime.Symbol)CUP$cup$stack.elementAt(CUP$cup$top-3)).right;
+		Object e = (Object)((java_cup.runtime.Symbol) CUP$cup$stack.elementAt(CUP$cup$top-3)).value;
+		int e1left = ((java_cup.runtime.Symbol)CUP$cup$stack.elementAt(CUP$cup$top-1)).left;
+		int e1right = ((java_cup.runtime.Symbol)CUP$cup$stack.elementAt(CUP$cup$top-1)).right;
+		Object e1 = (Object)((java_cup.runtime.Symbol) CUP$cup$stack.elementAt(CUP$cup$top-1)).value;
 		
 		types.log("[CUP]: IDENTIFIER OPEN_BRACKET function_call_arguments CLOSE_BRACKET ");
+		function_call_node p = new function_call_node();
+		p.m_fuc = e.toString();
+		p.m_arglist = (function_call_arglist_node)e1;
+		p.m_fakecall = false;
+		p.m_classmem_call = false;
+		RESULT = p;
 	
               CUP$cup$result = parser.getSymbolFactory().newSymbol("function_call",21, ((java_cup.runtime.Symbol)CUP$cup$stack.elementAt(CUP$cup$top-3)), ((java_cup.runtime.Symbol)CUP$cup$stack.peek()), RESULT);
             }
@@ -1335,8 +1368,20 @@ class CUP$cup$actions {
           case 12: // function_call ::= IDENTIFIER_DOT OPEN_BRACKET function_call_arguments CLOSE_BRACKET 
             {
               Object RESULT =null;
+		int eleft = ((java_cup.runtime.Symbol)CUP$cup$stack.elementAt(CUP$cup$top-2)).left;
+		int eright = ((java_cup.runtime.Symbol)CUP$cup$stack.elementAt(CUP$cup$top-2)).right;
+		Object e = (Object)((java_cup.runtime.Symbol) CUP$cup$stack.elementAt(CUP$cup$top-2)).value;
+		int e1left = ((java_cup.runtime.Symbol)CUP$cup$stack.elementAt(CUP$cup$top-1)).left;
+		int e1right = ((java_cup.runtime.Symbol)CUP$cup$stack.elementAt(CUP$cup$top-1)).right;
+		Object e1 = (Object)((java_cup.runtime.Symbol) CUP$cup$stack.elementAt(CUP$cup$top-1)).value;
 		
 		types.log("[CUP]: IDENTIFIER_DOT OPEN_BRACKET function_call_arguments CLOSE_BRACKET ");
+		function_call_node p = new function_call_node();
+		p.m_fuc = e.toString();
+		p.m_arglist = (function_call_arglist_node)e1;
+		p.m_fakecall = false;
+		p.m_classmem_call = false;
+		RESULT = p;
 	
               CUP$cup$result = parser.getSymbolFactory().newSymbol("function_call",21, ((java_cup.runtime.Symbol)CUP$cup$stack.elementAt(CUP$cup$top-3)), ((java_cup.runtime.Symbol)CUP$cup$stack.peek()), RESULT);
             }
@@ -1346,8 +1391,28 @@ class CUP$cup$actions {
           case 13: // function_call ::= variable COLON IDENTIFIER OPEN_BRACKET function_call_arguments CLOSE_BRACKET 
             {
               Object RESULT =null;
+		int eleft = ((java_cup.runtime.Symbol)CUP$cup$stack.elementAt(CUP$cup$top-5)).left;
+		int eright = ((java_cup.runtime.Symbol)CUP$cup$stack.elementAt(CUP$cup$top-5)).right;
+		Object e = (Object)((java_cup.runtime.Symbol) CUP$cup$stack.elementAt(CUP$cup$top-5)).value;
+		int e1left = ((java_cup.runtime.Symbol)CUP$cup$stack.elementAt(CUP$cup$top-3)).left;
+		int e1right = ((java_cup.runtime.Symbol)CUP$cup$stack.elementAt(CUP$cup$top-3)).right;
+		Object e1 = (Object)((java_cup.runtime.Symbol) CUP$cup$stack.elementAt(CUP$cup$top-3)).value;
+		int e2left = ((java_cup.runtime.Symbol)CUP$cup$stack.elementAt(CUP$cup$top-1)).left;
+		int e2right = ((java_cup.runtime.Symbol)CUP$cup$stack.elementAt(CUP$cup$top-1)).right;
+		Object e2 = (Object)((java_cup.runtime.Symbol) CUP$cup$stack.elementAt(CUP$cup$top-1)).value;
 		
 		types.log("[CUP]: variable COLON IDENTIFIER OPEN_BRACKET function_call_arguments CLOSE_BRACKET ");
+		function_call_node p = new function_call_node();
+		p.m_fuc = e1.toString();
+		p.m_arglist = (function_call_arglist_node)e2;
+		if (p.m_arglist == null)
+		{
+			p.m_arglist = new function_call_arglist_node();
+		}
+		p.m_arglist.add_arg((syntree_node)e);
+		p.m_fakecall = false;
+		p.m_classmem_call = true;
+		RESULT = p;
 	
               CUP$cup$result = parser.getSymbolFactory().newSymbol("function_call",21, ((java_cup.runtime.Symbol)CUP$cup$stack.elementAt(CUP$cup$top-5)), ((java_cup.runtime.Symbol)CUP$cup$stack.peek()), RESULT);
             }
@@ -1368,8 +1433,17 @@ class CUP$cup$actions {
           case 15: // function_call_arguments ::= function_call_arguments ARG_SPLITTER arg_expr 
             {
               Object RESULT =null;
+		int eleft = ((java_cup.runtime.Symbol)CUP$cup$stack.elementAt(CUP$cup$top-2)).left;
+		int eright = ((java_cup.runtime.Symbol)CUP$cup$stack.elementAt(CUP$cup$top-2)).right;
+		Object e = (Object)((java_cup.runtime.Symbol) CUP$cup$stack.elementAt(CUP$cup$top-2)).value;
+		int e1left = ((java_cup.runtime.Symbol)CUP$cup$stack.peek()).left;
+		int e1right = ((java_cup.runtime.Symbol)CUP$cup$stack.peek()).right;
+		Object e1 = (Object)((java_cup.runtime.Symbol) CUP$cup$stack.peek()).value;
 		
 		types.log("[CUP]: function_call_arguments ARG_SPLITTER arg_expr ");
+		function_call_arglist_node p = (function_call_arglist_node)e;
+		p.add_arg((syntree_node)e1);
+		RESULT = p;
 	
               CUP$cup$result = parser.getSymbolFactory().newSymbol("function_call_arguments",24, ((java_cup.runtime.Symbol)CUP$cup$stack.elementAt(CUP$cup$top-2)), ((java_cup.runtime.Symbol)CUP$cup$stack.peek()), RESULT);
             }
@@ -1379,8 +1453,14 @@ class CUP$cup$actions {
           case 16: // function_call_arguments ::= arg_expr 
             {
               Object RESULT =null;
+		int eleft = ((java_cup.runtime.Symbol)CUP$cup$stack.peek()).left;
+		int eright = ((java_cup.runtime.Symbol)CUP$cup$stack.peek()).right;
+		Object e = (Object)((java_cup.runtime.Symbol) CUP$cup$stack.peek()).value;
 		
 		types.log("[CUP]: arg_expr ");
+		function_call_arglist_node p = new function_call_arglist_node();
+		p.add_arg((syntree_node)e);
+		RESULT = p;
 	
               CUP$cup$result = parser.getSymbolFactory().newSymbol("function_call_arguments",24, ((java_cup.runtime.Symbol)CUP$cup$stack.peek()), ((java_cup.runtime.Symbol)CUP$cup$stack.peek()), RESULT);
             }

@@ -169,39 +169,71 @@ function_declaration_arguments ::=
 		types.log("[CUP]: empty");
 	:}
 	| 
-	function_declaration_arguments ARG_SPLITTER arg 
+	function_declaration_arguments:e ARG_SPLITTER arg:e1 
 	{:
 		types.log("[CUP]: function_declaration_arguments ARG_SPLITTER arg ");
+		func_desc_arglist_node p = (func_desc_arglist_node)e;
+		p.add_arg((syntree_node)e1);
+		RESULT = p;
 	:}
 	| 
-	arg
+	arg:e
 	{:
 		types.log("[CUP]: arg");
+		func_desc_arglist_node p = new func_desc_arglist_node();
+		p.add_arg((syntree_node)e);
+		RESULT = p;
 	:}
 	;
 
 arg ::=
-	IDENTIFIER
+	IDENTIFIER:e
 	{:
 		types.log("[CUP]: IDENTIFIER");
+		identifier_node p = new identifier_node();
+		p.m_str = e.toString();
+		RESULT = p;
 	:}
 	;
 	
 	
 function_call ::=
-	IDENTIFIER OPEN_BRACKET function_call_arguments CLOSE_BRACKET 
+	IDENTIFIER:e OPEN_BRACKET function_call_arguments:e1 CLOSE_BRACKET 
 	{:
 		types.log("[CUP]: IDENTIFIER OPEN_BRACKET function_call_arguments CLOSE_BRACKET ");
+		function_call_node p = new function_call_node();
+		p.m_fuc = e.toString();
+		p.m_arglist = (function_call_arglist_node)e1;
+		p.m_fakecall = false;
+		p.m_classmem_call = false;
+		RESULT = p;
 	:} 
 	|
-	IDENTIFIER_DOT OPEN_BRACKET function_call_arguments CLOSE_BRACKET 
+	IDENTIFIER_DOT OPEN_BRACKET:e function_call_arguments:e1 CLOSE_BRACKET 
 	{:
 		types.log("[CUP]: IDENTIFIER_DOT OPEN_BRACKET function_call_arguments CLOSE_BRACKET ");
+		function_call_node p = new function_call_node();
+		p.m_fuc = e.toString();
+		p.m_arglist = (function_call_arglist_node)e1;
+		p.m_fakecall = false;
+		p.m_classmem_call = false;
+		RESULT = p;
 	:} 
 	|
-	variable COLON IDENTIFIER OPEN_BRACKET function_call_arguments CLOSE_BRACKET 
+	variable:e COLON IDENTIFIER:e1 OPEN_BRACKET function_call_arguments:e2 CLOSE_BRACKET 
 	{:
 		types.log("[CUP]: variable COLON IDENTIFIER OPEN_BRACKET function_call_arguments CLOSE_BRACKET ");
+		function_call_node p = new function_call_node();
+		p.m_fuc = e1.toString();
+		p.m_arglist = (function_call_arglist_node)e2;
+		if (p.m_arglist == null)
+		{
+			p.m_arglist = new function_call_arglist_node();
+		}
+		p.m_arglist.add_arg((syntree_node)e);
+		p.m_fakecall = false;
+		p.m_classmem_call = true;
+		RESULT = p;
 	:} 
 	;
 	
@@ -211,14 +243,20 @@ function_call_arguments ::=
 		types.log("[CUP]: empty ");
 	:}
 	| 
-	function_call_arguments ARG_SPLITTER arg_expr
+	function_call_arguments:e ARG_SPLITTER arg_expr:e1
 	{:
 		types.log("[CUP]: function_call_arguments ARG_SPLITTER arg_expr ");
+		function_call_arglist_node p = (function_call_arglist_node)e;
+		p.add_arg((syntree_node)e1);
+		RESULT = p;
 	:}
 	| 
-	arg_expr
+	arg_expr:e
 	{:
 		types.log("[CUP]: arg_expr ");
+		function_call_arglist_node p = new function_call_arglist_node();
+		p.add_arg((syntree_node)e);
+		RESULT = p;
 	:}
 	;  
 

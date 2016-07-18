@@ -27,7 +27,7 @@ public class func_desc_arglist_node extends syntree_node
 		return ret;
 	}
 	
-	void add_arg(syntree_node p)
+	public void add_arg(syntree_node p)
 	{
 		identifier_node pi = (identifier_node)(p);
 		m_arglist.add(pi.m_str);
