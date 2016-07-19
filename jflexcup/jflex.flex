@@ -28,6 +28,11 @@ import java_cup.runtime.*;
 	types.log("[JFLEX]: " + sym.terminalNames[type] + "(" + value.toString() + ")");
     return new javasymbol(type, yyline+1, yycolumn+1, value);
   }
+  
+  public int get_line()
+  {
+	return yyline;
+  }
 
   /** 
    * assumes correct representation of a long value for 
@@ -50,7 +55,7 @@ import java_cup.runtime.*;
 
 LineTerminator = \r|\n|\r\n
 InputCharacter = [^\r\n]
-Comment = "//" {InputCharacter}* {LineTerminator}?
+Comment = "--" {InputCharacter}* {LineTerminator}?
 StringCharacter = [^\r\n\"\\]
 WhiteSpace = {LineTerminator} | [ \t\f]
 

@@ -141,24 +141,24 @@ body ::=
 	;
 
 function_declaration ::=
-	FUNC IDENTIFIER:e OPEN_BRACKET function_declaration_arguments:e1 CLOSE_BRACKET block:e2 END:e3
+	FUNC IDENTIFIER:e OPEN_BRACKET function_declaration_arguments:e1 CLOSE_BRACKET block:e2 END
 	{:
 		types.log("[CUP]: FUNC IDENTIFIER OPEN_BRACKET function_declaration_arguments CLOSE_BRACKET block END");
 		func_desc_node p = new func_desc_node();
 		p.m_funcname = e.toString();
 		p.m_arglist = (func_desc_arglist_node)e1;
 		p.m_block = (block_node)e2;
-		p.m_endline = ((javasymbol)e3).getLine();
+		p.m_endline = m_mycup.get_jflex().get_line();
 		m_mycup.dd_func_desc(p);
 	:}
 	|
-	FUNC IDENTIFIER:e OPEN_BRACKET function_declaration_arguments:e1 CLOSE_BRACKET END:e3
+	FUNC IDENTIFIER:e OPEN_BRACKET function_declaration_arguments:e1 CLOSE_BRACKET END
 	{:
 		types.log("[CUP]: FUNC IDENTIFIER OPEN_BRACKET function_declaration_arguments CLOSE_BRACKET END");
 		func_desc_node p = new func_desc_node();
 		p.m_funcname = e.toString();
 		p.m_arglist = (func_desc_arglist_node)e1;
-		p.m_endline = ((javasymbol)e3).getLine();
+		p.m_endline = m_mycup.get_jflex().get_line();
 		m_mycup.dd_func_desc(p);
 	:}
 	;
@@ -209,7 +209,7 @@ function_call ::=
 		RESULT = p;
 	:} 
 	|
-	IDENTIFIER_DOT OPEN_BRACKET:e function_call_arguments:e1 CLOSE_BRACKET 
+	IDENTIFIER_DOT:e OPEN_BRACKET function_call_arguments:e1 CLOSE_BRACKET 
 	{:
 		types.log("[CUP]: IDENTIFIER_DOT OPEN_BRACKET function_call_arguments CLOSE_BRACKET ");
 		function_call_node p = new function_call_node();
@@ -261,155 +261,226 @@ function_call_arguments ::=
 	;  
 
 arg_expr ::=
-	expr_value
+	expr_value:e
 	{:
 		types.log("[CUP]: expr_value");
+		RESULT = e;
 	:}
 	;
 
 /* function declaration end */
 
 block ::=
-	block stmt 
+	block:e stmt:e1
 	{:
 		types.log("[CUP]: block stmt ");
+		block_node p = (block_node)e;
+		p.add_stmt((syntree_node)e1);
+		RESULT = p;
 	:}
 	|
-	stmt 
+	stmt:e
 	{:
 		types.log("[CUP]: stmt");
+		block_node p = new block_node();
+		p.add_stmt((syntree_node)e);
+		RESULT = p;
 	:}
 	;
   
 stmt ::=
-	while_stmt
+	while_stmt:e
 	{:
 		types.log("[CUP]: while_stmt");
+		RESULT = e;
 	:}
 	|
-	if_stmt
+	if_stmt:e
 	{:
 		types.log("[CUP]: if_stmt");
+		RESULT = e;
 	:}
 	|
-	return_stmt
+	return_stmt:e
 	{:
 		types.log("[CUP]: return_stmt");
+		RESULT = e;
 	:}
 	|
-	assign_stmt
+	assign_stmt:e
 	{:
 		types.log("[CUP]: assign_stmt");
+		RESULT = e;
 	:}
 	|
-	multi_assign_stmt
+	multi_assign_stmt:e
 	{:
 		types.log("[CUP]: multi_assign_stmt");
+		RESULT = e;
 	:}
 	|
-	break
+	break:e
 	{:
 		types.log("[CUP]: break");
+		RESULT = e;
 	:}
 	|
-	continue
+	continue:e
 	{:
 		types.log("[CUP]: continue");
+		RESULT = e;
 	:}
 	|
-	expr
+	expr:e
 	{:
 		types.log("[CUP]: expr");
+		RESULT = e;
 	:}
 	|
-	math_assign_stmt
+	math_assign_stmt:e
 	{:
 		types.log("[CUP]: math_assign_stmt");
+		RESULT = e;
 	:}
 	|
-	for_stmt
+	for_stmt:e
 	{:
 		types.log("[CUP]: for_stmt");
+		RESULT = e;
 	:}
 	|
-	for_loop_stmt
+	for_loop_stmt:e
 	{:
 		types.log("[CUP]: for_loop_stmt");
+		RESULT = e;
 	:}
 	|
-	fake_call_stmt
+	fake_call_stmt:e
 	{:
 		types.log("[CUP]: fake_call_stmt");
+		RESULT = e;
 	:}
 	|
-	sleep
+	sleep:e
 	{:
 		types.log("[CUP]: sleep_stmt");
+		RESULT = e;
 	:}
 	|
-	yield
+	yield:e
 	{:
 		types.log("[CUP]: yield_stmt");
+		RESULT = e;
 	:}
 	|
-	switch_stmt
+	switch_stmt:e
 	{:
 		types.log("[CUP]: switch_stmt");
+		RESULT = e;
 	:}
 	;
 
 fake_call_stmt ::=
-	FAKE function_call
+	FAKE function_call:e
 	{:
 		types.log("[CUP]: FAKE function_call");
+		function_call_node p = (function_call_node)e;
+		p.m_fakecall = true;
+		RESULT = p;
 	:}
 	;
 	
 for_stmt ::=
-	FOR block ARG_SPLITTER cmp ARG_SPLITTER block THEN block END
+	FOR block:e ARG_SPLITTER cmp:e1 ARG_SPLITTER block:e2 THEN block:e3 END
 	{:
 		types.log("[CUP]: FOR block ARG_SPLITTER cmp ARG_SPLITTER block THEN block END");
+		for_stmt p = new for_stmt();
+		p.m_cmp = (cmp_stmt)e1;
+		p.m_beginblock = (block_node)e;
+		p.m_endblock = (block_node)e2;
+		p.m_block = (block_node)e3;
+		RESULT = p;
 	:}
 	|
-	FOR block ARG_SPLITTER cmp ARG_SPLITTER block THEN END
+	FOR block:e ARG_SPLITTER cmp:e1 ARG_SPLITTER block:e2 THEN END
 	{:
 		types.log("[CUP]: FOR block ARG_SPLITTER cmp ARG_SPLITTER block THEN END");
+		for_stmt p = new for_stmt();
+		p.m_cmp = (cmp_stmt)e1;
+		p.m_beginblock = (block_node)e;
+		p.m_endblock = (block_node)e2;
+		p.m_block = null;
+		RESULT = p;
 	:}
 	;
 
 for_loop_stmt ::=
-	FOR var ASSIGN assign_value RIGHT_POINTER cmp_value ARG_SPLITTER expr_value THEN block END
+	FOR var:e ASSIGN assign_value:e1 RIGHT_POINTER cmp_value:e2 ARG_SPLITTER expr_value:e3 THEN block:e4 END
 	{:
 		types.log("[CUP]: FOR var ASSIGN assign_value RIGHT_POINTER cmp_value ARG_SPLITTER expr_value THEN block END");
+		for_loop_stmt p = new for_loop_stmt();
+		p.m_var = (syntree_node)e;
+		p.m_begin = (syntree_node)e1;
+		p.m_end = (syntree_node)e2;
+		p.m_add = (syntree_node)e3;
+		p.m_block = (block_node)e4;
+		RESULT = p;
 	:}
 	|
-	FOR var ASSIGN assign_value RIGHT_POINTER cmp_value ARG_SPLITTER expr_value THEN END
+	FOR var:e ASSIGN assign_value:e1 RIGHT_POINTER cmp_value:e2 ARG_SPLITTER expr_value:e3 THEN END
 	{:
 		types.log("[CUP]: FOR var ASSIGN assign_value RIGHT_POINTER cmp_value ARG_SPLITTER expr_value THEN END");
+		for_loop_stmt p = new for_loop_stmt();
+		p.m_var = (syntree_node)e;
+		p.m_begin = (syntree_node)e1;
+		p.m_end = (syntree_node)e2;
+		p.m_add = (syntree_node)e3;
+		p.m_block = null;
+		RESULT = p;
 	:}
 	;
 	
 while_stmt ::=
-	WHILE cmp THEN block END 
+	WHILE cmp:e THEN block:e1 END 
 	{:
 		types.log("[CUP]: WHILE cmp THEN block END ");
+		while_stmt p = new while_stmt();
+		p.m_cmp = (cmp_stmt)e;
+		p.m_block = (block_node)e1;
+		RESULT = p;
 	:}
 	|
-	WHILE cmp THEN END 
+	WHILE cmp:e THEN END 
 	{:
 		types.log("[CUP]: WHILE cmp THEN END ");
+		while_stmt p = new while_stmt();
+		p.m_cmp = (cmp_stmt)e;
+		p.m_block = null;
+		RESULT = p;
 	:}
 	;
 	
 if_stmt ::=
-	IF cmp THEN block elseif_stmt_list else_stmt END
+	IF cmp:e THEN block:e1 elseif_stmt_list:e2 else_stmt:e3 END
 	{:
 		types.log("[CUP]: IF cmp THEN block elseif_stmt_list else_stmt END");
+		if_stmt p = new if_stmt();
+		p.m_cmp = (cmp_stmt)e;
+		p.m_block = (block_node)e1;
+		p.m_elseifs = (elseif_stmt_list)e2;
+		p.m_elses = (else_stmt)e3;
+		RESULT = p;
 	:}
 	|
-	IF cmp THEN elseif_stmt_list else_stmt END
+	IF cmp:e THEN elseif_stmt_list:e1 else_stmt:e2 END
 	{:
 		types.log("[CUP]: IF cmp THEN elseif_stmt_list else_stmt END");
+		if_stmt p = new if_stmt();
+		p.m_cmp = (cmp_stmt)e;
+		p.m_block = null;
+		p.m_elseifs = (elseif_stmt_list)e1;
+		p.m_elses = (else_stmt)e2;
+		RESULT = p;
 	:}
 	;
 	
@@ -417,28 +488,43 @@ elseif_stmt_list ::=
 	/* empty */
 	{:
 		types.log("[CUP]: empty");
+		RESULT = null;
 	:}
 	| 
-	elseif_stmt_list elseif_stmt
+	elseif_stmt_list:e elseif_stmt:e1
 	{:
 		types.log("[CUP]: elseif_stmt_list elseif_stmt");
+		elseif_stmt_list p = (elseif_stmt_list)e;
+		p.add_stmt((syntree_node)e1);
+		RESULT = p;
 	:}
 	| 
-	elseif_stmt
+	elseif_stmt:e
 	{:
 		types.log("[CUP]: elseif_stmt");
+		elseif_stmt_list p = new elseif_stmt_list();
+		p.add_stmt((syntree_node)e);
+		RESULT = p;
 	:}
 	;
 	
 elseif_stmt ::=
-	ELSEIF cmp THEN block
+	ELSEIF cmp:e THEN block:e1
 	{:
 		types.log("[CUP]: ELSEIF cmp THEN block");
+		elseif_stmt p = new elseif_stmt();
+		p.m_cmp = (cmp_stmt)e;
+		p.m_block = (syntree_node)e1;
+		RESULT = p;
 	:}
 	|
-	ELSEIF cmp THEN
+	ELSEIF cmp:e THEN
 	{:
 		types.log("[CUP]: ELSEIF cmp THEN");
+		elseif_stmt p = new elseif_stmt();
+		p.m_cmp = (cmp_stmt)e;
+		p.m_block = null;
+		RESULT = p;
 	:}
 	;
 	
@@ -446,141 +532,227 @@ else_stmt ::=
 	/*empty*/
 	{:
 		types.log("[CUP]: empty");
+		RESULT = null;
 	:}
 	|
-	ELSE block
+	ELSE block:e
 	{:
 		types.log("[CUP]: ELSE block");
+		else_stmt p = new else_stmt();
+		p.m_block = (block_node)e;
+		RESULT = p;
 	:}
 	|
 	ELSE
 	{:
 		types.log("[CUP]: ELSE");
+		else_stmt p = new else_stmt();
+		p.m_block = null;
+		RESULT = p;
 	:}
 	;
 
 cmp ::=
-	OPEN_BRACKET cmp CLOSE_BRACKET
+	OPEN_BRACKET cmp:e CLOSE_BRACKET
 	{:
 		types.log("[CUP]: OPEN_BRACKET cmp CLOSE_BRACKET");
+		RESULT = e;
 	:}
 	|
-	cmp AND cmp
+	cmp:e AND cmp:e1
 	{:
 		types.log("[CUP]: cmp AND cmp");
+		cmp_stmt p = new cmp_stmt();
+		p.m_cmp = "&&";
+		p.m_left = (syntree_node)e;
+		p.m_right = (syntree_node)e1;
+		RESULT = p;
 	:}
 	|
-	cmp OR cmp
+	cmp:e OR cmp:e1
 	{:
 		types.log("[CUP]: cmp OR cmp");
+		cmp_stmt p = new cmp_stmt();
+		p.m_cmp = "||";
+		p.m_left = (syntree_node)e;
+		p.m_right = (syntree_node)e1;
+		RESULT = p;
 	:}
 	|
-	cmp_value LESS cmp_value
+	cmp_value:e LESS cmp_value:e1
 	{:
 		types.log("[CUP]: cmp_value LESS cmp_value");
+		cmp_stmt p = new cmp_stmt();
+		p.m_cmp = "<";
+		p.m_left = (syntree_node)e;
+		p.m_right = (syntree_node)e1;
+		RESULT = p;
 	:}
 	|
-	cmp_value MORE cmp_value
+	cmp_value:e MORE cmp_value:e1
 	{:
 		types.log("[CUP]: cmp_value MORE cmp_value");
+		cmp_stmt p = new cmp_stmt();
+		p.m_cmp = ">";
+		p.m_left = (syntree_node)e;
+		p.m_right = (syntree_node)e1;
+		RESULT = p;
 	:}
 	|
-	cmp_value EQUAL cmp_value
+	cmp_value:e EQUAL cmp_value:e1
 	{:
 		types.log("[CUP]: cmp_value EQUAL cmp_value");
+		cmp_stmt p = new cmp_stmt();
+		p.m_cmp = "==";
+		p.m_left = (syntree_node)e;
+		p.m_right = (syntree_node)e1;
+		RESULT = p;
 	:}
 	|
-	cmp_value MORE_OR_EQUAL cmp_value
+	cmp_value:e MORE_OR_EQUAL cmp_value:e1
 	{:
 		types.log("[CUP]: cmp_value MORE_OR_EQUAL cmp_value");
+		cmp_stmt p = new cmp_stmt();
+		p.m_cmp = ">=";
+		p.m_left = (syntree_node)e;
+		p.m_right = (syntree_node)e1;
+		RESULT = p;
 	:}
 	|
-	cmp_value LESS_OR_EQUAL cmp_value
+	cmp_value:e LESS_OR_EQUAL cmp_value:e1
 	{:
 		types.log("[CUP]: cmp_value LESS_OR_EQUAL cmp_value");
+		cmp_stmt p = new cmp_stmt();
+		p.m_cmp = "<=";
+		p.m_left = (syntree_node)e;
+		p.m_right = (syntree_node)e1;
+		RESULT = p;
 	:}
 	|
-	cmp_value NOT_EQUAL cmp_value
+	cmp_value:e NOT_EQUAL cmp_value:e1
 	{:
 		types.log("[CUP]: cmp_value NOT_EQUAL cmp_value");
+		cmp_stmt p = new cmp_stmt();
+		p.m_cmp = "!=";
+		p.m_left = (syntree_node)e;
+		p.m_right = (syntree_node)e1;
+		RESULT = p;
 	:}
 	|
 	FTRUE
 	{:
 		types.log("[CUP]: FTRUE");
+		cmp_stmt p = new cmp_stmt();
+		p.m_cmp = "true";
+		p.m_left = null;
+		p.m_right = null;
+		RESULT = p;
 	:}
 	|
 	FFALSE
 	{:
 		types.log("[CUP]: FFALSE");
+		cmp_stmt p = new cmp_stmt();
+		p.m_cmp = "false";
+		p.m_left = null;
+		p.m_right = null;
+		RESULT = p;
 	:}
 	|
-	IS cmp_value
+	IS cmp_value:e
 	{:
 		types.log("[CUP]: IS cmp_value");
+		cmp_stmt p = new cmp_stmt();
+		p.m_cmp = "is";
+		p.m_left = (syntree_node)e;
+		p.m_right = null;
+		RESULT = p;
 	:}
 	|
-	NOT cmp_value
+	NOT cmp_value:e
 	{:
 		types.log("[CUP]: NOT cmp_value");
+		cmp_stmt p = new cmp_stmt();
+		p.m_cmp = "not";
+		p.m_left = (syntree_node)e;
+		p.m_right = null;
+		RESULT = p;
 	:}
 	;
 
 cmp_value ::=
-	explicit_value
+	explicit_value:e
 	{:
 		types.log("[CUP]: explicit_value");
+		RESULT = e;
 	:}
 	|
-	variable
+	variable:e
 	{:
 		types.log("[CUP]: variable");
+		RESULT = e;
 	:}
 	|
-	expr
+	expr:e
 	{:
 		types.log("[CUP]: expr");
+		RESULT = e;
 	:}
 	;
 	
 return_stmt ::=
-	RETURN return_value_list
+	RETURN return_value_list:e
 	{:
 		types.log("[CUP]: RETURN return_value_list");
+		return_stmt p = new return_stmt();
+		p.m_returnlist = (return_value_list_node)e;
+		RESULT = p;
 	:}
 	|
 	RETURN
 	{:
 		types.log("[CUP]: RETURN");
+		return_stmt p = new return_stmt();
+		p.m_returnlist = null;
+		RESULT = p;
 	:}
 	;
  
 return_value_list ::=
-	return_value_list ARG_SPLITTER return_value
+	return_value_list:e ARG_SPLITTER return_value:e1
 	{:
 		types.log("[CUP]: return_value_list ARG_SPLITTER return_value");
+		return_value_list_node p = (return_value_list_node)e;
+		p.add_arg((syntree_node)e1);
+		RESULT = p;
 	:}
 	|
-	return_value
+	return_value:e
 	{:
 		types.log("[CUP]: return_value");
+		return_value_list_node p = new return_value_list_node();
+		p.add_arg((syntree_node)e);
+		RESULT = p;
 	:}
 	;
  
 return_value ::=
-	explicit_value
+	explicit_value:e
 	{:
 		types.log("[CUP]: explicit_value");
+		RESULT = e;
 	:}
 	|
-	variable
+	variable:e
 	{:
 		types.log("[CUP]: variable");
+		RESULT = e;
 	:}
 	|
-	expr
+	expr:e
 	{:
 		types.log("[CUP]: expr");
+		RESULT = e;
 	:}
 	;
 
