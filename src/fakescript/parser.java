@@ -54,8 +54,9 @@ class parser
 		
 		java.io.Reader reader = new java.io.StringReader(content);
 		cup yyp = new cup();
-		yyp.setScanner(new jflex(reader));
-		yyp.set_mycup(new mycup());
+		jflex f = new jflex(reader);
+		yyp.setScanner(f);
+		yyp.set_mycup(new mycup(f));
 		try 
 		{
 			yyp.parse();
@@ -92,6 +93,8 @@ class parser
             	Arrays.fill(readbuff, '\0');
             }
             reader.close();
+            
+	        types.log(ret);
 	        
 			return ret;
 	    } 

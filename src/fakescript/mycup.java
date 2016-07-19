@@ -14,10 +14,16 @@ public class mycup
 	private HashSet<String> m_struct_list = new HashSet<String>();
 	private HashMap<String, syntree_node> m_constmap = new HashMap<String, syntree_node>();
 	private ArrayList<func_desc_node> m_funclist = new ArrayList<func_desc_node>();
+	private jflex m_f;
 	
-	public mycup()
+	public mycup(jflex f)
 	{
-		
+		m_f = f;
+	}
+
+	public jflex get_jflex()
+	{
+		return m_f;
 	}
 	
 	public void set_package(String packagename)

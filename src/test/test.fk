@@ -35,3 +35,34 @@ const c_table_data = {
 		}
 	}
 const c_array_data = [1 {1 : "aa"} 3]
+
+func parse(name)
+	
+	var ret = node()
+	ret->name = ""
+	ret->param = map()
+	ret->memlist = array()
+	
+	var ok, var f = file.open(name, "rb")
+	if not ok then
+		return false, ret
+	end
+	
+	var content = file.read_all(f)
+	ok, var pos, var errormsg = _parse(content, 0, ret)
+	
+	if not ok then
+		return false, ret, errormsg
+	end
+	
+	var memlist = ret->memlist
+	ret = memlist[0]
+	
+	return true, ret, errormsg
+	
+end
+
+-- test
+func test(name)
+	return 1,2,3
+end
