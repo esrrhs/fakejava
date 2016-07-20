@@ -956,78 +956,116 @@ variable ::=
 	;
 
 expr ::=
-	OPEN_BRACKET expr CLOSE_BRACKET
+	OPEN_BRACKET expr:e CLOSE_BRACKET
 	{:
 		types.log("[CUP]: OPEN_BRACKET expr CLOSE_BRACKET");
+		RESULT = e;
 	:}
 	|
-	function_call
+	function_call:e
 	{:
 		types.log("[CUP]: function_call");
+		RESULT = e;
 	:}
 	|
-	math_expr
+	math_expr:e
 	{:
 		types.log("[CUP]: math_expr");
+		RESULT = e;
 	:}
 	;
 
 math_expr ::=
-	OPEN_BRACKET math_expr CLOSE_BRACKET
+	OPEN_BRACKET math_expr:e CLOSE_BRACKET
 	{:
 		types.log("[CUP]: OPEN_BRACKET math_expr CLOSE_BRACKET");
+		RESULT = e;
 	:}
 	|
-	expr_value PLUS expr_value
+	expr_value:e PLUS expr_value:e1
 	{:
 		types.log("[CUP]: expr_value PLUS expr_value");
+		math_expr_node p = new math_expr_node();
+		p.m_oper = "+";
+		p.m_left = (syntree_node)e;
+		p.m_right = (syntree_node)e1;
+		RESULT = p;
 	:}
 	|
-	expr_value MINUS expr_value
+	expr_value:e MINUS expr_value:e1
 	{:
 		types.log("[CUP]: expr_value MINUS expr_value");
+		math_expr_node p = new math_expr_node();
+		p.m_oper = "-";
+		p.m_left = (syntree_node)e;
+		p.m_right = (syntree_node)e1;
+		RESULT = p;
 	:}
 	|
-	expr_value MULTIPLY expr_value
+	expr_value:e MULTIPLY expr_value:e1
 	{:
 		types.log("[CUP]: expr_value MULTIPLY expr_value");
+		math_expr_node p = new math_expr_node();
+		p.m_oper = "*";
+		p.m_left = (syntree_node)e;
+		p.m_right = (syntree_node)e1;
+		RESULT = p;
 	:}
 	|
-	expr_value DIVIDE expr_value
+	expr_value:e DIVIDE expr_value:e1
 	{:
 		types.log("[CUP]: expr_value DIVIDE expr_value");
+		math_expr_node p = new math_expr_node();
+		p.m_oper = "/";
+		p.m_left = (syntree_node)e;
+		p.m_right = (syntree_node)e1;
+		RESULT = p;
 	:}
 	|
-	expr_value DIVIDE_MOD expr_value
+	expr_value:e DIVIDE_MOD expr_value:e1
 	{:
 		types.log("[CUP]: expr_value DIVIDE_MOD expr_value");
+		math_expr_node p = new math_expr_node();
+		p.m_oper = "%";
+		p.m_left = (syntree_node)e;
+		p.m_right = (syntree_node)e1;
+		RESULT = p;
 	:}
 	|
-	expr_value STRING_CAT expr_value
+	expr_value:e STRING_CAT expr_value:e1
 	{:
 		types.log("[CUP]: expr_value STRING_CAT expr_value");
+		math_expr_node p = new math_expr_node();
+		p.m_oper = "..";
+		p.m_left = (syntree_node)e;
+		p.m_right = (syntree_node)e1;
+		RESULT = p;
 	:}
 	;	
 
 expr_value ::=
-	math_expr
+	math_expr:e
 	{:
 		types.log("[CUP]: math_expr");
+		RESULT = e;
 	:}
 	|
-	explicit_value
+	explicit_value:e
 	{:
 		types.log("[CUP]: explicit_value");
+		RESULT = e;
 	:}
 	|
-	function_call
+	function_call:e
 	{:
 		types.log("[CUP]: function_call");
+		RESULT = e;
 	:}
 	|
-	variable
+	variable:e
 	{:
 		types.log("[CUP]: variable");
+		RESULT = e;
 	:}
 	;
 	
@@ -1035,6 +1073,8 @@ break ::=
 	BREAK 
 	{:
 		types.log("[CUP]: BREAK");
+		break_stmt p = new break_stmt();
+		RESULT = p;
 	:}
 	;
 	
@@ -1042,56 +1082,88 @@ continue ::=
 	CONTINUE 
 	{:
 		types.log("[CUP]: CONTINUE");
+		continue_stmt p = new continue_stmt();
+		RESULT = p;
 	:}
 	;
 
 sleep ::=
-	SLEEP expr_value 
+	SLEEP expr_value:e
 	{:
 		types.log("[CUP]: SLEEP");
+		sleep_stmt p = new sleep_stmt();
+		p.m_time = (syntree_node)e;
+		RESULT = p;
 	:}
 	;
 	
 yield ::=
-	YIELD expr_value
+	YIELD expr_value:e
 	{:
 		types.log("[CUP]: YIELD");
+		yield_stmt p = new yield_stmt();
+		p.m_time = (syntree_node)e;
+		RESULT = p;
 	:}
 	;
 	
 switch_stmt ::=
-	SWITCH cmp_value switch_case_list DEFAULT block END
+	SWITCH cmp_value:e switch_case_list:e1 DEFAULT block:e2 END
 	{:
 		types.log("[CUP]: SWITCH cmp_value switch_case_list DEFAULT block END");
+		switch_stmt p = new switch_stmt();
+		p.m_cmp = (syntree_node)e;
+		p.m_caselist = (syntree_node)e1;
+		p.m_def = (syntree_node)e2;
+		RESULT = p;
 	:}
 	|
-	SWITCH cmp_value switch_case_list DEFAULT END
+	SWITCH cmp_value:e switch_case_list:e1 DEFAULT END
 	{:
 		types.log("[CUP]: SWITCH cmp_value switch_case_list DEFAULT END");
+		switch_stmt p = new switch_stmt();
+		p.m_cmp = (syntree_node)e;
+		p.m_caselist = (syntree_node)e1;
+		p.m_def = null;
+		RESULT = p;
 	:}
 	;
 	
 switch_case_list ::=
-	switch_case_define
+	switch_case_define:e
 	{:
 		types.log("[CUP]: switch_case_define");
+		switch_caselist_node p = new switch_caselist_node();
+		p.add_case((syntree_node)e);
+		RESULT = p;
 	:}
 	|
-	switch_case_list switch_case_define
+	switch_case_list:e switch_case_define:e1
 	{:
 		types.log("[CUP]: switch_case_list switch_case_define");
+		switch_caselist_node p = (switch_caselist_node)e;
+		p.add_case((syntree_node)e1);
+		RESULT = p;
 	:}
 	;
 
 switch_case_define ::=
-	CASE cmp_value THEN block
+	CASE cmp_value:e THEN block:e1
 	{:
 		types.log("[CUP]: CASE cmp_value THEN block");
+		switch_case_node p = new switch_case_node();
+		p.m_cmp = (syntree_node)e;
+		p.m_block = (syntree_node)e1;
+		RESULT = p;
 	:}
 	|
-	CASE cmp_value THEN
+	CASE cmp_value:e THEN
 	{:
 		types.log("[CUP]: CASE cmp_value THEN");
+		switch_case_node p = new switch_case_node();
+		p.m_cmp = (syntree_node)e;
+		p.m_block = null;
+		RESULT = p;
 	:}
 	;
 		
