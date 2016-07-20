@@ -757,121 +757,201 @@ return_value ::=
 	;
 
 assign_stmt ::=
-	var ASSIGN assign_value
+	var:e ASSIGN assign_value:e1
 	{:
 		types.log("[CUP]: var ASSIGN assign_value");
+		assign_stmt p = new assign_stmt();
+		p.m_var = (syntree_node)e;
+		p.m_value = (syntree_node)e1;
+		p.m_isnew = false;
+		RESULT = p;
 	:}
 	|
-	var NEW_ASSIGN assign_value
+	var:e NEW_ASSIGN assign_value:e1
 	{:
 		types.log("[CUP]: var NEW_ASSIGN assign_value");
+		assign_stmt p = new assign_stmt();
+		p.m_var = (syntree_node)e;
+		p.m_value = (syntree_node)e1;
+		p.m_isnew = true;
+		RESULT = p;
 	:}
 	;
 
 multi_assign_stmt ::=
-	var_list ASSIGN function_call
+	var_list:e ASSIGN function_call:e1
 	{:
 		types.log("[CUP]: var_list ASSIGN function_call");
+		multi_assign_stmt p = new multi_assign_stmt();
+		p.m_varlist = (var_list_node)e;
+		p.m_value = (syntree_node)e1;
+		p.m_isnew = false;
+		RESULT = p;
 	:}
 	|
-	var_list NEW_ASSIGN function_call
+	var_list:e NEW_ASSIGN function_call:e1
 	{:
 		types.log("[CUP]: var_list NEW_ASSIGN function_call");
+		multi_assign_stmt p = new multi_assign_stmt();
+		p.m_varlist = (var_list_node)e;
+		p.m_value = (syntree_node)e1;
+		p.m_isnew = true;
+		RESULT = p;
 	:}
 	;
 	
 var_list ::=
-	var_list ARG_SPLITTER var
+	var_list:e ARG_SPLITTER var:e1
 	{:
 		types.log("[CUP]: var_list ARG_SPLITTER var");
+		var_list_node p = (var_list_node)e;
+		p.add_arg((syntree_node)e1);
+		RESULT = p;
 	:}
 	|
-	var
+	var:e
 	{:
 		types.log("[CUP]: var");
+		var_list_node p = new var_list_node();
+		p.add_arg((syntree_node)e);
+		RESULT = p;
 	:}
 	;
 	
 assign_value ::=
-	explicit_value
+	explicit_value:e
 	{:
 		types.log("[CUP]: explicit_value");
+		RESULT = e;
 	:}
 	|
-	variable
+	variable:e
 	{:
 		types.log("[CUP]: variable");
+		RESULT = e;
 	:}
 	|
-	expr
+	expr:e
 	{:
 		types.log("[CUP]: expr");
+		RESULT = e;
 	:}
 	;
 	
 math_assign_stmt ::=
-	variable PLUS_ASSIGN assign_value
+	variable:e PLUS_ASSIGN assign_value:e1
 	{:
 		types.log("[CUP]: variable PLUS_ASSIGN assign_value");
+		math_assign_stmt p = new math_assign_stmt();
+		p.m_var = (syntree_node)e;
+		p.m_oper = "+=";
+		p.m_value = (syntree_node)e1;
+		RESULT = p;
 	:}
 	|
-	variable MINUS_ASSIGN assign_value
+	variable:e MINUS_ASSIGN assign_value:e1
 	{:
 		types.log("[CUP]: variable MINUS_ASSIGN assign_value");
+		math_assign_stmt p = new math_assign_stmt();
+		p.m_var = (syntree_node)e;
+		p.m_oper = "-=";
+		p.m_value = (syntree_node)e1;
+		RESULT = p;
 	:}
 	|
-	variable DIVIDE_ASSIGN assign_value
+	variable:e DIVIDE_ASSIGN assign_value:e1
 	{:
 		types.log("[CUP]: variable DIVIDE_ASSIGN assign_value");
+		math_assign_stmt p = new math_assign_stmt();
+		p.m_var = (syntree_node)e;
+		p.m_oper = "/=";
+		p.m_value = (syntree_node)e1;
+		RESULT = p;
 	:}
 	|
-	variable MULTIPLY_ASSIGN assign_value
+	variable:e MULTIPLY_ASSIGN assign_value:e1
 	{:
 		types.log("[CUP]: variable MULTIPLY_ASSIGN assign_value");
+		math_assign_stmt p = new math_assign_stmt();
+		p.m_var = (syntree_node)e;
+		p.m_oper = "*=";
+		p.m_value = (syntree_node)e1;
+		RESULT = p;
 	:}
 	|
-	variable DIVIDE_MOD_ASSIGN assign_value
+	variable:e DIVIDE_MOD_ASSIGN assign_value:e1
 	{:
 		types.log("[CUP]: variable DIVIDE_MOD_ASSIGN assign_value");
+		math_assign_stmt p = new math_assign_stmt();
+		p.m_var = (syntree_node)e;
+		p.m_oper = "%=";
+		p.m_value = (syntree_node)e1;
+		RESULT = p;
 	:}
 	|
-	variable INC
+	variable:e INC
 	{:
 		types.log("[CUP]: variable INC");
+		explicit_value_node pp = new explicit_value_node();
+		pp.m_str = "1";
+		pp.m_type = explicit_value_type.EVT_NUM;
+		
+		math_assign_stmt p = new math_assign_stmt();
+		p.m_var = (syntree_node)e;
+		p.m_oper = "+=";
+		p.m_value = pp;
+		RESULT = p;
 	:}
 	;
 	
 var ::=
-	VAR_BEGIN IDENTIFIER
+	VAR_BEGIN IDENTIFIER:e
 	{:
 		types.log("[CUP]: VAR_BEGIN IDENTIFIER");
+		var_node p = new var_node();
+		p.m_str = e.toString();
+		RESULT = p;
 	:}
 	|
-	variable
+	variable:e
 	{:
 		types.log("[CUP]: variable");
+		RESULT = e;
 	:}
 	;
 
 variable ::=
-	IDENTIFIER
+	IDENTIFIER:e
 	{:
 		types.log("[CUP]: IDENTIFIER");
+		variable_node p = new variable_node();
+		p.m_str = e.toString();
+		RESULT = p;
 	:}
 	|
-	IDENTIFIER OPEN_SQUARE_BRACKET expr_value CLOSE_SQUARE_BRACKET
+	IDENTIFIER:e OPEN_SQUARE_BRACKET expr_value:e1 CLOSE_SQUARE_BRACKET
 	{:
 		types.log("[CUP]: IDENTIFIER OPEN_SQUARE_BRACKET expr_value CLOSE_SQUARE_BRACKET");
+		container_get_node p = new container_get_node();
+		p.m_container = e.toString();
+		p.m_key = (syntree_node)e1;
+		RESULT = p;
 	:}
 	|
-	IDENTIFIER_POINTER
+	IDENTIFIER_POINTER:e
 	{:
 		types.log("[CUP]: IDENTIFIER_POINTER");
+		struct_pointer_node p = new struct_pointer_node();
+		p.m_str = e.toString();
+		RESULT = p;
 	:}
 	|
-	IDENTIFIER_DOT
+	IDENTIFIER_DOT:e
 	{:
 		types.log("[CUP]: IDENTIFIER_DOT");
+		variable_node p = new variable_node();
+		p.m_str = e.toString();
+		RESULT = p;
 	:}
 	;
 
