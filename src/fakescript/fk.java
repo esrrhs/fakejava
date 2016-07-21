@@ -20,8 +20,7 @@ public class fk
 	public static boolean parse(fake f, String filename)
 	{
 		f.pa.clear();
-		f.pa.parse(filename);
-		return true;
+		return f.pa.parse(filename);
 	}
 
 }

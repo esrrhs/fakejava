@@ -26,6 +26,11 @@ public class mycup
 		return m_f;
 	}
 	
+	public String get_package()
+	{
+		return m_packagename;
+	}
+	
 	public void set_package(String packagename)
 	{
 		m_packagename = packagename;
@@ -45,6 +50,11 @@ public class mycup
 	boolean is_have_struct(String structname)
 	{
 		return m_struct_list.contains(structname);
+	}
+	
+	public HashMap<String, syntree_node> get_const_map()
+	{
+		return m_constmap;
 	}
 	
 	public void add_const_desc(String name, syntree_node node)

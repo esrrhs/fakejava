@@ -20,6 +20,10 @@ public class test
 		});
 		
 		boolean ret = fk.parse(f, "./src/test/test.fk");
+		if (!ret)
+		{
+			System.out.println("parse fail");
+		}
 		System.out.println("hehe");
 	}
 }
