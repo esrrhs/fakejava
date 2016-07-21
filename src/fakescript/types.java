@@ -12,9 +12,10 @@ class types
 		}
 	}
 	
-	public static void log(String str)
+	public static void log(String str, Object... args)
 	{
-		System.out.println(str);
+		System.out.printf(str, args);
+		System.out.println("");
 	}
 	
 	public static String show_exception(Exception e)
@@ -26,5 +27,54 @@ class types
         }
 		ret += e.toString();
 		return ret;
+	}
+
+	public static String gen_package_name(String p, String n)
+	{
+		if (p.isEmpty())
+		{
+			return n;
+		}
+		else
+		{
+			return p + "." + n;
+		}
+	}
+
+	public static boolean isint(double d)
+	{
+		long l = (long)d;
+		return l == d;
+	}
+	
+	public static String stringeletoa(stringele ele)
+	{
+		return ele.toString();
+	}
+	
+	public static String uitoa(long uid)
+	{
+		return "" + uid;
+	}
+	
+	public static String pointertoa(Object o)
+	{
+		if (o == null)
+		{
+			return "";
+		}
+		return o.toString();
+	}
+	
+	public static String arraytoa(variant_array va)
+	{
+		// TODO
+		return "";
+	}
+	
+	public static String maptoa(variant_map va)
+	{
+		// TODO
+		return "";
 	}
 }

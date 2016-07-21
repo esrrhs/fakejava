@@ -24,6 +24,11 @@ class parser
 		m_parse_dep = 0;
 	}
 	
+	public void reg_const_define(String constname, variant v, int lineno)
+	{
+		// TODO
+	}
+	
 	public boolean parse(String filename)
 	{
 		m_parse_dep++;
