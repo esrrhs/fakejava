@@ -52,11 +52,13 @@ class parser
 			return false;
 		}
 		
+		// 解析语法
 		java.io.Reader reader = new java.io.StringReader(content);
 		cup yyp = new cup();
 		jflex f = new jflex(reader);
 		yyp.setScanner(f);
-		yyp.set_mycup(new mycup(f));
+		mycup mcp = new mycup(f);
+		yyp.set_mycup(mcp);
 		try 
 		{
 			yyp.parse();
@@ -66,6 +68,18 @@ class parser
 			types.seterror(m_f, filename, 0, "", "parse " + filename + " fail " + types.show_exception(e));
 			return false;
 	    }
+		
+		// 编译
+		compiler mc = new compiler(m_f, mcp);
+		if (!mc.compile())
+		{
+			return false;
+		}
+
+		// 弹出
+		m_parsing_file_list.remove(m_parsing_file_list.size() - 1);
+		
+		types.log("parse " + filename + " OK");
 		
 		return true;
 	}
