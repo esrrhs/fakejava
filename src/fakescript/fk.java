@@ -23,4 +23,66 @@ public class fk
 		return f.pa.parse(filename);
 	}
 
+	public static Object run(fake f, String func, Object... args)
+	{
+		psclear(f);
+		for (Object arg : args)
+		{
+			pspush(f, arg);
+		}
+		runps(f, func);
+		return pspop(f);
+	}
+
+	protected static void psclear(fake f)
+	{
+		
+	}
+	
+	protected static void pspush(fake f, Object arg)
+	{
+		Class< ? extends Object> c = arg.getClass();
+		if (c == Byte.class)
+		{
+			
+		}
+		else if (c == Short.class)
+		{
+			
+		}
+		else if (c == Integer.class)
+		{
+			
+		}
+		else if (c == Long.class)
+		{
+			
+		}
+		else if (c == Float.class)
+		{
+			
+		}
+		else if (c == Double.class)
+		{
+			
+		}
+		else if (c == Boolean.class)
+		{
+			
+		}
+		else
+		{
+			
+		}
+	}
+	
+	protected static Object pspop(fake f)
+	{
+		return null;
+	}
+	
+	protected static void runps(fake f, String func)
+	{
+		
+	}
 }

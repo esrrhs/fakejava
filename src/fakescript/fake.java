@@ -10,4 +10,7 @@ public class fake
 	
 	// 解析
 	protected parser pa = new parser(this);
+
+	// 参数栈
+	protected paramstack ps = new paramstack(this);
 }

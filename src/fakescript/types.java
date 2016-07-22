@@ -2,13 +2,13 @@ package fakescript;
 
 class types 
 {
-	public static void seterror(fake f, String file, int lineno, String func, String errorstr)
+	public static void seterror(fake f, String file, int lineno, String func, String errorstr, Object... args)
 	{
-		f.errorstr = errorstr;
+		f.errorstr = String.format(errorstr, args);
 		
 		if (f.cb != null)
 		{
-			f.cb.on_error(f, file, lineno, func, errorstr);
+			f.cb.on_error(f, file, lineno, func, f.errorstr);
 		}
 	}
 	
@@ -47,16 +47,6 @@ class types
 		return l == d;
 	}
 	
-	public static String stringeletoa(stringele ele)
-	{
-		return ele.toString();
-	}
-	
-	public static String uitoa(long uid)
-	{
-		return "" + uid;
-	}
-	
 	public static String pointertoa(Object o)
 	{
 		if (o == null)
@@ -66,13 +56,13 @@ class types
 		return o.toString();
 	}
 	
-	public static String arraytoa(variant_array va)
+	public static String arraytoa(Object va)
 	{
 		// TODO
 		return "";
 	}
 	
-	public static String maptoa(variant_map va)
+	public static String maptoa(Object va)
 	{
 		// TODO
 		return "";
