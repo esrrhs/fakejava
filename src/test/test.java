@@ -15,9 +15,8 @@ public class test
 			{
 				System.out.printf("fake error in file(%s:%d) func(%s) : ", file, lineno, func);
 				System.out.printf("%s\n", str);
-				// TODO
-				//System.out.printf("call stack :\n%s\n", fk.getcurcallstack(f));
-				//System.out.printf("cur routine :\n%s\n", fk.getcurroutine(f));
+				System.out.printf("call stack :\n%s\n", fk.getcurcallstack(f));
+				System.out.printf("cur routine :\n%s\n", fk.getcurroutine(f));
 			}
 		});
 

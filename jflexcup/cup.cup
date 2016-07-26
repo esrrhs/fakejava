@@ -149,7 +149,7 @@ function_declaration ::=
 		p.m_arglist = (func_desc_arglist_node)e1;
 		p.m_block = (block_node)e2;
 		p.m_endline = m_mycup.get_jflex().get_line();
-		m_mycup.dd_func_desc(p);
+		m_mycup.add_func_desc(p);
 	:}
 	|
 	FUNC IDENTIFIER:e OPEN_BRACKET function_declaration_arguments:e1 CLOSE_BRACKET END
@@ -159,7 +159,7 @@ function_declaration ::=
 		p.m_funcname = e.toString();
 		p.m_arglist = (func_desc_arglist_node)e1;
 		p.m_endline = m_mycup.get_jflex().get_line();
-		m_mycup.dd_func_desc(p);
+		m_mycup.add_func_desc(p);
 	:}
 	;
 

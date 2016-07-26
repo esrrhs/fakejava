@@ -1242,7 +1242,7 @@ class CUP$cup$actions {
 		p.m_arglist = (func_desc_arglist_node)e1;
 		p.m_block = (block_node)e2;
 		p.m_endline = m_mycup.get_jflex().get_line();
-		m_mycup.dd_func_desc(p);
+		m_mycup.add_func_desc(p);
 	
               CUP$cup$result = parser.getSymbolFactory().newSymbol("function_declaration",3, ((java_cup.runtime.Symbol)CUP$cup$stack.elementAt(CUP$cup$top-6)), ((java_cup.runtime.Symbol)CUP$cup$stack.peek()), RESULT);
             }
@@ -1264,7 +1264,7 @@ class CUP$cup$actions {
 		p.m_funcname = e.toString();
 		p.m_arglist = (func_desc_arglist_node)e1;
 		p.m_endline = m_mycup.get_jflex().get_line();
-		m_mycup.dd_func_desc(p);
+		m_mycup.add_func_desc(p);
 	
               CUP$cup$result = parser.getSymbolFactory().newSymbol("function_declaration",3, ((java_cup.runtime.Symbol)CUP$cup$stack.elementAt(CUP$cup$top-5)), ((java_cup.runtime.Symbol)CUP$cup$stack.peek()), RESULT);
             }

@@ -49,6 +49,16 @@ public class fk
 		return "";
 	}
 
+	public static String getcurcallstack(fake f)
+	{
+		return "";
+	}
+
+	public static String getcurroutine(fake f)
+	{
+		return "";
+	}
+
 	protected static void psclear(fake f)
 	{
 
