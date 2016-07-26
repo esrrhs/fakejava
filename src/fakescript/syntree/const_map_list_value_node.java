@@ -4,8 +4,8 @@ import java.util.ArrayList;
 
 public class const_map_list_value_node extends syntree_node
 {
-	ArrayList<syntree_node> m_lists = new ArrayList<syntree_node>();
-	
+	public ArrayList<syntree_node> m_lists = new ArrayList<syntree_node>();
+
 	@Override
 	public esyntreetype gettype()
 	{
@@ -16,7 +16,7 @@ public class const_map_list_value_node extends syntree_node
 	public String dump(int indent)
 	{
 		String ret = "";
-		for (int i = 0; i < (int)m_lists.size(); i++)
+		for (int i = 0; i < (int) m_lists.size(); i++)
 		{
 			ret += gentab(indent);
 			ret += i;
@@ -25,7 +25,7 @@ public class const_map_list_value_node extends syntree_node
 		}
 		return ret;
 	}
-	
+
 	public void add_ele(syntree_node e)
 	{
 		m_lists.add(e);

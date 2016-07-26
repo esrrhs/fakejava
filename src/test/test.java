@@ -1,6 +1,8 @@
 package test;
 
-import fakescript.*;
+import fakescript.callback;
+import fakescript.fake;
+import fakescript.fk;
 
 public class test
 {
@@ -18,7 +20,7 @@ public class test
 				//System.out.printf("cur routine :\n%s\n", fk.getcurroutine(f));
 			}
 		});
-		
+
 		boolean ret = fk.parse(f, "./src/test/test.fk");
 		if (!ret)
 		{
