@@ -1,0 +1,8 @@
+﻿2016.7.14:建立hg
+2016.7.15:建立jflex,cup
+2016.7.18:语法迁移ok，加语法树节点
+2016.7.19:加语法树节点
+2016.7.20:加语法树节点完成，下一步编译
+2016.7.21:加编译空class，下一步加基本的binary类型
+2016.7.22:开始加variant类型，下一步完善variant周边操作，variant用原生Object,string就用原生String，map和array在原生基础上加一个const
+2016.7.26:加编译const,java确实很方便，下一步继续移植compiler
