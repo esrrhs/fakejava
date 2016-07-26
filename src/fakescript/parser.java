@@ -7,12 +7,16 @@ import java.io.InputStreamReader;
 import java.io.Reader;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 
 class parser
 {
 	private fake m_f;
 	private int m_parse_dep = 0;
 	private ArrayList<String> m_parsing_file_list = new ArrayList<String>();
+	// const永久存在映射
+	private HashMap<String, variant> m_constv_map = new HashMap<String, variant>();
+	private HashMap<String, Integer> m_constline_map = new HashMap<String, Integer>();
 
 	public parser(fake f)
 	{
@@ -22,11 +26,13 @@ class parser
 	public void clear()
 	{
 		m_parse_dep = 0;
+		m_parsing_file_list.clear();
 	}
 
 	public void reg_const_define(String constname, variant v, int lineno)
 	{
-		// TODO
+		m_constv_map.put(constname, v);
+		m_constline_map.put(constname, lineno);
 	}
 
 	public boolean parse(String filename)

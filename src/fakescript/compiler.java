@@ -8,12 +8,14 @@ import fakescript.syntree.const_array_list_value_node;
 import fakescript.syntree.const_map_list_value_node;
 import fakescript.syntree.const_map_value_node;
 import fakescript.syntree.explicit_value_node;
+import fakescript.syntree.func_desc_node;
 import fakescript.syntree.syntree_node;
 
 class compiler
 {
-	fake m_f;
-	mycup m_mcp;
+	private fake m_f;
+	private mycup m_mcp;
+	private String m_cur_compile_func;
 
 	public compiler(fake f, mycup mcp)
 	{
@@ -68,6 +70,28 @@ class compiler
 
 	public boolean compile_body()
 	{
+		for (func_desc_node funcnode : m_mcp.get_func_list())
+		{
+			if (!compile_func(funcnode))
+			{
+				types.log("[compiler] compile_body %s fail", funcnode.m_funcname);
+				return false;
+			}
+		}
+
+		return true;
+	}
+
+	public boolean compile_func(func_desc_node funcnode)
+	{
+		m_cur_compile_func = funcnode.m_funcname;
+
+		codegen cg = new codegen(m_f);
+		func_binary bin = new func_binary();
+		bin.m_end_lineno = funcnode.m_endline;
+
+		// 压栈
+		cg.push_stack_identifiers();
 
 		return true;
 	}
