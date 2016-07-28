@@ -7,3 +7,4 @@
 2016.7.22:开始加variant类型，下一步完善variant周边操作，variant用原生Object,string就用原生String，map和array在原生基础上加一个const
 2016.7.23:fix build
 2016.7.26:加编译const,java确实很方便，下一步继续移植compiler
+2016.7.28:无脑翻译compile while

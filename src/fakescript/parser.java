@@ -70,6 +70,7 @@ class parser
 		jflex f = new jflex(reader);
 		yyp.setScanner(f);
 		mycup mcp = new mycup(f);
+		mcp.set_filename(filename);
 		yyp.set_mycup(mcp);
 		try
 		{

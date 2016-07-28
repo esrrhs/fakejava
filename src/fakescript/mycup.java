@@ -9,7 +9,8 @@ import fakescript.syntree.syntree_node;
 
 public class mycup
 {
-	private String m_packagename = "";
+	private String m_filename;
+	private String m_packagename;
 	private ArrayList<String> m_includelist = new ArrayList<String>();
 	private HashSet<String> m_struct_list = new HashSet<String>();
 	private HashMap<String, syntree_node> m_constmap = new HashMap<String, syntree_node>();
@@ -24,6 +25,16 @@ public class mycup
 	public jflex get_jflex()
 	{
 		return m_f;
+	}
+
+	public String get_filename()
+	{
+		return m_filename;
+	}
+
+	public void set_filename(String filename)
+	{
+		m_filename = filename;
 	}
 
 	public String get_package()
