@@ -85,4 +85,17 @@ public class mycup
 	{
 		return m_funclist;
 	}
+
+	public boolean is_have_func(String funcname)
+	{
+		for (int i = 0; i < (int) m_funclist.size(); i++)
+		{
+			func_desc_node p = m_funclist.get(i);
+			if (p.m_funcname.equals(funcname))
+			{
+				return true;
+			}
+		}
+		return false;
+	}
 }

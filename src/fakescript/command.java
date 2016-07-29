@@ -50,9 +50,29 @@ public class command
 	public static final int OPCODE_YIELD = opcode_help++;
 	public static final int OPCODE_MAX = opcode_help++;
 
+	public static int addr_help = 0;
+	public static final int ADDR_STACK = addr_help++;
+	public static final int ADDR_CONST = addr_help++;
+	public static final int ADDR_CONTAINER = addr_help++;
+
+	public static int call_help = 0;
+	public static final int CALL_NORMAL = call_help++;
+	public static final int CALL_FAKE = call_help++;
+	public static final int CALL_CLASSMEM = call_help++;
+
+	public static long MAKEINT64(int high, int low)
+	{
+		return ((long) ((low) | ((long) (high)) << 32));
+	}
+
+	public static int MAKEINT32(int high, int low)
+	{
+		return ((int) (((short) (low)) | ((int) ((short) (high))) << 16));
+	}
+
 	public static long MAKE_COMMAND(int type, int code)
 	{
-		return ((long) ((code) | ((long) (type)) << 32));
+		return MAKEINT64(type, code);
 	}
 
 	public static long MAKE_OPCODE(int op)
@@ -63,6 +83,11 @@ public class command
 	public static long MAKE_POS(int pos)
 	{
 		return MAKE_COMMAND(COMMAND_POS, pos);
+	}
+
+	public static long MAKE_ADDR(int addrtype, int pos)
+	{
+		return MAKE_COMMAND(COMMAND_ADDR, MAKEINT32(addrtype, pos));
 	}
 
 }
