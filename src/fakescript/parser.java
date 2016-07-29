@@ -35,6 +35,16 @@ class parser
 		m_constline_map.put(constname, lineno);
 	}
 
+	public variant get_const_define(String constname)
+	{
+		return m_constv_map.get(constname);
+	}
+
+	public int get_const_define_lineno(String constname)
+	{
+		return m_constline_map.get(constname);
+	}
+
 	public boolean parse(String filename)
 	{
 		m_parse_dep++;
