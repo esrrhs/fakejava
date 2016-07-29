@@ -131,4 +131,113 @@ class types
 
 		return ret;
 	}
+	
+	public static String dump_addr(int code)
+	{
+		String ret = "";
+		int addrtype = command.HIINT16(code);
+		int pos = command.LOINT16(code);
+		switch (addrtype)
+		{
+		case command.ADDR_STACK:
+			ret += "STACK";
+			break;
+		case command.ADDR_CONST:
+			ret += "CONST";
+			break;
+		case command.ADDR_CONTAINER:
+			ret += "CONTAINER";
+			break;
+		default:
+			ret += "unknow ";
+			ret += addrtype;
+		}
+		ret += "\t";
+		ret += pos;
+		return ret;
+	}
+
+	public static String OpCodeStr(int opcode)
+	{
+		switch (opcode)
+		{
+		case command.OPCODE_ASSIGN:
+			return "ASSIGN";
+		case command.OPCODE_PLUS:
+			return "PLUS";
+		case command.OPCODE_MINUS:
+			return "MINUS";
+		case command.OPCODE_MULTIPLY:
+			return "MULTIPLY";
+		case command.OPCODE_DIVIDE:
+			return "DIVIDE";
+		case command.OPCODE_DIVIDE_MOD:
+			return "DIVIDE_MOD";
+		case command.OPCODE_STRING_CAT:
+			return "STRING_CAT";
+		case command.OPCODE_PLUS_ASSIGN:
+			return "PLUS_ASSIGN";
+		case command.OPCODE_MINUS_ASSIGN:
+			return "MINUS_ASSIGN";
+		case command.OPCODE_MULTIPLY_ASSIGN:
+			return "MULTIPLY_ASSIGN";
+		case command.OPCODE_DIVIDE_ASSIGN:
+			return "DIVIDE_ASSIGN";
+		case command.OPCODE_DIVIDE_MOD_ASSIGN:
+			return "DIVIDE_MOD_ASSIGN";
+		case command.OPCODE_RETURN:
+			return "RETURN";
+		case command.OPCODE_JNE:
+			return "JNE";
+		case command.OPCODE_JMP:
+			return "JMP";
+		case command.OPCODE_FORBEGIN:
+			return "FORBEGIN";
+		case command.OPCODE_FORLOOP:
+			return "FORLOOP";
+		case command.OPCODE_AND:
+			return "AND";
+		case command.OPCODE_OR:
+			return "OR";
+		case command.OPCODE_LESS:
+			return "LESS";
+		case command.OPCODE_MORE:
+			return "MORE";
+		case command.OPCODE_EQUAL:
+			return "EQUAL";
+		case command.OPCODE_MOREEQUAL:
+			return "MOREEQUAL";
+		case command.OPCODE_LESSEQUAL:
+			return "LESSEQUAL";
+		case command.OPCODE_NOTEQUAL:
+			return "NOTEQUAL";
+		case command.OPCODE_NOT:
+			return "NOT";
+		case command.OPCODE_AND_JNE:
+			return "AND_JNE";
+		case command.OPCODE_OR_JNE:
+			return "OR_JNE";
+		case command.OPCODE_LESS_JNE:
+			return "LESS_JNE";
+		case command.OPCODE_MORE_JNE:
+			return "MORE_JNE";
+		case command.OPCODE_EQUAL_JNE:
+			return "EQUAL_JNE";
+		case command.OPCODE_MOREEQUAL_JNE:
+			return "MOREEQUAL_JNE";
+		case command.OPCODE_LESSEQUAL_JNE:
+			return "LESSEQUAL_JNE";
+		case command.OPCODE_NOTEQUAL_JNE:
+			return "NOTEQUAL_JNE";
+		case command.OPCODE_NOT_JNE:
+			return "NOT_JNE";
+		case command.OPCODE_CALL:
+			return "CALL";
+		case command.OPCODE_SLEEP:
+			return "SLEEP";
+		case command.OPCODE_YIELD:
+			return "YIELD";
+		}
+		return "unknow";
+	}
 }

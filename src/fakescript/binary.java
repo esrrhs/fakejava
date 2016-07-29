@@ -1,5 +1,8 @@
 package fakescript;
 
+import java.util.HashMap;
+import java.util.Map;
+
 class binary
 {
 	private fake m_f;
@@ -11,7 +14,16 @@ class binary
 
 	public String dump()
 	{
-		return "";
+		String ret = "";
+		for (HashMap.Entry<variant, funcunion> e : m_f.fm.get_funcmap().entrySet())
+		{
+			funcunion f = e.getValue();
+			if (f.m_havefb)
+			{
+				ret += f.m_fb.dump();
+			}
+		}
+		return ret;
 	}
 
 	public void add_func(variant name, func_binary bin)

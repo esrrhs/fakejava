@@ -34,6 +34,11 @@ class funcmap
 		return m_funcmap.get(name);
 	}
 
+	public HashMap<variant, funcunion> get_funcmap()
+	{
+		return m_funcmap;
+	}
+	
 	private funcunion add_func_union(variant name)
 	{
 		funcunion p = m_funcmap.get(name);
