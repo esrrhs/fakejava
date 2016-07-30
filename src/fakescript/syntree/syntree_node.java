@@ -1,15 +1,11 @@
 package fakescript.syntree;
 
-import fakescript.fake;
-
 public class syntree_node 
 {
-	public fake m_f = null;
 	public int m_lno = 0;
 
 	public syntree_node()
 	{
-		
 	}
 	
 	public esyntreetype gettype()

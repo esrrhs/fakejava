@@ -1145,6 +1145,14 @@ public class cup extends java_cup.runtime.lr_parser {
   {
 	m_mycup = mc;
   }
+  
+  public <T> T new_node(Class<? extends syntree_node> c) throws Exception
+  {
+	syntree_node t = c.newInstance();
+	t.m_lno = m_mycup.get_jflex().get_line();
+	return (T)t;
+  }
+
 
 
 /** Cup generated class to encapsulate user supplied action code.*/
@@ -1237,7 +1245,7 @@ class CUP$cup$actions {
 		Object e2 = (Object)((java_cup.runtime.Symbol) CUP$cup$stack.elementAt(CUP$cup$top-1)).value;
 		
 		types.log("[CUP]: FUNC IDENTIFIER OPEN_BRACKET function_declaration_arguments CLOSE_BRACKET block END");
-		func_desc_node p = new func_desc_node();
+		func_desc_node p = new_node(func_desc_node.class);
 		p.m_funcname = e.toString();
 		p.m_arglist = (func_desc_arglist_node)e1;
 		p.m_block = (block_node)e2;
@@ -1260,7 +1268,7 @@ class CUP$cup$actions {
 		Object e1 = (Object)((java_cup.runtime.Symbol) CUP$cup$stack.elementAt(CUP$cup$top-2)).value;
 		
 		types.log("[CUP]: FUNC IDENTIFIER OPEN_BRACKET function_declaration_arguments CLOSE_BRACKET END");
-		func_desc_node p = new func_desc_node();
+		func_desc_node p = new_node(func_desc_node.class);
 		p.m_funcname = e.toString();
 		p.m_arglist = (func_desc_arglist_node)e1;
 		p.m_endline = m_mycup.get_jflex().get_line();
@@ -1310,7 +1318,7 @@ class CUP$cup$actions {
 		Object e = (Object)((java_cup.runtime.Symbol) CUP$cup$stack.peek()).value;
 		
 		types.log("[CUP]: arg");
-		func_desc_arglist_node p = new func_desc_arglist_node();
+		func_desc_arglist_node p = new_node(func_desc_arglist_node.class);
 		p.add_arg((syntree_node)e);
 		RESULT = p;
 	
@@ -1327,7 +1335,7 @@ class CUP$cup$actions {
 		Object e = (Object)((java_cup.runtime.Symbol) CUP$cup$stack.peek()).value;
 		
 		types.log("[CUP]: IDENTIFIER");
-		identifier_node p = new identifier_node();
+		identifier_node p = new_node(identifier_node.class);
 		p.m_str = e.toString();
 		RESULT = p;
 	
@@ -1347,7 +1355,7 @@ class CUP$cup$actions {
 		Object e1 = (Object)((java_cup.runtime.Symbol) CUP$cup$stack.elementAt(CUP$cup$top-1)).value;
 		
 		types.log("[CUP]: IDENTIFIER OPEN_BRACKET function_call_arguments CLOSE_BRACKET ");
-		function_call_node p = new function_call_node();
+		function_call_node p = new_node(function_call_node.class);
 		p.m_fuc = e.toString();
 		p.m_arglist = (function_call_arglist_node)e1;
 		p.m_fakecall = false;
@@ -1370,7 +1378,7 @@ class CUP$cup$actions {
 		Object e1 = (Object)((java_cup.runtime.Symbol) CUP$cup$stack.elementAt(CUP$cup$top-1)).value;
 		
 		types.log("[CUP]: IDENTIFIER_DOT OPEN_BRACKET function_call_arguments CLOSE_BRACKET ");
-		function_call_node p = new function_call_node();
+		function_call_node p = new_node(function_call_node.class);
 		p.m_fuc = e.toString();
 		p.m_arglist = (function_call_arglist_node)e1;
 		p.m_fakecall = false;
@@ -1396,12 +1404,12 @@ class CUP$cup$actions {
 		Object e2 = (Object)((java_cup.runtime.Symbol) CUP$cup$stack.elementAt(CUP$cup$top-1)).value;
 		
 		types.log("[CUP]: variable COLON IDENTIFIER OPEN_BRACKET function_call_arguments CLOSE_BRACKET ");
-		function_call_node p = new function_call_node();
+		function_call_node p = new_node(function_call_node.class);
 		p.m_fuc = e1.toString();
 		p.m_arglist = (function_call_arglist_node)e2;
 		if (p.m_arglist == null)
 		{
-			p.m_arglist = new function_call_arglist_node();
+			p.m_arglist = new_node(function_call_arglist_node.class);
 		}
 		p.m_arglist.add_arg((syntree_node)e);
 		p.m_fakecall = false;
@@ -1452,7 +1460,7 @@ class CUP$cup$actions {
 		Object e = (Object)((java_cup.runtime.Symbol) CUP$cup$stack.peek()).value;
 		
 		types.log("[CUP]: arg_expr ");
-		function_call_arglist_node p = new function_call_arglist_node();
+		function_call_arglist_node p = new_node(function_call_arglist_node.class);
 		p.add_arg((syntree_node)e);
 		RESULT = p;
 	
@@ -1504,7 +1512,7 @@ class CUP$cup$actions {
 		Object e = (Object)((java_cup.runtime.Symbol) CUP$cup$stack.peek()).value;
 		
 		types.log("[CUP]: stmt");
-		block_node p = new block_node();
+		block_node p = new_node(block_node.class);
 		p.add_stmt((syntree_node)e);
 		RESULT = p;
 	
@@ -1772,7 +1780,7 @@ class CUP$cup$actions {
 		Object e3 = (Object)((java_cup.runtime.Symbol) CUP$cup$stack.elementAt(CUP$cup$top-1)).value;
 		
 		types.log("[CUP]: FOR block ARG_SPLITTER cmp ARG_SPLITTER block THEN block END");
-		for_stmt p = new for_stmt();
+		for_stmt p = new_node(for_stmt.class);
 		p.m_cmp = (cmp_stmt)e1;
 		p.m_beginblock = (block_node)e;
 		p.m_endblock = (block_node)e2;
@@ -1798,7 +1806,7 @@ class CUP$cup$actions {
 		Object e2 = (Object)((java_cup.runtime.Symbol) CUP$cup$stack.elementAt(CUP$cup$top-2)).value;
 		
 		types.log("[CUP]: FOR block ARG_SPLITTER cmp ARG_SPLITTER block THEN END");
-		for_stmt p = new for_stmt();
+		for_stmt p = new_node(for_stmt.class);
 		p.m_cmp = (cmp_stmt)e1;
 		p.m_beginblock = (block_node)e;
 		p.m_endblock = (block_node)e2;
@@ -1830,7 +1838,7 @@ class CUP$cup$actions {
 		Object e4 = (Object)((java_cup.runtime.Symbol) CUP$cup$stack.elementAt(CUP$cup$top-1)).value;
 		
 		types.log("[CUP]: FOR var ASSIGN assign_value RIGHT_POINTER cmp_value ARG_SPLITTER expr_value THEN block END");
-		for_loop_stmt p = new for_loop_stmt();
+		for_loop_stmt p = new_node(for_loop_stmt.class);
 		p.m_var = (syntree_node)e;
 		p.m_begin = (syntree_node)e1;
 		p.m_end = (syntree_node)e2;
@@ -1860,7 +1868,7 @@ class CUP$cup$actions {
 		Object e3 = (Object)((java_cup.runtime.Symbol) CUP$cup$stack.elementAt(CUP$cup$top-2)).value;
 		
 		types.log("[CUP]: FOR var ASSIGN assign_value RIGHT_POINTER cmp_value ARG_SPLITTER expr_value THEN END");
-		for_loop_stmt p = new for_loop_stmt();
+		for_loop_stmt p = new_node(for_loop_stmt.class);
 		p.m_var = (syntree_node)e;
 		p.m_begin = (syntree_node)e1;
 		p.m_end = (syntree_node)e2;
@@ -1884,7 +1892,7 @@ class CUP$cup$actions {
 		Object e1 = (Object)((java_cup.runtime.Symbol) CUP$cup$stack.elementAt(CUP$cup$top-1)).value;
 		
 		types.log("[CUP]: WHILE cmp THEN block END ");
-		while_stmt p = new while_stmt();
+		while_stmt p = new_node(while_stmt.class);
 		p.m_cmp = (cmp_stmt)e;
 		p.m_block = (block_node)e1;
 		RESULT = p;
@@ -1902,7 +1910,7 @@ class CUP$cup$actions {
 		Object e = (Object)((java_cup.runtime.Symbol) CUP$cup$stack.elementAt(CUP$cup$top-2)).value;
 		
 		types.log("[CUP]: WHILE cmp THEN END ");
-		while_stmt p = new while_stmt();
+		while_stmt p = new_node(while_stmt.class);
 		p.m_cmp = (cmp_stmt)e;
 		p.m_block = null;
 		RESULT = p;
@@ -1929,7 +1937,7 @@ class CUP$cup$actions {
 		Object e3 = (Object)((java_cup.runtime.Symbol) CUP$cup$stack.elementAt(CUP$cup$top-1)).value;
 		
 		types.log("[CUP]: IF cmp THEN block elseif_stmt_list else_stmt END");
-		if_stmt p = new if_stmt();
+		if_stmt p = new_node(if_stmt.class);
 		p.m_cmp = (cmp_stmt)e;
 		p.m_block = (block_node)e1;
 		p.m_elseifs = (elseif_stmt_list)e2;
@@ -1955,7 +1963,7 @@ class CUP$cup$actions {
 		Object e2 = (Object)((java_cup.runtime.Symbol) CUP$cup$stack.elementAt(CUP$cup$top-1)).value;
 		
 		types.log("[CUP]: IF cmp THEN elseif_stmt_list else_stmt END");
-		if_stmt p = new if_stmt();
+		if_stmt p = new_node(if_stmt.class);
 		p.m_cmp = (cmp_stmt)e;
 		p.m_block = null;
 		p.m_elseifs = (elseif_stmt_list)e1;
@@ -2007,7 +2015,7 @@ class CUP$cup$actions {
 		Object e = (Object)((java_cup.runtime.Symbol) CUP$cup$stack.peek()).value;
 		
 		types.log("[CUP]: elseif_stmt");
-		elseif_stmt_list p = new elseif_stmt_list();
+		elseif_stmt_list p = new_node(elseif_stmt_list.class);
 		p.add_stmt((syntree_node)e);
 		RESULT = p;
 	
@@ -2027,7 +2035,7 @@ class CUP$cup$actions {
 		Object e1 = (Object)((java_cup.runtime.Symbol) CUP$cup$stack.peek()).value;
 		
 		types.log("[CUP]: ELSEIF cmp THEN block");
-		elseif_stmt p = new elseif_stmt();
+		elseif_stmt p = new_node(elseif_stmt.class);
 		p.m_cmp = (cmp_stmt)e;
 		p.m_block = (syntree_node)e1;
 		RESULT = p;
@@ -2045,7 +2053,7 @@ class CUP$cup$actions {
 		Object e = (Object)((java_cup.runtime.Symbol) CUP$cup$stack.elementAt(CUP$cup$top-1)).value;
 		
 		types.log("[CUP]: ELSEIF cmp THEN");
-		elseif_stmt p = new elseif_stmt();
+		elseif_stmt p = new_node(elseif_stmt.class);
 		p.m_cmp = (cmp_stmt)e;
 		p.m_block = null;
 		RESULT = p;
@@ -2075,7 +2083,7 @@ class CUP$cup$actions {
 		Object e = (Object)((java_cup.runtime.Symbol) CUP$cup$stack.peek()).value;
 		
 		types.log("[CUP]: ELSE block");
-		else_stmt p = new else_stmt();
+		else_stmt p = new_node(else_stmt.class);
 		p.m_block = (block_node)e;
 		RESULT = p;
 	
@@ -2089,7 +2097,7 @@ class CUP$cup$actions {
               Object RESULT =null;
 		
 		types.log("[CUP]: ELSE");
-		else_stmt p = new else_stmt();
+		else_stmt p = new_node(else_stmt.class);
 		p.m_block = null;
 		RESULT = p;
 	
@@ -2124,7 +2132,7 @@ class CUP$cup$actions {
 		Object e1 = (Object)((java_cup.runtime.Symbol) CUP$cup$stack.peek()).value;
 		
 		types.log("[CUP]: cmp AND cmp");
-		cmp_stmt p = new cmp_stmt();
+		cmp_stmt p = new_node(cmp_stmt.class);
 		p.m_cmp = "&&";
 		p.m_left = (syntree_node)e;
 		p.m_right = (syntree_node)e1;
@@ -2146,7 +2154,7 @@ class CUP$cup$actions {
 		Object e1 = (Object)((java_cup.runtime.Symbol) CUP$cup$stack.peek()).value;
 		
 		types.log("[CUP]: cmp OR cmp");
-		cmp_stmt p = new cmp_stmt();
+		cmp_stmt p = new_node(cmp_stmt.class);
 		p.m_cmp = "||";
 		p.m_left = (syntree_node)e;
 		p.m_right = (syntree_node)e1;
@@ -2168,7 +2176,7 @@ class CUP$cup$actions {
 		Object e1 = (Object)((java_cup.runtime.Symbol) CUP$cup$stack.peek()).value;
 		
 		types.log("[CUP]: cmp_value LESS cmp_value");
-		cmp_stmt p = new cmp_stmt();
+		cmp_stmt p = new_node(cmp_stmt.class);
 		p.m_cmp = "<";
 		p.m_left = (syntree_node)e;
 		p.m_right = (syntree_node)e1;
@@ -2190,7 +2198,7 @@ class CUP$cup$actions {
 		Object e1 = (Object)((java_cup.runtime.Symbol) CUP$cup$stack.peek()).value;
 		
 		types.log("[CUP]: cmp_value MORE cmp_value");
-		cmp_stmt p = new cmp_stmt();
+		cmp_stmt p = new_node(cmp_stmt.class);
 		p.m_cmp = ">";
 		p.m_left = (syntree_node)e;
 		p.m_right = (syntree_node)e1;
@@ -2212,7 +2220,7 @@ class CUP$cup$actions {
 		Object e1 = (Object)((java_cup.runtime.Symbol) CUP$cup$stack.peek()).value;
 		
 		types.log("[CUP]: cmp_value EQUAL cmp_value");
-		cmp_stmt p = new cmp_stmt();
+		cmp_stmt p = new_node(cmp_stmt.class);
 		p.m_cmp = "==";
 		p.m_left = (syntree_node)e;
 		p.m_right = (syntree_node)e1;
@@ -2234,7 +2242,7 @@ class CUP$cup$actions {
 		Object e1 = (Object)((java_cup.runtime.Symbol) CUP$cup$stack.peek()).value;
 		
 		types.log("[CUP]: cmp_value MORE_OR_EQUAL cmp_value");
-		cmp_stmt p = new cmp_stmt();
+		cmp_stmt p = new_node(cmp_stmt.class);
 		p.m_cmp = ">=";
 		p.m_left = (syntree_node)e;
 		p.m_right = (syntree_node)e1;
@@ -2256,7 +2264,7 @@ class CUP$cup$actions {
 		Object e1 = (Object)((java_cup.runtime.Symbol) CUP$cup$stack.peek()).value;
 		
 		types.log("[CUP]: cmp_value LESS_OR_EQUAL cmp_value");
-		cmp_stmt p = new cmp_stmt();
+		cmp_stmt p = new_node(cmp_stmt.class);
 		p.m_cmp = "<=";
 		p.m_left = (syntree_node)e;
 		p.m_right = (syntree_node)e1;
@@ -2278,7 +2286,7 @@ class CUP$cup$actions {
 		Object e1 = (Object)((java_cup.runtime.Symbol) CUP$cup$stack.peek()).value;
 		
 		types.log("[CUP]: cmp_value NOT_EQUAL cmp_value");
-		cmp_stmt p = new cmp_stmt();
+		cmp_stmt p = new_node(cmp_stmt.class);
 		p.m_cmp = "!=";
 		p.m_left = (syntree_node)e;
 		p.m_right = (syntree_node)e1;
@@ -2294,7 +2302,7 @@ class CUP$cup$actions {
               Object RESULT =null;
 		
 		types.log("[CUP]: FTRUE");
-		cmp_stmt p = new cmp_stmt();
+		cmp_stmt p = new_node(cmp_stmt.class);
 		p.m_cmp = "true";
 		p.m_left = null;
 		p.m_right = null;
@@ -2310,7 +2318,7 @@ class CUP$cup$actions {
               Object RESULT =null;
 		
 		types.log("[CUP]: FFALSE");
-		cmp_stmt p = new cmp_stmt();
+		cmp_stmt p = new_node(cmp_stmt.class);
 		p.m_cmp = "false";
 		p.m_left = null;
 		p.m_right = null;
@@ -2329,7 +2337,7 @@ class CUP$cup$actions {
 		Object e = (Object)((java_cup.runtime.Symbol) CUP$cup$stack.peek()).value;
 		
 		types.log("[CUP]: IS cmp_value");
-		cmp_stmt p = new cmp_stmt();
+		cmp_stmt p = new_node(cmp_stmt.class);
 		p.m_cmp = "is";
 		p.m_left = (syntree_node)e;
 		p.m_right = null;
@@ -2348,7 +2356,7 @@ class CUP$cup$actions {
 		Object e = (Object)((java_cup.runtime.Symbol) CUP$cup$stack.peek()).value;
 		
 		types.log("[CUP]: NOT cmp_value");
-		cmp_stmt p = new cmp_stmt();
+		cmp_stmt p = new_node(cmp_stmt.class);
 		p.m_cmp = "not";
 		p.m_left = (syntree_node)e;
 		p.m_right = null;
@@ -2412,7 +2420,7 @@ class CUP$cup$actions {
 		Object e = (Object)((java_cup.runtime.Symbol) CUP$cup$stack.peek()).value;
 		
 		types.log("[CUP]: RETURN return_value_list");
-		return_stmt p = new return_stmt();
+		return_stmt p = new_node(return_stmt.class);
 		p.m_returnlist = (return_value_list_node)e;
 		RESULT = p;
 	
@@ -2426,7 +2434,7 @@ class CUP$cup$actions {
               Object RESULT =null;
 		
 		types.log("[CUP]: RETURN");
-		return_stmt p = new return_stmt();
+		return_stmt p = new_node(return_stmt.class);
 		p.m_returnlist = null;
 		RESULT = p;
 	
@@ -2463,7 +2471,7 @@ class CUP$cup$actions {
 		Object e = (Object)((java_cup.runtime.Symbol) CUP$cup$stack.peek()).value;
 		
 		types.log("[CUP]: return_value");
-		return_value_list_node p = new return_value_list_node();
+		return_value_list_node p = new_node(return_value_list_node.class);
 		p.add_arg((syntree_node)e);
 		RESULT = p;
 	
@@ -2528,7 +2536,7 @@ class CUP$cup$actions {
 		Object e1 = (Object)((java_cup.runtime.Symbol) CUP$cup$stack.peek()).value;
 		
 		types.log("[CUP]: var ASSIGN assign_value");
-		assign_stmt p = new assign_stmt();
+		assign_stmt p = new_node(assign_stmt.class);
 		p.m_var = (syntree_node)e;
 		p.m_value = (syntree_node)e1;
 		p.m_isnew = false;
@@ -2550,7 +2558,7 @@ class CUP$cup$actions {
 		Object e1 = (Object)((java_cup.runtime.Symbol) CUP$cup$stack.peek()).value;
 		
 		types.log("[CUP]: var NEW_ASSIGN assign_value");
-		assign_stmt p = new assign_stmt();
+		assign_stmt p = new_node(assign_stmt.class);
 		p.m_var = (syntree_node)e;
 		p.m_value = (syntree_node)e1;
 		p.m_isnew = true;
@@ -2572,7 +2580,7 @@ class CUP$cup$actions {
 		Object e1 = (Object)((java_cup.runtime.Symbol) CUP$cup$stack.peek()).value;
 		
 		types.log("[CUP]: var_list ASSIGN function_call");
-		multi_assign_stmt p = new multi_assign_stmt();
+		multi_assign_stmt p = new_node(multi_assign_stmt.class);
 		p.m_varlist = (var_list_node)e;
 		p.m_value = (syntree_node)e1;
 		p.m_isnew = false;
@@ -2594,7 +2602,7 @@ class CUP$cup$actions {
 		Object e1 = (Object)((java_cup.runtime.Symbol) CUP$cup$stack.peek()).value;
 		
 		types.log("[CUP]: var_list NEW_ASSIGN function_call");
-		multi_assign_stmt p = new multi_assign_stmt();
+		multi_assign_stmt p = new_node(multi_assign_stmt.class);
 		p.m_varlist = (var_list_node)e;
 		p.m_value = (syntree_node)e1;
 		p.m_isnew = true;
@@ -2633,7 +2641,7 @@ class CUP$cup$actions {
 		Object e = (Object)((java_cup.runtime.Symbol) CUP$cup$stack.peek()).value;
 		
 		types.log("[CUP]: var");
-		var_list_node p = new var_list_node();
+		var_list_node p = new_node(var_list_node.class);
 		p.add_arg((syntree_node)e);
 		RESULT = p;
 	
@@ -2698,7 +2706,7 @@ class CUP$cup$actions {
 		Object e1 = (Object)((java_cup.runtime.Symbol) CUP$cup$stack.peek()).value;
 		
 		types.log("[CUP]: variable PLUS_ASSIGN assign_value");
-		math_assign_stmt p = new math_assign_stmt();
+		math_assign_stmt p = new_node(math_assign_stmt.class);
 		p.m_var = (syntree_node)e;
 		p.m_oper = "+=";
 		p.m_value = (syntree_node)e1;
@@ -2720,7 +2728,7 @@ class CUP$cup$actions {
 		Object e1 = (Object)((java_cup.runtime.Symbol) CUP$cup$stack.peek()).value;
 		
 		types.log("[CUP]: variable MINUS_ASSIGN assign_value");
-		math_assign_stmt p = new math_assign_stmt();
+		math_assign_stmt p = new_node(math_assign_stmt.class);
 		p.m_var = (syntree_node)e;
 		p.m_oper = "-=";
 		p.m_value = (syntree_node)e1;
@@ -2742,7 +2750,7 @@ class CUP$cup$actions {
 		Object e1 = (Object)((java_cup.runtime.Symbol) CUP$cup$stack.peek()).value;
 		
 		types.log("[CUP]: variable DIVIDE_ASSIGN assign_value");
-		math_assign_stmt p = new math_assign_stmt();
+		math_assign_stmt p = new_node(math_assign_stmt.class);
 		p.m_var = (syntree_node)e;
 		p.m_oper = "/=";
 		p.m_value = (syntree_node)e1;
@@ -2764,7 +2772,7 @@ class CUP$cup$actions {
 		Object e1 = (Object)((java_cup.runtime.Symbol) CUP$cup$stack.peek()).value;
 		
 		types.log("[CUP]: variable MULTIPLY_ASSIGN assign_value");
-		math_assign_stmt p = new math_assign_stmt();
+		math_assign_stmt p = new_node(math_assign_stmt.class);
 		p.m_var = (syntree_node)e;
 		p.m_oper = "*=";
 		p.m_value = (syntree_node)e1;
@@ -2786,7 +2794,7 @@ class CUP$cup$actions {
 		Object e1 = (Object)((java_cup.runtime.Symbol) CUP$cup$stack.peek()).value;
 		
 		types.log("[CUP]: variable DIVIDE_MOD_ASSIGN assign_value");
-		math_assign_stmt p = new math_assign_stmt();
+		math_assign_stmt p = new_node(math_assign_stmt.class);
 		p.m_var = (syntree_node)e;
 		p.m_oper = "%=";
 		p.m_value = (syntree_node)e1;
@@ -2805,11 +2813,11 @@ class CUP$cup$actions {
 		Object e = (Object)((java_cup.runtime.Symbol) CUP$cup$stack.elementAt(CUP$cup$top-1)).value;
 		
 		types.log("[CUP]: variable INC");
-		explicit_value_node pp = new explicit_value_node();
+		explicit_value_node pp = new_node(explicit_value_node.class);
 		pp.m_str = "1";
 		pp.m_type = explicit_value_type.EVT_NUM;
 		
-		math_assign_stmt p = new math_assign_stmt();
+		math_assign_stmt p = new_node(math_assign_stmt.class);
 		p.m_var = (syntree_node)e;
 		p.m_oper = "+=";
 		p.m_value = pp;
@@ -2828,7 +2836,7 @@ class CUP$cup$actions {
 		Object e = (Object)((java_cup.runtime.Symbol) CUP$cup$stack.peek()).value;
 		
 		types.log("[CUP]: VAR_BEGIN IDENTIFIER");
-		var_node p = new var_node();
+		var_node p = new_node(var_node.class);
 		p.m_str = e.toString();
 		RESULT = p;
 	
@@ -2860,7 +2868,7 @@ class CUP$cup$actions {
 		Object e = (Object)((java_cup.runtime.Symbol) CUP$cup$stack.peek()).value;
 		
 		types.log("[CUP]: IDENTIFIER");
-		variable_node p = new variable_node();
+		variable_node p = new_node(variable_node.class);
 		p.m_str = e.toString();
 		RESULT = p;
 	
@@ -2880,7 +2888,7 @@ class CUP$cup$actions {
 		Object e1 = (Object)((java_cup.runtime.Symbol) CUP$cup$stack.elementAt(CUP$cup$top-1)).value;
 		
 		types.log("[CUP]: IDENTIFIER OPEN_SQUARE_BRACKET expr_value CLOSE_SQUARE_BRACKET");
-		container_get_node p = new container_get_node();
+		container_get_node p = new_node(container_get_node.class);
 		p.m_container = e.toString();
 		p.m_key = (syntree_node)e1;
 		RESULT = p;
@@ -2898,7 +2906,7 @@ class CUP$cup$actions {
 		Object e = (Object)((java_cup.runtime.Symbol) CUP$cup$stack.peek()).value;
 		
 		types.log("[CUP]: IDENTIFIER_POINTER");
-		struct_pointer_node p = new struct_pointer_node();
+		struct_pointer_node p = new_node(struct_pointer_node.class);
 		p.m_str = e.toString();
 		RESULT = p;
 	
@@ -2915,7 +2923,7 @@ class CUP$cup$actions {
 		Object e = (Object)((java_cup.runtime.Symbol) CUP$cup$stack.peek()).value;
 		
 		types.log("[CUP]: IDENTIFIER_DOT");
-		variable_node p = new variable_node();
+		variable_node p = new_node(variable_node.class);
 		p.m_str = e.toString();
 		RESULT = p;
 	
@@ -2995,7 +3003,7 @@ class CUP$cup$actions {
 		Object e1 = (Object)((java_cup.runtime.Symbol) CUP$cup$stack.peek()).value;
 		
 		types.log("[CUP]: expr_value PLUS expr_value");
-		math_expr_node p = new math_expr_node();
+		math_expr_node p = new_node(math_expr_node.class);
 		p.m_oper = "+";
 		p.m_left = (syntree_node)e;
 		p.m_right = (syntree_node)e1;
@@ -3017,7 +3025,7 @@ class CUP$cup$actions {
 		Object e1 = (Object)((java_cup.runtime.Symbol) CUP$cup$stack.peek()).value;
 		
 		types.log("[CUP]: expr_value MINUS expr_value");
-		math_expr_node p = new math_expr_node();
+		math_expr_node p = new_node(math_expr_node.class);
 		p.m_oper = "-";
 		p.m_left = (syntree_node)e;
 		p.m_right = (syntree_node)e1;
@@ -3039,7 +3047,7 @@ class CUP$cup$actions {
 		Object e1 = (Object)((java_cup.runtime.Symbol) CUP$cup$stack.peek()).value;
 		
 		types.log("[CUP]: expr_value MULTIPLY expr_value");
-		math_expr_node p = new math_expr_node();
+		math_expr_node p = new_node(math_expr_node.class);
 		p.m_oper = "*";
 		p.m_left = (syntree_node)e;
 		p.m_right = (syntree_node)e1;
@@ -3061,7 +3069,7 @@ class CUP$cup$actions {
 		Object e1 = (Object)((java_cup.runtime.Symbol) CUP$cup$stack.peek()).value;
 		
 		types.log("[CUP]: expr_value DIVIDE expr_value");
-		math_expr_node p = new math_expr_node();
+		math_expr_node p = new_node(math_expr_node.class);
 		p.m_oper = "/";
 		p.m_left = (syntree_node)e;
 		p.m_right = (syntree_node)e1;
@@ -3083,7 +3091,7 @@ class CUP$cup$actions {
 		Object e1 = (Object)((java_cup.runtime.Symbol) CUP$cup$stack.peek()).value;
 		
 		types.log("[CUP]: expr_value DIVIDE_MOD expr_value");
-		math_expr_node p = new math_expr_node();
+		math_expr_node p = new_node(math_expr_node.class);
 		p.m_oper = "%";
 		p.m_left = (syntree_node)e;
 		p.m_right = (syntree_node)e1;
@@ -3105,7 +3113,7 @@ class CUP$cup$actions {
 		Object e1 = (Object)((java_cup.runtime.Symbol) CUP$cup$stack.peek()).value;
 		
 		types.log("[CUP]: expr_value STRING_CAT expr_value");
-		math_expr_node p = new math_expr_node();
+		math_expr_node p = new_node(math_expr_node.class);
 		p.m_oper = "..";
 		p.m_left = (syntree_node)e;
 		p.m_right = (syntree_node)e1;
@@ -3181,7 +3189,7 @@ class CUP$cup$actions {
               Object RESULT =null;
 		
 		types.log("[CUP]: BREAK");
-		break_stmt p = new break_stmt();
+		break_stmt p = new_node(break_stmt.class);
 		RESULT = p;
 	
               CUP$cup$result = parser.getSymbolFactory().newSymbol("break",1, ((java_cup.runtime.Symbol)CUP$cup$stack.peek()), ((java_cup.runtime.Symbol)CUP$cup$stack.peek()), RESULT);
@@ -3194,7 +3202,7 @@ class CUP$cup$actions {
               Object RESULT =null;
 		
 		types.log("[CUP]: CONTINUE");
-		continue_stmt p = new continue_stmt();
+		continue_stmt p = new_node(continue_stmt.class);
 		RESULT = p;
 	
               CUP$cup$result = parser.getSymbolFactory().newSymbol("continue",2, ((java_cup.runtime.Symbol)CUP$cup$stack.peek()), ((java_cup.runtime.Symbol)CUP$cup$stack.peek()), RESULT);
@@ -3210,7 +3218,7 @@ class CUP$cup$actions {
 		Object e = (Object)((java_cup.runtime.Symbol) CUP$cup$stack.peek()).value;
 		
 		types.log("[CUP]: SLEEP");
-		sleep_stmt p = new sleep_stmt();
+		sleep_stmt p = new_node(sleep_stmt.class);
 		p.m_time = (syntree_node)e;
 		RESULT = p;
 	
@@ -3227,7 +3235,7 @@ class CUP$cup$actions {
 		Object e = (Object)((java_cup.runtime.Symbol) CUP$cup$stack.peek()).value;
 		
 		types.log("[CUP]: YIELD");
-		yield_stmt p = new yield_stmt();
+		yield_stmt p = new_node(yield_stmt.class);
 		p.m_time = (syntree_node)e;
 		RESULT = p;
 	
@@ -3250,7 +3258,7 @@ class CUP$cup$actions {
 		Object e2 = (Object)((java_cup.runtime.Symbol) CUP$cup$stack.elementAt(CUP$cup$top-1)).value;
 		
 		types.log("[CUP]: SWITCH cmp_value switch_case_list DEFAULT block END");
-		switch_stmt p = new switch_stmt();
+		switch_stmt p = new_node(switch_stmt.class);
 		p.m_cmp = (syntree_node)e;
 		p.m_caselist = (syntree_node)e1;
 		p.m_def = (syntree_node)e2;
@@ -3272,7 +3280,7 @@ class CUP$cup$actions {
 		Object e1 = (Object)((java_cup.runtime.Symbol) CUP$cup$stack.elementAt(CUP$cup$top-2)).value;
 		
 		types.log("[CUP]: SWITCH cmp_value switch_case_list DEFAULT END");
-		switch_stmt p = new switch_stmt();
+		switch_stmt p = new_node(switch_stmt.class);
 		p.m_cmp = (syntree_node)e;
 		p.m_caselist = (syntree_node)e1;
 		p.m_def = null;
@@ -3291,7 +3299,7 @@ class CUP$cup$actions {
 		Object e = (Object)((java_cup.runtime.Symbol) CUP$cup$stack.peek()).value;
 		
 		types.log("[CUP]: switch_case_define");
-		switch_caselist_node p = new switch_caselist_node();
+		switch_caselist_node p = new_node(switch_caselist_node.class);
 		p.add_case((syntree_node)e);
 		RESULT = p;
 	
@@ -3331,7 +3339,7 @@ class CUP$cup$actions {
 		Object e1 = (Object)((java_cup.runtime.Symbol) CUP$cup$stack.peek()).value;
 		
 		types.log("[CUP]: CASE cmp_value THEN block");
-		switch_case_node p = new switch_case_node();
+		switch_case_node p = new_node(switch_case_node.class);
 		p.m_cmp = (syntree_node)e;
 		p.m_block = (syntree_node)e1;
 		RESULT = p;
@@ -3349,7 +3357,7 @@ class CUP$cup$actions {
 		Object e = (Object)((java_cup.runtime.Symbol) CUP$cup$stack.elementAt(CUP$cup$top-1)).value;
 		
 		types.log("[CUP]: CASE cmp_value THEN");
-		switch_case_node p = new switch_case_node();
+		switch_case_node p = new_node(switch_case_node.class);
 		p.m_cmp = (syntree_node)e;
 		p.m_block = null;
 		RESULT = p;
@@ -3567,7 +3575,7 @@ class CUP$cup$actions {
 		Object e = (Object)((java_cup.runtime.Symbol) CUP$cup$stack.peek()).value;
 		
 		types.log("[CUP]: FTRUE ");
-		explicit_value_node p = new explicit_value_node();
+		explicit_value_node p = new_node(explicit_value_node.class);
 		p.m_type = explicit_value_type.EVT_TRUE;
 		RESULT = p;
 	
@@ -3584,7 +3592,7 @@ class CUP$cup$actions {
 		Object e = (Object)((java_cup.runtime.Symbol) CUP$cup$stack.peek()).value;
 		
 		types.log("[CUP]: FFALSE ");
-		explicit_value_node p = new explicit_value_node();
+		explicit_value_node p = new_node(explicit_value_node.class);
 		p.m_type = explicit_value_type.EVT_FALSE;
 		RESULT = p;
 	
@@ -3601,7 +3609,7 @@ class CUP$cup$actions {
 		Object e = (Object)((java_cup.runtime.Symbol) CUP$cup$stack.peek()).value;
 		
 		types.log("[CUP]: NUMBER ");
-		explicit_value_node p = new explicit_value_node();
+		explicit_value_node p = new_node(explicit_value_node.class);
 		p.m_str = e.toString();
 		p.m_type = explicit_value_type.EVT_NUM;
 		RESULT = p;
@@ -3619,7 +3627,7 @@ class CUP$cup$actions {
 		Object e = (Object)((java_cup.runtime.Symbol) CUP$cup$stack.peek()).value;
 		
 		types.log("[CUP]: FKUUID ");
-		explicit_value_node p = new explicit_value_node();
+		explicit_value_node p = new_node(explicit_value_node.class);
 		p.m_str = e.toString();
 		p.m_type = explicit_value_type.EVT_UUID;
 		RESULT = p;
@@ -3637,7 +3645,7 @@ class CUP$cup$actions {
 		Object e = (Object)((java_cup.runtime.Symbol) CUP$cup$stack.peek()).value;
 		
 		types.log("[CUP]: STRING_DEFINITION ");
-		explicit_value_node p = new explicit_value_node();
+		explicit_value_node p = new_node(explicit_value_node.class);
 		p.m_str = e.toString();
 		p.m_type = explicit_value_type.EVT_STR;
 		RESULT = p;
@@ -3655,7 +3663,7 @@ class CUP$cup$actions {
 		Object e = (Object)((java_cup.runtime.Symbol) CUP$cup$stack.peek()).value;
 		
 		types.log("[CUP]: FKFLOAT ");
-		explicit_value_node p = new explicit_value_node();
+		explicit_value_node p = new_node(explicit_value_node.class);
 		p.m_str = e.toString();
 		p.m_type = explicit_value_type.EVT_FLOAT;
 		RESULT = p;
@@ -3673,7 +3681,7 @@ class CUP$cup$actions {
 		Object e = (Object)((java_cup.runtime.Symbol) CUP$cup$stack.elementAt(CUP$cup$top-1)).value;
 		
 		types.log("[CUP]: OPEN_BIG_BRACKET const_map_list_value CLOSE_BIG_BRACKET ");
-		explicit_value_node p = new explicit_value_node();
+		explicit_value_node p = new_node(explicit_value_node.class);
 		p.m_type = explicit_value_type.EVT_MAP;
 		p.m_v = (const_map_list_value_node)e;
 		RESULT = p;
@@ -3691,7 +3699,7 @@ class CUP$cup$actions {
 		Object e = (Object)((java_cup.runtime.Symbol) CUP$cup$stack.elementAt(CUP$cup$top-1)).value;
 		
 		types.log("[CUP]: OPEN_BIG_BRACKET const_array_list_value CLOSE_BIG_BRACKET ");
-		explicit_value_node p = new explicit_value_node();
+		explicit_value_node p = new_node(explicit_value_node.class);
 		p.m_type = explicit_value_type.EVT_ARRAY;
 		p.m_v = (const_array_list_value_node)e;
 		RESULT = p;
@@ -3706,7 +3714,7 @@ class CUP$cup$actions {
               Object RESULT =null;
 		
 		types.log("[CUP]: empty ");
-		const_map_list_value_node p = new const_map_list_value_node();
+		const_map_list_value_node p = new_node(const_map_list_value_node.class);
 		RESULT = p;
 	
               CUP$cup$result = parser.getSymbolFactory().newSymbol("const_map_list_value",44, ((java_cup.runtime.Symbol)CUP$cup$stack.peek()), RESULT);
@@ -3722,7 +3730,7 @@ class CUP$cup$actions {
 		Object e = (Object)((java_cup.runtime.Symbol) CUP$cup$stack.peek()).value;
 		
 		types.log("[CUP]: const_map_value ");
-		const_map_list_value_node p = new const_map_list_value_node();
+		const_map_list_value_node p = new_node(const_map_list_value_node.class);
 		p.add_ele((const_map_value_node)e);
 		RESULT = p;
 	
@@ -3762,7 +3770,7 @@ class CUP$cup$actions {
 		Object e1 = (Object)((java_cup.runtime.Symbol) CUP$cup$stack.peek()).value;
 		
 		types.log("[CUP]: explicit_value COLON explicit_value ");
-		const_map_value_node p = new const_map_value_node();
+		const_map_value_node p = new_node(const_map_value_node.class);
 		p.m_k = (syntree_node)e;
 		p.m_v = (syntree_node)e1;
 		RESULT = p;
@@ -3777,7 +3785,7 @@ class CUP$cup$actions {
               Object RESULT =null;
 		
 		types.log("[CUP]: empty ");
-		const_array_list_value_node p = new const_array_list_value_node();
+		const_array_list_value_node p = new_node(const_array_list_value_node.class);
 		RESULT = p;
 	
               CUP$cup$result = parser.getSymbolFactory().newSymbol("const_array_list_value",46, ((java_cup.runtime.Symbol)CUP$cup$stack.peek()), RESULT);
@@ -3793,7 +3801,7 @@ class CUP$cup$actions {
 		Object e = (Object)((java_cup.runtime.Symbol) CUP$cup$stack.peek()).value;
 		
 		types.log("[CUP]: explicit_value ");
-		const_array_list_value_node p = new const_array_list_value_node();
+		const_array_list_value_node p = new_node(const_array_list_value_node.class);
 		p.add_ele((explicit_value_node)e);
 		RESULT = p;
 	
