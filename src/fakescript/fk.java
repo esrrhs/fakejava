@@ -104,53 +104,101 @@ public class fk
 	
 	protected static void psclear(fake f)
 	{
-		
+		f.ps.clear();
 	}
 	
 	protected static void pspush(fake f, Object arg)
 	{
+		variant v = f.ps.push_and_get();
+		
 		Class<? extends Object> c = arg.getClass();
 		if (c == Byte.class)
 		{
-			
+			Byte b = (Byte) arg;
+			v.set_real(b);
 		}
 		else if (c == Short.class)
 		{
-			
+			Short b = (Short) arg;
+			v.set_real(b);
 		}
 		else if (c == Integer.class)
 		{
-			
+			Integer b = (Integer) arg;
+			v.set_real(b);
 		}
 		else if (c == Long.class)
 		{
-			
+			long b = (long) arg;
+			v.set_uuid(b);
 		}
 		else if (c == Float.class)
 		{
-			
+			Float b = (Float) arg;
+			v.set_real(b);
 		}
 		else if (c == Double.class)
 		{
-			
+			Double b = (Double) arg;
+			v.set_real(b);
 		}
 		else if (c == Boolean.class)
 		{
-			
+			Boolean b = (Boolean) arg;
+			v.set_real(b ? 1 : 0);
 		}
 		else
 		{
-			
+			v.set_pointer(arg);
 		}
 	}
 	
 	protected static Object pspop(fake f)
 	{
-		return null;
+		variant v = f.ps.pop_and_get();
+		if (v.m_type == variant_type.NIL)
+		{
+			return null;
+		}
+		else if (v.m_type == variant_type.REAL)
+		{
+			double b = (double) v.m_data;
+			return b;
+		}
+		else if (v.m_type == variant_type.STRING)
+		{
+			String b = (String) v.m_data;
+			return b;
+		}
+		else if (v.m_type == variant_type.POINTER)
+		{
+			return v.m_data;
+		}
+		else if (v.m_type == variant_type.UUID)
+		{
+			long b = (long) v.m_data;
+			return b;
+		}
+		else
+		{
+			return null;
+		}
 	}
 	
 	protected static void runps(fake f, String func)
 	{
+		variant funcv = new variant();
+		funcv.set_string(func);
 		
+		processor pro = new processor(f);
+		
+		routine r = pro.start_routine(funcv);
+		
+		pro.run();
+		
+		variant ret = r.get_ret();
+		
+		variant v = f.ps.push_and_get();
+		v.copy_from(ret);
 	}
 }
