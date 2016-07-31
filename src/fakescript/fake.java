@@ -22,4 +22,10 @@ public class fake
 	
 	// 性能检测
 	protected profile pf = new profile(this);
+	
+	// 内建的函数集合
+	protected buildinfunc bif = new buildinfunc(this);
+	
+	// 当前运行状态
+	protected running rn = new running(this);
 }

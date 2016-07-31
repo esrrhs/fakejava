@@ -15,6 +15,11 @@ class processor
 		m_f = f;
 	}
 	
+	public routine get_curroutine()
+	{
+		return m_curroutine;
+	}
+	
 	public routine start_routine(variant func, ArrayList<Integer> retpos)
 			throws Exception
 	{
@@ -57,4 +62,29 @@ class processor
 			}
 		}
 	}
+	
+	public String get_routine_info()
+	{
+		String tmp = "";
+		for (int i = 0; i < m_routines.size(); i++)
+		{
+			routine r = m_routines.get(i);
+			
+			tmp += "#";
+			tmp += i;
+			tmp += "\tId:";
+			tmp += r.get_id();
+			tmp += "\t";
+			tmp += r.get_interpreter().get_running_func_name();
+			tmp += "(";
+			tmp += r.get_interpreter().get_running_file_name();
+			tmp += ":";
+			tmp += r.get_interpreter().get_running_file_line();
+			tmp += ")\t";
+			tmp += r.is_end() ? "Dead" : "Alive";
+			tmp += "\n";
+		}
+		return tmp;
+	}
+	
 }

@@ -51,7 +51,7 @@ class compiler
 	private ArrayList<Long> m_cur_addrs = new ArrayList<Long>();
 	private int m_cmp_deps;
 	private boolean m_new_var;
-	private int m_func_ret_num;
+	private int m_func_ret_num = 1;
 	
 	public compiler(fake f, mycup mcp)
 	{

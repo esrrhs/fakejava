@@ -165,6 +165,7 @@ class interpreter
 		// 内置函数
 		else if (f.m_havebif)
 		{
+			f.m_bif.call(m_f, this);
 		}
 		else
 		{
@@ -1180,13 +1181,17 @@ class interpreter
 						}
 						m_ip++;
 						
+						int oldsize = m_ret.size();
+						for (int i = 0; i < returnnum - oldsize; i++)
+						{
+							m_ret.add(new variant());
+						}
+						
 						// 塞给ret
 						for (int i = 0; i < returnnum; i++)
 						{
 							variant ret = GET_VARIANT(m_fb, m_bp, m_ip);
 							m_ip++;
-							
-							m_ret.ensureCapacity(i + 1);
 							
 							variant retv = new variant();
 							retv.copy_from(ret);
@@ -1364,4 +1369,91 @@ class interpreter
 		
 		return runcmdnum;
 	}
+	
+	public String get_running_file_name()
+	{
+		return m_fb != null ? m_fb.m_filename : "";
+	}
+	
+	public String get_running_func_name()
+	{
+		return m_fb != null ? m_fb.m_name : "";
+	}
+	
+	public int get_running_file_line()
+	{
+		return m_fb != null ? m_fb.get_binary_lineno(m_ip) : 0;
+	}
+	
+	public String get_running_call_stack()
+	{
+		String cur_runinginfo = "";
+		
+		if (m_fb == null)
+		{
+			return "";
+		}
+		
+		int deps = 0;
+		
+		int ip = m_ip;
+		int bp = m_bp;
+		func_binary fb = m_fb;
+		
+		while (bp != 0)
+		{
+			cur_runinginfo += "#";
+			cur_runinginfo += deps;
+			cur_runinginfo += "	";
+			cur_runinginfo += fb != null ? fb.m_name : "";
+			cur_runinginfo += " at ";
+			cur_runinginfo += fb != null ? fb.m_filename : "";
+			cur_runinginfo += ":";
+			cur_runinginfo += fb != null ? fb.get_binary_lineno(ip) : 0;
+			cur_runinginfo += "\n";
+			for (int j = 0; fb != null && j < fb.m_maxstack; j++)
+			{
+				cur_runinginfo += "		";
+				
+				String variant_name = "";
+				for (int i = 0; i < fb.m_debug_stack_variant_info.length; i++)
+				{
+					stack_variant_info info = fb.m_debug_stack_variant_info[i];
+					if (info.m_pos == j)
+					{
+						variant_name += info.m_name;
+						variant_name += "(line:";
+						variant_name += info.m_line;
+						variant_name += ") ";
+					}
+				}
+				if (variant_name.isEmpty())
+				{
+					variant_name = "(anonymous)";
+				}
+				
+				cur_runinginfo += variant_name;
+				cur_runinginfo += "\t[";
+				cur_runinginfo += j;
+				cur_runinginfo += "]\t";
+				variant v = m_stack.get(bp + j);
+				cur_runinginfo += v;
+				cur_runinginfo += "\n";
+			}
+			
+			fb = BP_GET_FB(bp);
+			ip = BP_GET_IP(bp);
+			int callbp = BP_GET_BP(bp);
+			bp = callbp;
+			if (bp == 0)
+			{
+				break;
+			}
+			
+			deps++;
+		}
+		
+		return cur_runinginfo;
+	}
+	
 }

@@ -147,7 +147,7 @@ class func_binary
 		return ret;
 	}
 	
-	private int get_binary_lineno(int pos)
+	public int get_binary_lineno(int pos)
 	{
 		return (pos >= 0 && pos < (int) m_lineno_buff.length)
 				? m_lineno_buff[pos]
