@@ -21,4 +21,10 @@ public class A
 		System.out.println("aaa1");
 		return 1;
 	}
+	
+	@fakescript
+	public static void aaa2()
+	{
+		System.out.println("aaa2");
+	}
 }

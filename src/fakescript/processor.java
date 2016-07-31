@@ -15,7 +15,8 @@ class processor
 		m_f = f;
 	}
 	
-	public routine start_routine(variant func)
+	public routine start_routine(variant func, ArrayList<Integer> retpos)
+			throws Exception
 	{
 		routine r = new routine(m_f);
 		
@@ -27,7 +28,7 @@ class processor
 		r.set_id(m_genid);
 		m_genid++;
 		r.set_processor(this);
-		r.entry(func);
+		r.entry(func, retpos);
 		
 		if (m_curroutine == null)
 		{
@@ -39,7 +40,7 @@ class processor
 		return r;
 	}
 	
-	public void run()
+	public void run() throws Exception
 	{
 		while (!m_routines.isEmpty())
 		{

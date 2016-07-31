@@ -1,6 +1,10 @@
 package fakescript;
 
+import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.lang.reflect.Method;
+import java.lang.reflect.Modifier;
+import java.util.ArrayList;
 import java.util.List;
 
 import fakescript.bind.fakescript;
@@ -42,6 +46,12 @@ public class fk
 					fkf.m_m = m;
 					fkf.m_param = m.getParameterTypes();
 					fkf.m_ret = m.getReturnType();
+					fkf.m_is_staic = Modifier.isStatic(m.getModifiers());
+					
+					if (!fkf.m_is_staic)
+					{
+						name = c.getName() + name;
+					}
 					
 					variant v = new variant();
 					v.set_string(name);
@@ -111,6 +121,12 @@ public class fk
 	{
 		variant v = f.ps.push_and_get();
 		
+		if (arg == null)
+		{
+			v.set_nil();
+			return;
+		}
+		
 		Class<? extends Object> c = arg.getClass();
 		if (c == Byte.class)
 		{
@@ -147,6 +163,11 @@ public class fk
 			Boolean b = (Boolean) arg;
 			v.set_real(b ? 1 : 0);
 		}
+		else if (c == String.class)
+		{
+			String b = (String) arg;
+			v.set_string(b);
+		}
 		else
 		{
 			v.set_pointer(arg);
@@ -155,6 +176,11 @@ public class fk
 	
 	protected static Object pspop(fake f)
 	{
+		if (f.ps.size() == 0)
+		{
+			return null;
+		}
+		
 		variant v = f.ps.pop_and_get();
 		if (v.m_type == variant_type.NIL)
 		{
@@ -185,6 +211,328 @@ public class fk
 		}
 	}
 	
+	protected static Object trans(Object src, Class<?> c)
+	{
+		Class<?> srcc = src.getClass();
+		
+		if (c == Byte.class || c == Byte.TYPE)
+		{
+			if (srcc == Byte.class)
+			{
+				return (byte) (byte) src;
+			}
+			else if (srcc == Short.class)
+			{
+				return (byte) (short) src;
+			}
+			else if (srcc == Integer.class)
+			{
+				return (byte) (int) src;
+			}
+			else if (srcc == Long.class)
+			{
+				return (byte) (long) src;
+			}
+			else if (srcc == Float.class)
+			{
+				return (byte) (float) src;
+			}
+			else if (srcc == Double.class)
+			{
+				return (byte) (double) src;
+			}
+			else if (srcc == Boolean.class)
+			{
+				return (boolean) src ? (byte) 1 : (byte) 0;
+			}
+			else if (srcc == String.class)
+			{
+				return Byte.valueOf((String) src);
+			}
+			else
+			{
+				return (byte) 0;
+			}
+		}
+		else if (c == Short.class || c == Short.TYPE)
+		{
+			if (srcc == Byte.class)
+			{
+				return (short) (byte) src;
+			}
+			else if (srcc == Short.class)
+			{
+				return (short) (short) src;
+			}
+			else if (srcc == Integer.class)
+			{
+				return (short) (int) src;
+			}
+			else if (srcc == Long.class)
+			{
+				return (short) (long) src;
+			}
+			else if (srcc == Float.class)
+			{
+				return (short) (float) src;
+			}
+			else if (srcc == Double.class)
+			{
+				return (short) (double) src;
+			}
+			else if (srcc == Boolean.class)
+			{
+				return (boolean) src ? (short) 1 : (short) 0;
+			}
+			else if (srcc == String.class)
+			{
+				return Short.valueOf((String) src);
+			}
+			else
+			{
+				return (short) 0;
+			}
+		}
+		else if (c == Integer.class || c == Integer.TYPE)
+		{
+			if (srcc == Byte.class)
+			{
+				return (int) (byte) src;
+			}
+			else if (srcc == Short.class)
+			{
+				return (int) (short) src;
+			}
+			else if (srcc == Integer.class)
+			{
+				return (int) (int) src;
+			}
+			else if (srcc == Long.class)
+			{
+				return (int) (long) src;
+			}
+			else if (srcc == Float.class)
+			{
+				return (int) (float) src;
+			}
+			else if (srcc == Double.class)
+			{
+				return (int) (double) src;
+			}
+			else if (srcc == Boolean.class)
+			{
+				return (boolean) src ? (int) 1 : (int) 0;
+			}
+			else if (srcc == String.class)
+			{
+				return Integer.valueOf((String) src);
+			}
+			else
+			{
+				return (int) 0;
+			}
+		}
+		else if (c == Long.class || c == Long.TYPE)
+		{
+			if (srcc == Byte.class)
+			{
+				return (long) (byte) src;
+			}
+			else if (srcc == Short.class)
+			{
+				return (long) (short) src;
+			}
+			else if (srcc == Integer.class)
+			{
+				return (long) (int) src;
+			}
+			else if (srcc == Long.class)
+			{
+				return (long) (long) src;
+			}
+			else if (srcc == Float.class)
+			{
+				return (long) (float) src;
+			}
+			else if (srcc == Double.class)
+			{
+				return (long) (double) src;
+			}
+			else if (srcc == Boolean.class)
+			{
+				return (boolean) src ? (long) 1 : (long) 0;
+			}
+			else if (srcc == String.class)
+			{
+				return Long.valueOf((String) src);
+			}
+			else
+			{
+				return (long) 0;
+			}
+		}
+		else if (c == Float.class || c == Float.TYPE)
+		{
+			if (srcc == Byte.class)
+			{
+				return (float) (byte) src;
+			}
+			else if (srcc == Short.class)
+			{
+				return (float) (short) src;
+			}
+			else if (srcc == Integer.class)
+			{
+				return (float) (int) src;
+			}
+			else if (srcc == Long.class)
+			{
+				return (float) (long) src;
+			}
+			else if (srcc == Float.class)
+			{
+				return (float) (float) src;
+			}
+			else if (srcc == Double.class)
+			{
+				return (float) (double) src;
+			}
+			else if (srcc == Boolean.class)
+			{
+				return (boolean) src ? (float) 1 : (float) 0;
+			}
+			else if (srcc == String.class)
+			{
+				return Float.valueOf((String) src);
+			}
+			else
+			{
+				return (float) 0;
+			}
+		}
+		else if (c == Double.class || c == Double.TYPE)
+		{
+			if (srcc == Byte.class)
+			{
+				return (double) (byte) src;
+			}
+			else if (srcc == Short.class)
+			{
+				return (double) (short) src;
+			}
+			else if (srcc == Integer.class)
+			{
+				return (double) (int) src;
+			}
+			else if (srcc == Long.class)
+			{
+				return (double) (long) src;
+			}
+			else if (srcc == Float.class)
+			{
+				return (double) (float) src;
+			}
+			else if (srcc == Double.class)
+			{
+				return (double) (double) src;
+			}
+			else if (srcc == Boolean.class)
+			{
+				return (boolean) src ? (double) 1 : (double) 0;
+			}
+			else if (srcc == String.class)
+			{
+				return Double.valueOf((String) src);
+			}
+			else
+			{
+				return (double) 0;
+			}
+		}
+		else if (c == Boolean.class || c == Boolean.TYPE)
+		{
+			if (srcc == Byte.class)
+			{
+				return (byte) src != 0;
+			}
+			else if (srcc == Short.class)
+			{
+				return (short) src != 0;
+			}
+			else if (srcc == Integer.class)
+			{
+				return (int) src != 0;
+			}
+			else if (srcc == Long.class)
+			{
+				return (long) src != 0;
+			}
+			else if (srcc == Float.class)
+			{
+				return (float) src != 0;
+			}
+			else if (srcc == Double.class)
+			{
+				return (double) src != 0;
+			}
+			else if (srcc == Boolean.class)
+			{
+				return src;
+			}
+			else if (srcc == String.class)
+			{
+				return Integer.valueOf((String) src) != 0;
+			}
+			else
+			{
+				return false;
+			}
+		}
+		else if (c == String.class)
+		{
+			return String.valueOf(src);
+		}
+		else
+		{
+			if (srcc == Byte.class)
+			{
+				return null;
+			}
+			else if (srcc == Short.class)
+			{
+				return null;
+			}
+			else if (srcc == Integer.class)
+			{
+				return null;
+			}
+			else if (srcc == Long.class)
+			{
+				return null;
+			}
+			else if (srcc == Float.class)
+			{
+				return null;
+			}
+			else if (srcc == Double.class)
+			{
+				return null;
+			}
+			else if (srcc == Boolean.class)
+			{
+				return null;
+			}
+			else if (srcc == String.class)
+			{
+				return null;
+			}
+			else
+			{
+				return src;
+			}
+		}
+	}
+	
 	protected static void runps(fake f, String func)
 	{
 		variant funcv = new variant();
@@ -192,13 +540,26 @@ public class fk
 		
 		processor pro = new processor(f);
 		
-		routine r = pro.start_routine(funcv);
-		
-		pro.run();
-		
-		variant ret = r.get_ret();
-		
-		variant v = f.ps.push_and_get();
-		v.copy_from(ret);
+		try
+		{
+			routine r = pro.start_routine(funcv, new ArrayList<Integer>());
+			
+			pro.run();
+			
+			variant ret = r.get_ret();
+			
+			variant v = f.ps.push_and_get();
+			v.copy_from(ret);
+		}
+		catch (Exception e)
+		{
+			StringWriter sw = new StringWriter();
+			PrintWriter pw = new PrintWriter(sw);
+			e.printStackTrace(pw);
+			types.seterror(f, getcurfile(f), getcurline(f), getcurfunc(f),
+					e.toString() + "\n" + sw.toString());
+			pw.close();
+			f.ps.push_and_get();
+		}
 	}
 }

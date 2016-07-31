@@ -6,6 +6,6 @@ class funcunion
 	// public bifunc m_bif;
 	public func_binary m_fb;
 	public boolean m_haveff;
-	// public boolean m_havebif;
+	public boolean m_havebif;
 	public boolean m_havefb;
 }

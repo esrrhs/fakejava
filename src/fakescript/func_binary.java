@@ -35,12 +35,12 @@ class func_binary
 	public String dump()
 	{
 		String ret = "";
-
+		
 		// 名字
 		ret += "\n[";
 		ret += m_name;
 		ret += "]\n";
-
+		
 		// 最大栈
 		ret += "\tmaxstack:\t";
 		ret += m_maxstack;
@@ -50,8 +50,8 @@ class func_binary
 		ret += "\t////// const define ";
 		ret += m_const_list.length;
 		ret += " //////\n";
-		for (int i = 0; i < (int)m_const_list.length; i++)
-		{  
+		for (int i = 0; i < (int) m_const_list.length; i++)
+		{
 			ret += "\t[";
 			ret += i;
 			ret += "]\t";
@@ -65,8 +65,8 @@ class func_binary
 		ret += "\n\t////// container addr ";
 		ret += m_container_addr_list.length;
 		ret += " //////\n";
-		for (int i = 0; i < (int)m_container_addr_list.length; i++)
-		{  
+		for (int i = 0; i < (int) m_container_addr_list.length; i++)
+		{
 			ret += "\t[";
 			ret += i;
 			ret += "]\t";
@@ -80,13 +80,13 @@ class func_binary
 			ret += types.dump_addr(keycode);
 			ret += "\n";
 		}
-
+		
 		// 变量地址
 		ret += "\n\t////// stack variant addr ";
 		ret += m_debug_stack_variant_info.length;
 		ret += " //////\n";
-		for (int i = 0; i < (int)m_debug_stack_variant_info.length; i++)
-		{  
+		for (int i = 0; i < (int) m_debug_stack_variant_info.length; i++)
+		{
 			stack_variant_info info = m_debug_stack_variant_info[i];
 			ret += "\t[";
 			ret += info.m_pos;
@@ -101,8 +101,8 @@ class func_binary
 		ret += m_buff.length;
 		ret += " //////\n";
 		// 字节码
-		for (int i = 0; i < (int)m_buff.length; i++)
-		{	
+		for (int i = 0; i < (int) m_buff.length; i++)
+		{
 			long cmd = m_buff[i];
 			int type = command.COMMAND_TYPE(cmd);
 			int code = command.COMMAND_CODE(cmd);
@@ -116,30 +116,30 @@ class func_binary
 			ret += "\t";
 			switch (type)
 			{
-			case command.COMMAND_OPCODE:
+				case command.COMMAND_OPCODE:
 				{
 					ret += "[";
 					ret += types.OpCodeStr(code);
 					ret += "]\t";
 				}
-				break;
-			case command.COMMAND_ADDR:
+					break;
+				case command.COMMAND_ADDR:
 				{
 					ret += "[ ADDR ]\t";
 					ret += types.dump_addr(code);
 				}
-				break;
-			case command.COMMAND_POS:
+					break;
+				case command.COMMAND_POS:
 				{
 					ret += "[ POS  ]\t";
 					ret += code;
 				}
-				break;
-			default:
+					break;
+				default:
 				{
 					ret += "[unknow]\t";
 				}
-				break;
+					break;
 			}
 			ret += "\n";
 		}
@@ -149,6 +149,42 @@ class func_binary
 	
 	private int get_binary_lineno(int pos)
 	{
-		return (pos >= 0 && pos < (int)m_lineno_buff.length) ? m_lineno_buff[pos] : (m_lineno_buff.length > 0 ? m_end_lineno : 0);
+		return (pos >= 0 && pos < (int) m_lineno_buff.length)
+				? m_lineno_buff[pos]
+				: (m_lineno_buff.length > 0 ? m_end_lineno : 0);
+	}
+	
+	public void backup_move()
+	{
+		// 最大栈空间
+		m_maxstack = m_backup.m_maxstack;
+		// 参数个数
+		m_paramnum = m_backup.m_paramnum;
+		// 名字
+		m_name = m_backup.m_name;
+		// 文件名
+		m_filename = m_backup.m_filename;
+		// 包名
+		m_packagename = m_backup.m_packagename;
+		// 二进制缓冲区
+		m_buff = m_backup.m_buff;
+		// 二进制行号缓冲区
+		m_lineno_buff = m_backup.m_lineno_buff;
+		m_end_lineno = m_backup.m_end_lineno;
+		// 常量
+		m_const_list = m_backup.m_const_list;
+		// container地址
+		m_container_addr_list = m_backup.m_container_addr_list;
+		// 调试信息，栈变量
+		m_debug_stack_variant_info = m_backup.m_debug_stack_variant_info;
+		// 序列
+		m_pos = m_backup.m_pos;
+		// 占用标记
+		m_use = m_backup.m_use;
+		// 新标记
+		m_fresh = m_backup.m_fresh;
+		
+		// 备份
+		m_backup = null;
 	}
 }
