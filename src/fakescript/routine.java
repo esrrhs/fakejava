@@ -14,6 +14,11 @@ class routine
 		m_interpreter = new interpreter(f);
 	}
 	
+	public interpreter get_interpreter()
+	{
+		return m_interpreter;
+	}
+	
 	public variant get_ret()
 	{
 		return m_interpreter.get_ret();

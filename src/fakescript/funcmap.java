@@ -36,6 +36,13 @@ class funcmap
 		f.m_haveff = true;
 	}
 	
+	public void add_func(variant name, bifunc bif)
+	{
+		funcunion f = add_func_union(name);
+		f.m_bif = bif;
+		f.m_havebif = true;
+	}
+	
 	public funcunion get_func(variant name)
 	{
 		return m_funcmap.get(name);

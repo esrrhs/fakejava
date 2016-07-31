@@ -59,5 +59,9 @@ class fkfunctor
 		{
 			fk.pspush(f, ret);
 		}
+		else
+		{
+			fk.pspush(f, 0);
+		}
 	}
 }

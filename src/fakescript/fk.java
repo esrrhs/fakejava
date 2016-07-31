@@ -12,6 +12,16 @@ import fakescript.bind.packagehelper;
 
 public class fk
 {
+	/**
+	 * 创建fake对象
+	 * <p>
+	 * fake为上下文环境<br>
+	 * 所有接口在fake中执行
+	 * 
+	 * @param config
+	 *            具体的参数
+	 * @return fake对象
+	 */
 	public static fake newfake(fkconfig config)
 	{
 		fake f = new fake();
@@ -22,6 +32,20 @@ public class fk
 		return f;
 	}
 	
+	/**
+	 * 绑定java函数
+	 * <p>
+	 * 遍历package下所有类<br>
+	 * 绑定标记fakescript的函数
+	 * 
+	 * @param f
+	 *            上下文环境
+	 * 
+	 * @param packagename
+	 *            包的名字
+	 * 
+	 * @return 无
+	 */
 	public static void reg(fake f, String packagename)
 	{
 		List<Class<?>> tmp = packagehelper.getClasses(packagename);
@@ -65,17 +89,62 @@ public class fk
 		
 	}
 	
+	/**
+	 * 设置回调函数
+	 * <p>
+	 * 如错误处理<br>
+	 * 打印函数
+	 * 
+	 * @param f
+	 *            上下文环境
+	 * 
+	 * @param cb
+	 *            回调类
+	 * 
+	 * @return 无
+	 */
 	public static void set_callback(fake f, callback cb)
 	{
 		f.cb = cb;
 	}
 	
+	/**
+	 * 解析文件
+	 * <p>
+	 * 解析脚本<br>
+	 * 编译成字节码
+	 * 
+	 * @param f
+	 *            上下文环境
+	 * 
+	 * @param filename
+	 *            文件名
+	 * 
+	 * @return 无
+	 */
 	public static boolean parse(fake f, String filename)
 	{
 		f.pa.clear();
 		return f.pa.parse(filename);
 	}
 	
+	/**
+	 * 执行脚本
+	 * <p>
+	 * 执行指定脚本函数<br>
+	 * 结果通过Object返回，注意内部数值都是用double，所以转换时需要注意下
+	 * 
+	 * @param f
+	 *            上下文环境
+	 * 
+	 * @param func
+	 *            函数名
+	 * 
+	 * @param args
+	 *            参数
+	 * 
+	 * @return 无
+	 */
 	public static Object run(fake f, String func, Object... args)
 	{
 		psclear(f);
@@ -87,29 +156,135 @@ public class fk
 		return pspop(f);
 	}
 	
+	/**
+	 * 获取当前文件
+	 * <p>
+	 * 
+	 * @param f
+	 *            上下文环境
+	 * 
+	 * @return 无
+	 */
 	public static String getcurfile(fake f)
 	{
-		return "";
+		processor p = f.rn.cur_pro();
+		if (p != null && p.get_curroutine() != null)
+		{
+			return p.get_curroutine().get_interpreter().get_running_file_name();
+		}
+		return "nil";
 	}
 	
+	/**
+	 * 获取当前文件行号
+	 * <p>
+	 * 
+	 * @param f
+	 *            上下文环境
+	 * 
+	 * @return 无
+	 */
 	public static int getcurline(fake f)
 	{
+		processor p = f.rn.cur_pro();
+		if (p != null && p.get_curroutine() != null)
+		{
+			return p.get_curroutine().get_interpreter().get_running_file_line();
+		}
 		return 0;
 	}
 	
+	/**
+	 * 获取当前函数
+	 * <p>
+	 * 
+	 * @param f
+	 *            上下文环境
+	 * 
+	 * @return 无
+	 */
 	public static String getcurfunc(fake f)
 	{
-		return "";
+		processor p = f.rn.cur_pro();
+		if (p != null && p.get_curroutine() != null)
+		{
+			return p.get_curroutine().get_interpreter().get_running_func_name();
+		}
+		return "nil";
 	}
 	
+	/**
+	 * 获取当前调用堆栈
+	 * <p>
+	 * 
+	 * @param f
+	 *            上下文环境
+	 * 
+	 * @return 无
+	 */
 	public static String getcurcallstack(fake f)
 	{
-		return "";
+		processor p = f.rn.cur_pro();
+		if (p != null && p.get_curroutine() != null)
+		{
+			return p.get_curroutine().get_interpreter()
+					.get_running_call_stack();
+		}
+		return "nil";
 	}
 	
+	/**
+	 * 获取当前协程信息
+	 * <p>
+	 * 
+	 * @param f
+	 *            上下文环境
+	 * 
+	 * @return 无
+	 */
 	public static String getcurroutine(fake f)
 	{
-		return "";
+		processor p = f.rn.cur_pro();
+		if (p != null && p.get_curroutine() != null)
+		{
+			return p.get_routine_info();
+		}
+		return "nil";
+	}
+	
+	/**
+	 * 打开基本的内置函数
+	 * <p>
+	 * 
+	 * @param f
+	 *            上下文环境
+	 * 
+	 * @return 无
+	 */
+	public static void openbaselib(fake f)
+	{
+		f.bif.openbasefunc();
+	}
+	
+	/**
+	 * 是否有某个函数
+	 * <p>
+	 * 注意类的非静态成员函数在绑定的时候会在前面加上类名<br>
+	 * 如test.A类的aaa函数，他的实际函数名是test.Aaaa
+	 * 
+	 * @param f
+	 *            上下文环境
+	 * 
+	 * @param name
+	 *            函数名
+	 * 
+	 * @return 无
+	 */
+	public static boolean isfunc(fake f, String name)
+	{
+		variant funcv = new variant();
+		funcv.set_string(name);
+		return f.fm.get_func(funcv) != null;
 	}
 	
 	protected static void psclear(fake f)
@@ -544,7 +719,9 @@ public class fk
 		{
 			routine r = pro.start_routine(funcv, new ArrayList<Integer>());
 			
+			f.rn.push_pro(pro);
 			pro.run();
+			f.rn.pop_pro();
 			
 			variant ret = r.get_ret();
 			

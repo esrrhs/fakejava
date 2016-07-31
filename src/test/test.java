@@ -10,6 +10,7 @@ public class test
 	{
 		fake f = fk.newfake(null);
 		fk.reg(f, "test");
+		fk.openbaselib(f);
 		fk.set_callback(f, new callback()
 		{
 			@Override
@@ -22,6 +23,12 @@ public class test
 				System.out.printf("call stack :\n%s\n", fk.getcurcallstack(f));
 				System.out.printf("cur routine :\n%s\n", fk.getcurroutine(f));
 			}
+			
+			@Override
+			public void on_print(fake f, String str)
+			{
+				System.out.println(str);
+			}
 		});
 		
 		boolean b = fk.parse(f, "./src/test/test.fk");
@@ -31,7 +38,15 @@ public class test
 			return;
 		}
 		
-		int ret = (int) (double) fk.run(f, "main", new A(), 1);
-		System.out.println("run ret " + ret);
+		b = fk.isfunc(f, "test.Aaaa");
+		
+		long begin = System.currentTimeMillis();
+		int ret = 0;
+		for (int i = 0; i < 9000000; i++)
+		{
+			ret = (int) (double) fk.run(f, "main", new A(), 1);
+		}
+		long end = System.currentTimeMillis();
+		System.out.println("run ret " + ret + " " + (end - begin));
 	}
 }
