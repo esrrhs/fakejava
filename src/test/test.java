@@ -28,9 +28,10 @@ public class test
 		if (!b)
 		{
 			System.out.println("parse fail");
+			return;
 		}
 		
-		int ret = (Integer) fk.run(f, "main", 1);
+		int ret = (int) (double) fk.run(f, "main", new A(), 1);
 		System.out.println("run ret " + ret);
 	}
 }

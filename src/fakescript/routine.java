@@ -1,15 +1,17 @@
 package fakescript;
 
+import java.util.ArrayList;
+
 class routine
 {
 	private fake m_f;
 	private int m_id;
-	private finterpreter m_interpreter;
+	private interpreter m_interpreter;
 	
 	public routine(fake f)
 	{
 		m_f = f;
-		m_interpreter = new finterpreter(f);
+		m_interpreter = new interpreter(f);
 	}
 	
 	public variant get_ret()
@@ -32,12 +34,12 @@ class routine
 		m_interpreter.set_processor(pro);
 	}
 	
-	public void entry(variant func)
+	public void entry(variant func, ArrayList<Integer> retpos) throws Exception
 	{
-		m_interpreter.call(func);
+		m_interpreter.call(func, retpos);
 	}
 	
-	public void run(int cmdnum)
+	public void run(int cmdnum) throws Exception
 	{
 		m_interpreter.run(cmdnum);
 	}

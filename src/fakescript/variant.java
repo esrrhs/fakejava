@@ -141,6 +141,26 @@ class variant
 		return m_data == null ? 0 : (long) m_data;
 	}
 	
+	public variant_map get_map() throws Exception
+	{
+		if (m_type != variant_type.MAP)
+		{
+			throw new Exception("variant get map fail, the variant is "
+					+ m_type.toString() + m_data.toString());
+		}
+		return (variant_map) m_data;
+	}
+	
+	public variant_array get_array() throws Exception
+	{
+		if (m_type != variant_type.ARRAY)
+		{
+			throw new Exception("variant get array fail, the variant is "
+					+ m_type.toString() + m_data.toString());
+		}
+		return (variant_array) m_data;
+	}
+	
 	public void assert_can_cal() throws Exception
 	{
 		if (m_type != variant_type.REAL && m_type != variant_type.NIL)
@@ -192,13 +212,18 @@ class variant
 		m_type = variant_type.REAL;
 	}
 	
-	public void divide_mode(variant l, variant r) throws Exception
+	public void divide_mod(variant l, variant r) throws Exception
 	{
 		l.assert_can_cal();
 		r.assert_can_cal();
 		r.assert_can_divide();
 		m_data = (double) ((long) l.m_data % (long) r.m_data);
 		m_type = variant_type.REAL;
+	}
+	
+	public void string_cat(variant l, variant r) throws Exception
+	{
+		set_string(l.toString() + r.toString());
 	}
 	
 	public void and(variant l, variant r) throws Exception
@@ -271,6 +296,74 @@ class variant
 		m_data = (double) l.m_data != (double) r.m_data ? (double) 1
 				: (double) 0;
 		m_type = variant_type.REAL;
+	}
+	
+	public void not(variant r) throws Exception
+	{
+		m_data = ((double) r.m_data != 0) ? (double) 0 : (double) 1;
+		m_type = variant_type.REAL;
+	}
+	
+	public static boolean and_jne(variant l, variant r) throws Exception
+	{
+		l.assert_can_cal();
+		r.assert_can_cal();
+		return ((double) l.m_data != 0) & ((double) r.m_data != 0);
+	}
+	
+	public static boolean or_jne(variant l, variant r) throws Exception
+	{
+		l.assert_can_cal();
+		r.assert_can_cal();
+		return ((double) l.m_data != 0) | ((double) r.m_data != 0);
+	}
+	
+	public static boolean less_jne(variant l, variant r) throws Exception
+	{
+		l.assert_can_cal();
+		r.assert_can_cal();
+		return ((double) l.m_data) < ((double) r.m_data);
+	}
+	
+	public static boolean more_jne(variant l, variant r) throws Exception
+	{
+		l.assert_can_cal();
+		r.assert_can_cal();
+		return ((double) l.m_data) > ((double) r.m_data);
+	}
+	
+	public static boolean equal_jne(variant l, variant r) throws Exception
+	{
+		l.assert_can_cal();
+		r.assert_can_cal();
+		return ((double) l.m_data) == ((double) r.m_data);
+	}
+	
+	public static boolean more_equal_jne(variant l, variant r) throws Exception
+	{
+		l.assert_can_cal();
+		r.assert_can_cal();
+		return ((double) l.m_data) >= ((double) r.m_data);
+	}
+	
+	public static boolean less_equal_jne(variant l, variant r) throws Exception
+	{
+		l.assert_can_cal();
+		r.assert_can_cal();
+		return ((double) l.m_data) <= ((double) r.m_data);
+	}
+	
+	public static boolean not_equal_jne(variant l, variant r) throws Exception
+	{
+		l.assert_can_cal();
+		r.assert_can_cal();
+		return ((double) l.m_data) != ((double) r.m_data);
+	}
+	
+	public static boolean not_jne(variant r) throws Exception
+	{
+		r.assert_can_cal();
+		return ((double) r.m_data) == 0;
 	}
 	
 	public boolean bool()

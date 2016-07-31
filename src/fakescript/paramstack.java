@@ -27,28 +27,14 @@ class paramstack
 	
 	public variant pop_and_get()
 	{
-		try
-		{
-			variant v = m_variant_list.get(m_variant_list.size() - 1);
-			m_variant_list.remove(m_variant_list.size() - 1);
-			return v;
-		}
-		catch (Exception e)
-		{
-			return null;
-		}
+		variant v = m_variant_list.get(m_variant_list.size() - 1);
+		m_variant_list.remove(m_variant_list.size() - 1);
+		return v;
 	}
 	
 	public variant get(int i)
 	{
-		try
-		{
-			return m_variant_list.get(i);
-		}
-		catch (Exception e)
-		{
-			return null;
-		}
+		return m_variant_list.get(i);
 	}
 	
 	public int size()

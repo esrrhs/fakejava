@@ -3,11 +3,11 @@ package fakescript;
 public class command
 {
 	public static final long EMPTY_CMD = -1;
-
+	
 	public static final int COMMAND_OPCODE = 0;
 	public static final int COMMAND_ADDR = 1;
 	public static final int COMMAND_POS = 2;
-
+	
 	public static final int OPCODE_ASSIGN = 0;
 	public static final int OPCODE_PLUS = 1;
 	public static final int OPCODE_MINUS = 2;
@@ -47,23 +47,23 @@ public class command
 	public static final int OPCODE_SLEEP = 36;
 	public static final int OPCODE_YIELD = 37;
 	public static final int OPCODE_MAX = 38;
-
+	
 	public static final int ADDR_STACK = 0;
 	public static final int ADDR_CONST = 1;
 	public static final int ADDR_CONTAINER = 2;
-
+	
 	public static final int CALL_NORMAL = 0;
 	public static final int CALL_FAKE = 1;
 	public static final int CALL_CLASSMEM = 2;
-
+	
 	public static long MAKEINT64(int high, int low)
 	{
 		return ((long) ((low) | ((long) (high)) << 32));
 	}
-
+	
 	public static int HIINT32(long i)
 	{
-		return ( ( int ) ( ( ( long )( i ) >> 32) & 0xFFFFFFFF ) );
+		return ((int) (((long) (i) >> 32) & 0xFFFFFFFF));
 	}
 	
 	public static int LOINT32(long i)
@@ -75,10 +75,10 @@ public class command
 	{
 		return ((int) (((short) (low)) | ((int) ((short) (high))) << 16));
 	}
-
+	
 	public static short HIINT16(int i)
 	{
-		return ( ( short ) ( ( ( int )( i ) >> 16) & 0xFFFF ) );
+		return ((short) (((int) (i) >> 16) & 0xFFFF));
 	}
 	
 	public static short LOINT16(int i)
@@ -90,22 +90,22 @@ public class command
 	{
 		return MAKEINT64(type, code);
 	}
-
+	
 	public static long MAKE_OPCODE(int op)
 	{
 		return MAKE_COMMAND(COMMAND_OPCODE, op);
 	}
-
+	
 	public static long MAKE_POS(int pos)
 	{
 		return MAKE_COMMAND(COMMAND_POS, pos);
 	}
-
+	
 	public static long MAKE_ADDR(int addrtype, int pos)
 	{
 		return MAKE_COMMAND(COMMAND_ADDR, MAKEINT32(addrtype, pos));
 	}
-
+	
 	public static int COMMAND_TYPE(long cmd)
 	{
 		return HIINT32(cmd);
@@ -114,5 +114,15 @@ public class command
 	public static int COMMAND_CODE(long cmd)
 	{
 		return LOINT32(cmd);
+	}
+	
+	public static short ADDR_TYPE(int code)
+	{
+		return HIINT16(code);
+	}
+	
+	public static short ADDR_POS(int code)
+	{
+		return LOINT16(code);
 	}
 }
