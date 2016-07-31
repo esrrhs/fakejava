@@ -19,10 +19,6 @@
 * 支持包
 * 支持struct
 
-## 产品应用
-![d8f9d72a6059252d8aa6c584329b033b5ab5b9f9.jpg](https://bitbucket.org/repo/pAEqqM/images/870497708-d8f9d72a6059252d8aa6c584329b033b5ab5b9f9.jpg)[我是大主宰](http://dzz.youxi.com)
-![9f510fb30f2442a71a9ae83ad443ad4bd013029c.jpg](https://bitbucket.org/repo/pAEqqM/images/3631286140-9f510fb30f2442a71a9ae83ad443ad4bd013029c.jpg)[天天炫斗](http://ttxd.qq.com/act/a20160419brandP/)
-
 ## 示例
 
 ```
@@ -116,11 +112,11 @@ end
 // 创建一个实例
 fake f = fk.newfake(null);
 // 注册包里全部标记@fakescript的函数
-fkreg(f, "com.test");
+fk.reg(f, "com.test");
 // 解析fake脚本文件
-fkparse(f, "test.fk");
+fk.parse(f, "test.fk");
 // 执行myfunc1函数，传入两个参数分别为1和2
-double ret = (double)fkrun(f, "myfunc1", 1, 2);
+double ret = (double)fk.run(f, "myfunc1", 1, 2);
 
 ```
 

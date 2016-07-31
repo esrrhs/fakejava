@@ -24,12 +24,6 @@ Lightweight embedded scripting language
 
 
 
-## In Production
-![d8f9d72a6059252d8aa6c584329b033b5ab5b9f9.jpg](https://bitbucket.org/repo/pAEqqM/images/870497708-d8f9d72a6059252d8aa6c584329b033b5ab5b9f9.jpg)[我是大主宰](http://dzz.youxi.com)
-![9f510fb30f2442a71a9ae83ad443ad4bd013029c.jpg](https://bitbucket.org/repo/pAEqqM/images/3631286140-9f510fb30f2442a71a9ae83ad443ad4bd013029c.jpg)[天天炫斗](http://ttxd.qq.com/act/a20160419brandP/)
-
-
-
 ## Sample
 
 ```
@@ -123,11 +117,11 @@ end
 // create instance
 fake f = fk.newfake(null);
 // regist all func marked with @fakescript in package
-fkreg(f, "com.test");
+fk.reg(f, "com.test");
 // parse script file
-fkparse(f, "test.fk");
+fk.parse(f, "test.fk");
 // run script func myfunc1, put in two param 1 and 2
-double ret = (double)fkrun(f, "myfunc1", 1, 2);
+double ret = (double)fk.run(f, "myfunc1", 1, 2);
 
 ```
 
