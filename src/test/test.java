@@ -24,11 +24,13 @@ public class test
 			}
 		});
 		
-		boolean ret = fk.parse(f, "./src/test/test.fk");
-		if (!ret)
+		boolean b = fk.parse(f, "./src/test/test.fk");
+		if (!b)
 		{
 			System.out.println("parse fail");
 		}
-		System.out.println("hehe");
+		
+		int ret = (Integer) fk.run(f, "main", 1);
+		System.out.println("run ret " + ret);
 	}
 }
