@@ -1,0 +1,24 @@
+package test;
+
+import fakescript.bind.fakescript;
+
+public class A
+{
+	public A()
+	{
+		
+	}
+	
+	@fakescript
+	public void aaa(int a)
+	{
+		System.out.println("aaa" + a);
+	}
+	
+	@fakescript (name = "bbb")
+	public int aaa1()
+	{
+		System.out.println("aaa1");
+		return 1;
+	}
+}
