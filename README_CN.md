@@ -9,7 +9,7 @@
 * 全部为函数
 * 支持array，map，可以无限嵌套
 * 支持fake testfunc(param1)产生routine，实现假多线程效果
-* 支持C函数和类成员函数的绑定
+* 支持Java静态函数和Java类成员函数的绑定
 * 自带解释器
 * 支持多返回值
 * 自带profile，可获取脚本各个函数运行时间

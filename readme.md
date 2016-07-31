@@ -12,7 +12,7 @@ Lightweight embedded scripting language
 * All function
 * Support array, map, unlimited nested
 * Support generating routine like fake testfunc (param1), to achieve the effect of multithreading
-* Support binding C functions and class member functions
+* Support binding Java Static functions and Java class member functions
 * With interpreter
 * Support multi return value
 * Support profile, can get the script running time of each function
